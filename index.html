@@ -1,0 +1,986 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Diagnóstico Value Growth de Flint Consulting.">
+<meta name="theme-color" content="#FFFFFF">
+<title>Value Growth Score · Flint Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   FLINT — VALUE GROWTH SCORE
+   Sistema visual de flintconsulting.mx: fondo blanco, Playfair
+   Display en títulos, Inter en texto, tarjetas blancas con borde
+   fino y botones píldora en Flint Cyan.
+   ═══════════════════════════════════════════════════════════ */
+:root{
+  --tinta:#171717;        /* títulos */
+  --texto:#525252;        /* cuerpo */
+  --tenue:#8A8A8A;
+  --linea:#E5E5E5;
+  --linea-f:#D4D4D4;
+  --papel:#FFFFFF;
+  --niebla:#FAFAFA;
+  --cian:#00B0F0;         /* Flint Cyan del sitio */
+  --cian-txt:#0089BD;     /* cyan legible en texto chico */
+  --cianluz:#EDF9FF;
+  --oscuro:#171717;
+  --fuerte:#00B0F0; --medio:#D9951F; --debil:#E5654B;
+  --r:16px; --r-sm:12px;
+  --sombra:4px 4px 24px rgba(129,129,129,.08);
+  --sombra-h:6px 10px 34px rgba(129,129,129,.16);
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --display:"Playfair Display",Georgia,serif;
+  --ui:"Inter",-apple-system,"Segoe UI",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--papel);color:var(--texto);font-family:var(--ui);line-height:1.55;letter-spacing:-.015em;
+  -webkit-font-smoothing:antialiased;overflow-x:clip}
+button,input,select,textarea{font:inherit;color:inherit;letter-spacing:inherit}
+.num{font-variant-numeric:tabular-nums}
+
+.shell{max-width:1120px;margin:0 auto;padding:18px 24px 110px;min-height:100vh}
+@media(max-width:720px){.shell{padding:10px 16px 150px}}
+
+/* ═══ TOPBAR ═══ */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 4px;margin-bottom:18px;
+  position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--linea)}
+.wordmark{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.wordmark img{height:34px;width:auto;display:block}
+.wordmark small{font-size:12px;color:var(--tenue);padding-left:14px;border-left:1px solid var(--linea)}
+@media(max-width:720px){.wordmark img{height:28px}}
+@media(max-width:600px){.wordmark small{display:none}}
+.rail{display:flex;gap:6px;flex:1;max-width:360px}
+@media(max-width:720px){.rail{max-width:none}}
+.rail-seg{flex:1;height:4px;border-radius:2px;background:#EDEDED;overflow:hidden;position:relative}
+.rail-seg i{position:absolute;inset:0;width:0;border-radius:2px;background:var(--cian);transition:width .7s var(--ease)}
+.paso-txt{font-size:13px;color:var(--tenue);white-space:nowrap;flex-shrink:0;min-width:84px;text-align:right;font-variant-numeric:tabular-nums}
+.paso-txt b{color:var(--tinta);font-weight:600}
+@media(max-width:480px){.paso-txt{min-width:0;font-size:12px}}
+
+/* ═══ TARJETAS ═══ */
+.skew{position:relative;margin:0 0 18px}
+.glass{position:relative;background:var(--papel);border:1px solid var(--linea);border-radius:var(--r);box-shadow:var(--sombra)}
+.pad{padding:clamp(24px,4vw,48px)}
+@media(max-width:560px){.pad{padding:22px 16px}}
+.sub-glass{background:var(--papel);border:1px solid var(--linea);border-radius:var(--r)}
+
+#p-q>.skew>.glass{background:none;border:0;box-shadow:none;padding:18px 0 0}
+/* Bloque oscuro — como el hero del sitio */
+.hero-dark{background:var(--oscuro);border-color:var(--oscuro);color:#D4D4D4;overflow:hidden;box-shadow:none}
+.hero-dark::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(90% 120% at 100% 0%,rgba(0,176,240,.28),transparent 55%),
+             radial-gradient(60% 80% at 0% 100%,rgba(0,176,240,.10),transparent 60%)}
+.hero-dark::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:56px 56px;-webkit-mask-image:linear-gradient(120deg,transparent 30%,#000);mask-image:linear-gradient(120deg,transparent 30%,#000)}
+.hero-dark>*{position:relative;z-index:1}
+.hero-dark h1,.hero-dark h2{color:#fff}
+.hero-dark .lede{color:#D4D4D4}
+.hero-dark .eyebrow{color:var(--cian)}
+.hero-dark .eyebrow::before{background:var(--cian)}
+
+/* ═══ PANTALLAS ═══ */
+.panel{display:none}
+.panel.on{display:block;animation:screenIn .55s var(--ease-out) both}
+@keyframes screenIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ═══ TIPOGRAFÍA ═══ */
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cian-txt);font-weight:600}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--cian)}
+h1,h2,h3,h4{font-family:var(--display);color:var(--tinta);font-weight:400;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:clamp(40px,6vw,64px);line-height:1.08}
+h2{font-size:clamp(30px,3.8vw,48px);line-height:1.12}
+h1 em,h2 em,h3 em,h4 em{font-style:italic;color:var(--cian)}
+.lede{font-size:clamp(16px,1.5vw,18px);line-height:1.6;color:var(--texto);max-width:62ch}
+
+.pillrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.pill{display:inline-flex;align-items:center;padding:8px 16px;border-radius:99px;font-size:13.5px;font-weight:500;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff}
+.pill.hi{background:var(--cian);border-color:var(--cian);color:#fff}
+
+/* ═══ INTRO ═══ */
+#p-intro h1{margin:22px 0 18px}
+#p-intro .pad{padding:clamp(32px,6vw,72px)}
+.intro-meta{display:flex;flex-wrap:wrap;gap:24px 56px;margin-top:40px;padding-top:30px;border-top:1px solid rgba(255,255,255,.14)}
+.intro-meta .n{font-family:var(--display);font-size:44px;color:#fff;line-height:1}
+.intro-meta .t{font-size:14px;color:#A3A3A3;margin-top:8px}
+@media(max-width:560px){.intro-meta{display:grid;grid-template-columns:1fr 1fr;gap:22px}}
+
+.sect-title{font-family:var(--display);font-size:clamp(26px,3vw,36px);color:var(--tinta);margin:56px 0 20px;line-height:1.15}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.celda{padding:26px 24px;box-shadow:var(--sombra);transition:box-shadow .3s var(--ease),transform .3s var(--ease),border-color .3s}
+.celda:hover{box-shadow:var(--sombra-h);transform:translateY(-3px);border-color:var(--linea-f)}
+.celda .k{width:40px;height:40px;border-radius:8px;background:var(--cian);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:600}
+.celda h3{font-family:var(--ui);font-size:19px;font-weight:500;color:var(--tinta);margin:18px 0 8px;line-height:1.25;letter-spacing:-.01em}
+.celda p{font-size:15px;color:var(--texto);line-height:1.55}
+.pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+@media(max-width:760px){.pasos{grid-template-columns:1fr}}
+.paso{padding:28px 28px 28px 0;display:block;border:0;border-radius:0}
+.paso+.paso{padding-left:28px;border-left:1px solid var(--linea)}
+@media(max-width:760px){.paso,.paso+.paso{padding:22px 0;border-left:0}.paso+.paso{border-top:1px solid var(--linea)}}
+.paso .nn{font-family:var(--display);font-size:44px;line-height:1;color:var(--cian)}
+.paso h3{font-family:var(--ui);font-size:20px;font-weight:500;color:var(--tinta);margin:14px 0 6px;letter-spacing:-.01em}
+.paso p{font-size:15px;color:var(--texto)}
+
+/* ═══ PREGUNTAS ═══ */
+.parte+.parte{margin-top:56px;padding-top:48px;border-top:1px solid var(--linea)}
+.cab{display:flex;align-items:flex-start;gap:20px;margin-bottom:26px}
+@media(max-width:560px){.cab{gap:14px}}
+.cab .big-n{width:52px;height:52px;border-radius:8px;background:var(--cian);color:#fff;display:grid;place-items:center;
+  font-size:16px;font-weight:600;flex-shrink:0;margin-top:4px}
+@media(max-width:560px){.cab .big-n{width:42px;height:42px;font-size:14px}}
+.cab .tag{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--cian-txt);font-weight:600;margin-bottom:6px}
+.cab h2{font-size:clamp(28px,3.4vw,40px)}
+.cab p{font-size:16px;color:var(--texto);margin-top:8px;max-width:60ch}
+.cab p b{color:var(--tinta);font-weight:600}
+
+.q{padding:24px 26px;margin-bottom:12px;border-radius:var(--r);background:var(--papel);border:1px solid var(--linea);
+  box-shadow:var(--sombra);transition:border-color .3s var(--ease),box-shadow .3s var(--ease);
+  animation:qIn .6s var(--ease-out) both;animation-delay:calc(var(--i) * 70ms + 120ms)}
+@keyframes qIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.q.ok{border-color:rgba(0,176,240,.35)}
+.q.pend{border-color:var(--debil);box-shadow:0 0 0 3px rgba(229,101,75,.12)}
+@media(max-width:560px){.q{padding:18px 14px}}
+.q-top{display:flex;gap:16px;align-items:flex-start}
+@media(max-width:560px){.q-top{flex-direction:column;gap:10px}}
+.q-num{flex-shrink:0;font-size:12px;font-weight:600;color:var(--cian-txt);margin-top:3px;min-width:42px;padding:3px 0;
+  border-bottom:2px solid var(--cian);text-align:center;font-variant-numeric:tabular-nums}
+.q.ok .q-num{color:#fff;background:var(--cian);border-radius:6px;border-bottom-color:transparent}
+.q.pend .q-num{color:var(--debil);border-bottom-color:var(--debil)}
+.q-text{font-size:17px;line-height:1.5;color:var(--tinta);font-weight:500;text-wrap:pretty;letter-spacing:-.015em}
+.q-body{padding-left:58px}
+@media(max-width:560px){.q-body{padding-left:0}}
+.nota{margin-top:10px;padding:10px 14px;border-radius:10px;background:var(--niebla);color:var(--texto);font-size:14px;line-height:1.5}
+.instr{margin-top:10px;color:var(--cian-txt);font-size:14px;font-weight:500}
+.subtit{margin:22px 0 0;font-weight:600;font-size:15px;color:var(--tinta)}
+
+.ops{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.ops.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.op{display:flex;gap:13px;align-items:flex-start;padding:12px 14px;text-align:left;cursor:pointer;background:var(--niebla);
+  border:1px solid var(--linea);border-radius:var(--r-sm);transition:border-color .2s var(--ease),background .2s var(--ease)}
+.op:hover{border-color:var(--linea-f);background:#F5F5F5}
+.op:focus-visible{outline:2px solid var(--cian);outline-offset:2px}
+.mk{flex-shrink:0;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:var(--papel);
+  border:1px solid var(--linea-f);font-size:12px;font-weight:600;text-transform:uppercase;color:var(--tenue);transition:all .2s var(--ease)}
+.mk svg{width:13px;height:13px;stroke:#fff;stroke-width:2.6;fill:none;opacity:0}
+.op .txt{font-size:15px;line-height:1.45;color:var(--texto);padding-top:2px}
+.op.sel{border-color:var(--cian);background:var(--cianluz)}
+.op.sel .mk{background:var(--cian);border-color:var(--cian);color:#fff}
+.op.sel .mk svg{opacity:1}
+.op.sel .txt{color:var(--tinta)}
+@media(max-width:560px){.op{padding:11px 12px;gap:11px}.op .txt{font-size:14.5px}}
+
+.campos{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
+.campo label{display:block;font-size:14px;font-weight:500;color:var(--tinta);margin-bottom:7px}
+input[type=text],input[type=email],select,textarea{width:100%;padding:13px 16px;border-radius:var(--r-sm);background:var(--papel);
+  border:1px solid var(--linea-f);color:var(--tinta);font-size:16px;transition:border-color .2s,box-shadow .2s}
+input::placeholder,textarea::placeholder{color:#A3A3A3}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--cian);box-shadow:0 0 0 4px rgba(0,176,240,.14)}
+textarea{min-height:76px;resize:vertical;margin-top:16px;display:block}
+.pesos{position:relative}
+.pesos input{padding-left:30px;font-variant-numeric:tabular-nums}
+.pesos .sig{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--tenue)}
+select{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:44px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23171717' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 17px center}
+select:invalid{color:#A3A3A3}
+
+/* ═══ NAVEGACIÓN ═══ */
+.nav{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:22px}
+.nav-hint{font-size:14px;color:var(--tenue);text-align:center;flex:1}
+.nav-hint b{color:var(--debil);font-weight:600}
+.nav-hint.done{color:var(--cian-txt)}
+@media(max-width:720px){
+  .nav.fija{position:fixed;left:0;right:0;bottom:0;z-index:70;margin:0;
+    padding:12px 84px calc(12px + env(safe-area-inset-bottom)) 14px;
+    background:rgba(255,255,255,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-top:1px solid var(--linea);box-shadow:0 -6px 24px rgba(0,0,0,.05)}
+  .nav.fija .nav-hint{display:none}
+  .nav.fija .btn.main{flex:1;justify-content:center}
+  .nav.fija .btn.back{width:48px;height:48px;padding:0;justify-content:center;flex-shrink:0}
+  .nav.fija .btn.back .lbl{display:none}
+}
+html.embedded .nav.fija{position:static;padding:0;margin-top:22px;background:none;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+html.embedded .shell{padding-bottom:40px}
+html.embedded .topbar{position:static}
+
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;border-radius:99px;cursor:pointer;
+  font-family:var(--ui);font-size:16px;font-weight:500;text-decoration:none;border:1px solid transparent;
+  transition:background .2s var(--ease),transform .2s var(--ease),opacity .2s}
+.btn:focus-visible{outline:2px solid var(--cian);outline-offset:3px}
+.btn .arr{transition:transform .2s var(--ease)}
+.btn.main{background:var(--cian);color:#fff}
+.btn.main:hover{background:#009FDA}
+.btn.main:hover .arr{transform:translateX(3px)}
+.btn.main.off{background:#EDEDED;color:#A3A3A3}
+.btn.main[disabled]{opacity:.75;cursor:progress}
+.btn.back{background:var(--papel);color:var(--tinta);border-color:var(--linea-f)}
+.btn.back:hover{background:var(--niebla)}
+.btn-text{background:none;border:0;color:var(--texto);cursor:pointer;font-size:14px;font-weight:500;padding:8px 0;border-bottom:1px solid transparent}
+.btn-text:hover{color:var(--tinta);border-bottom-color:var(--tinta)}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ═══ MURO DEL LEAD ═══ */
+.gate{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(26px,4vw,56px);align-items:start}
+@media(max-width:820px){.gate{grid-template-columns:1fr}}
+.lock{padding:28px;text-align:center;background:var(--niebla)}
+.lock-ring{position:relative;width:160px;height:160px;margin:4px auto 18px}
+.lock-ring svg{display:block;width:100%;height:100%}
+.lock-ring .blur{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:56px;color:var(--cian);filter:blur(10px);user-select:none}
+.lock-ring .ic{position:absolute;inset:0;display:grid;place-items:center}
+.lock-ring .ic span{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:var(--tinta)}
+.lock-ring .ic svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.lock h3{font-family:var(--ui);font-size:18px;font-weight:500;color:var(--tinta)}
+.lock p{font-size:14px;color:var(--texto);margin-top:4px}
+.unlock{list-style:none;margin-top:20px;text-align:left;border-top:1px solid var(--linea)}
+.unlock li{display:flex;gap:11px;align-items:center;padding:11px 0;font-size:14.5px;color:var(--tinta);border-bottom:1px solid var(--linea)}
+.unlock li:last-child{border-bottom:0;padding-bottom:0}
+.unlock svg{width:16px;height:16px;stroke:var(--cian);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.gate-form h2{margin:14px 0 8px}
+.gform{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+@media(max-width:560px){.gform{grid-template-columns:1fr}}
+.err{display:none;font-size:13px;color:var(--debil);margin-top:6px}
+.campo.bad .err{display:block}
+.campo.bad input,.campo.bad select{border-color:var(--debil)}
+.priv{display:flex;gap:11px;align-items:flex-start;margin-top:20px;font-size:14.5px;color:var(--texto);cursor:pointer;line-height:1.5}
+.priv input{width:18px;height:18px;margin-top:2px;accent-color:var(--cian);flex-shrink:0}
+.priv.bad span{color:var(--debil)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.gnota{font-size:13.5px;color:var(--tenue);margin-top:12px}
+.gmsg{display:none;margin-top:16px;padding:12px 16px;border-radius:12px;font-size:14px;line-height:1.5;background:#FDF0EE;border:1px solid #F4C5BC;color:#9B2F1C}
+.gmsg.on{display:block}
+
+/* ═══ RESULTADO ═══ */
+.rin{animation:rIn .7s var(--ease-out) both}
+@keyframes rIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.hero{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center}
+@media(max-width:760px){.hero{grid-template-columns:1fr;gap:30px}}
+.hero h2{font-size:clamp(32px,4.2vw,50px);margin:16px 0 16px;max-width:20ch}
+.hero .lede{max-width:50ch}
+.band-chip{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:7px 15px;border-radius:99px;
+  font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;border:1px solid currentColor}
+.band-chip i{width:7px;height:7px;border-radius:50%;background:currentColor}
+.aro{position:relative;width:min(240px,64vw);aspect-ratio:1;justify-self:center;max-width:100%}
+.aro svg{width:100%;height:100%;transform:rotate(-90deg);display:block}
+.aro #aro-arc{transition:stroke-dashoffset 1.7s var(--ease-out)}
+.aro .cen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.aro .cen b{font-family:var(--display);font-weight:400;font-size:clamp(60px,9vw,88px);color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+.aro .cen span{font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-top:8px;color:#A3A3A3}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.card-t{font-size:clamp(28px,3.2vw,38px);margin-bottom:6px}
+.card-s{font-size:16px;color:var(--texto);margin-bottom:26px;max-width:62ch}
+
+.vc{padding:24px 26px;background:var(--niebla)}
+.vc.hi{background:var(--cianluz);border-color:rgba(0,176,240,.3)}
+.vc .lab{font-size:14px;color:var(--texto);font-weight:500}
+.vc.hi .lab{color:var(--cian-txt)}
+.vc .big{font-family:var(--display);font-size:clamp(34px,4.4vw,48px);color:var(--tinta);margin-top:8px;line-height:1.05;font-variant-numeric:tabular-nums}
+.vc .nt{font-size:14px;color:var(--texto);margin-top:8px}
+.escala{margin-top:30px}
+.escala .pista{height:8px;background:#EDEDED;border-radius:99px;position:relative}
+.escala .tramo{position:absolute;top:0;bottom:0;left:0;width:0;border-radius:99px;background:var(--cian);transition:width 1.3s var(--ease-out)}
+.escala .tick{position:absolute;top:-4px;width:2px;height:16px;background:var(--linea-f);border-radius:1px}
+.escala .aguja{position:absolute;top:-7px;width:22px;height:22px;margin-left:-11px;border-radius:50%;background:var(--papel);
+  border:3px solid var(--tinta);box-shadow:0 2px 8px rgba(0,0,0,.15);transition:left 1.3s var(--ease-out)}
+.escala .marcas{display:flex;justify-content:space-between;gap:10px;margin-top:16px;font-size:13px;color:var(--tenue);font-variant-numeric:tabular-nums}
+.escala .marcas b{display:block;color:var(--tinta);font-weight:600;font-size:15px;margin-top:2px}
+.legal{margin-top:24px;padding:14px 18px;border-radius:12px;background:var(--niebla);font-size:13.5px;color:var(--texto);line-height:1.55}
+
+.radar-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:start}
+.radar-wrap .radar{position:sticky;top:110px}
+@media(max-width:820px){.radar-wrap{grid-template-columns:1fr}.radar-wrap .radar{position:static}}
+.radar{width:100%;max-width:470px;margin:0 auto;display:block;overflow:visible}
+.radar .poly{transform-origin:center;transform-box:fill-box;transform:scale(0);transition:transform 1.5s var(--ease-out)}
+.radar.on .poly{transform:scale(1)}
+.radar text{font-family:var(--ui);fill:var(--tinta);font-size:12px;font-weight:500}
+
+.pilar{padding:16px 0}
+.pilar+.pilar{border-top:1px solid var(--linea)}
+.pilar .fila{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.pilar .nm{font-weight:500;font-size:16px;color:var(--tinta)}
+.pilar .pt{font-weight:600;font-size:16px;color:var(--tinta);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pilar .pt small{font-size:12px;font-weight:400;color:var(--tenue)}
+.pilar .track{height:7px;border-radius:99px;background:#EDEDED;overflow:hidden;margin:10px 0 9px}
+.pilar .fill{height:100%;width:0;border-radius:99px;transition:width 1.3s var(--ease-out)}
+.fill.debil{background:var(--debil)}
+.fill.medio{background:var(--medio)}
+.fill.fuerte{background:var(--fuerte)}
+.pilar .ver{font-size:13.5px;color:var(--texto);display:flex;gap:9px;align-items:baseline}
+.pilar .chip{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;flex-shrink:0}
+
+.ins{padding:30px 28px 26px}
+.ins-tag{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:10px}
+.ins.prio{background:var(--niebla)}
+.ins.prio .ins-tag{color:#A86B00}
+.ins.fort{background:var(--cianluz);border-color:rgba(0,176,240,.25)}
+.ins.fort .ins-tag{color:var(--cian-txt)}
+.ins h4{font-size:26px;margin-bottom:18px;line-height:1.2}
+.ins ul{list-style:none;counter-reset:it}
+.ins li{display:flex;gap:14px;padding:14px 0;font-size:15px;line-height:1.5;color:var(--texto);border-bottom:1px solid rgba(0,0,0,.07)}
+.ins li:last-child{border-bottom:0;padding-bottom:0}
+.ins li::before{content:counter(it,decimal-leading-zero);counter-increment:it;font-family:var(--display);font-size:20px;line-height:1.1;color:var(--cian);min-width:26px;flex-shrink:0}
+.ins.prio li::before{color:var(--medio)}
+.ins li b{color:var(--tinta);font-weight:600}
+.ins li small{display:block;font-size:12.5px;color:var(--tenue);margin-top:4px;font-variant-numeric:tabular-nums}
+
+.correo{display:flex;gap:14px;align-items:flex-start;margin-top:16px;padding:18px 22px;border-radius:var(--r);
+  background:var(--papel);border:1px solid var(--linea);box-shadow:var(--sombra)}
+.correo svg{width:40px;height:40px;padding:10px;border-radius:8px;background:var(--cian);stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.correo p{font-size:15px;color:var(--texto);align-self:center}
+.correo b{color:var(--tinta);font-weight:600}
+
+/* CTA — bloque cyan, como la sección de expertise del sitio */
+.ctac{text-align:center;background:var(--cian);border-color:var(--cian);box-shadow:none;overflow:hidden;color:#EDF9FF}
+.ctac::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(70% 90% at 0% 0%,rgba(255,255,255,.22),transparent 60%),radial-gradient(60% 80% at 100% 100%,rgba(0,60,90,.25),transparent 60%)}
+.ctac>*{position:relative}
+.ctac .eyebrow{color:#fff}
+.ctac .eyebrow::before{background:#fff}
+.ctac h3{font-size:clamp(32px,4.2vw,52px);line-height:1.1;margin:16px auto 16px;max-width:20ch;color:#fff}
+.ctac h3 em{color:#fff}
+.ctac p{max-width:54ch;margin:0 auto;font-size:17px;line-height:1.6;color:#EDF9FF}
+.precio{display:inline-flex;align-items:baseline;gap:10px;margin:28px 0;padding:10px 24px;border-radius:99px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35)}
+.precio b{font-family:var(--display);font-weight:400;font-size:36px;color:#fff;line-height:1}
+.precio span{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#fff;font-weight:500}
+.ctac .btn.main{background:#fff;color:var(--tinta)}
+.ctac .btn.main:hover{background:#F2F2F2}
+@media(max-width:560px){.ctac .btn{width:100%;justify-content:center}}
+.ctac .fine{font-size:13.5px;color:rgba(255,255,255,.85);margin-top:18px}
+
+.foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:34px;padding-top:22px;
+  border-top:1px solid var(--linea);font-size:13px;color:var(--tenue)}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+<header class="topbar">
+  <div class="wordmark">
+    <img src="data:image/png;base64,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" alt="Flint Consulting" width="92" height="34">
+    <small>Value Growth Score</small>
+  </div>
+  <div class="rail" id="rail" aria-hidden="true"></div>
+  <div class="paso-txt" id="paso-txt" aria-live="polite">Diagnóstico</div>
+</header>
+
+<!-- ═══ INTRO ═══ -->
+<section class="panel on" id="p-intro">
+  <div class="skew">
+    <div class="glass pad hero-dark">
+      <div class="eyebrow">Flint Consulting · Diagnósticos</div>
+      <h1>Value Growth <em>Score</em></h1>
+      <p class="lede">Cuánto vale tu empresa hoy, qué la está frenando y cuánto más podría valer. Cuarenta y nueve preguntas, ocho componentes de valor y una estimación con múltiplos de tu industria.</p>
+      <div class="pillrow">
+        <span class="pill hi">Nadie paga por el tamaño. Pagan por lo predecible.</span>
+        <span class="pill">Sin costo</span>
+        <span class="pill">Informe por correo</span>
+      </div>
+      <div class="intro-meta">
+        <div><div class="n num">49</div><div class="t">Preguntas</div></div>
+        <div><div class="n num">8</div><div class="t">Componentes</div></div>
+        <div><div class="n num">~14</div><div class="t">Minutos</div></div>
+        <div><div class="n num">1</div><div class="t">Rango de valor</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sect-title">Los ocho componentes que revisa un comprador</div>
+  <div class="rejilla" id="rejilla"></div>
+
+  <div class="sect-title">Cómo funciona</div>
+  <div class="pasos">
+    <div class="paso sub-glass"><div class="nn">1</div><div><h3>Contestas</h3><p>Cuarenta y nueve preguntas en seis secciones, todas en una sola pantalla. Sin datos que buscar, salvo tus ventas y tu EBITDA.</p></div></div>
+    <div class="paso sub-glass"><div class="nn">2</div><div><h3>Dejas tus datos</h3><p>Tu nombre, empresa y correo desbloquean tu score sobre 100, el desglose por componente y tu rango de valor.</p></div></div>
+    <div class="paso sub-glass"><div class="nn">3</div><div><h3>Recibes tu informe</h3><p>El reporte completo, con la explicación de cada componente, te llega por correo.</p></div></div>
+  </div>
+
+  <div class="nav fija" style="margin-top:28px">
+    <span class="nav-hint" style="text-align:left">Todas las preguntas en una sola pantalla; puedes cambiar respuestas antes de terminar.</span>
+    <button class="btn main" id="empezar">Comenzar diagnóstico <span class="arr" aria-hidden="true">→</span></button>
+  </div>
+</section>
+
+<div id="paneles"></div>
+
+<!-- ═══ MURO DEL LEAD ═══ -->
+<section class="panel" id="p-gate">
+  <div class="skew">
+    <div class="glass pad">
+      <div class="gate">
+        <div class="lock sub-glass">
+          <div class="lock-ring" aria-hidden="true">
+            <svg viewBox="0 0 170 170" width="170" height="170">
+              <circle cx="85" cy="85" r="74" fill="none" stroke="#E5E5E5" stroke-width="9"/>
+              <circle cx="85" cy="85" r="74" fill="none" stroke="#00B0F0" stroke-opacity=".6" stroke-width="9" stroke-dasharray="4 10" stroke-linecap="round"/>
+            </svg>
+            <div class="blur">??</div>
+            <div class="ic"><span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span></div>
+          </div>
+          <h3>Tu score ya está calculado</h3>
+          <p>Se desbloquea al enviar tus datos.</p>
+          <ul class="unlock">
+            <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Tu Value Growth Score sobre 100</li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Estimación de valor con múltiplos de tu industria</li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Score por cada uno de los ocho componentes</li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Tus tres prioridades y tus tres fortalezas</li>
+          </ul>
+        </div>
+
+        <form class="gate-form" id="gform" novalidate>
+          <div class="eyebrow">Último paso</div>
+          <h2>¿A nombre de quién va el <em>informe</em>?</h2>
+          <p class="lede">Lo usamos para prepararlo y enviártelo. Nada más.</p>
+          <div class="gform">
+            <div class="campo" data-f="nombre"><label for="g-nombre">Nombre</label><input type="text" id="g-nombre" autocomplete="name" placeholder="Tu nombre"><div class="err">Escribe tu nombre</div></div>
+            <div class="campo" data-f="empresa"><label for="g-empresa">Empresa</label><input type="text" id="g-empresa" autocomplete="organization" placeholder="Nombre de tu empresa"><div class="err">Escribe el nombre de tu empresa</div></div>
+            <div class="campo" data-f="emp"><label for="g-emp">Número de empleados</label>
+              <select id="g-emp" required>
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option>1 – 10</option>
+                <option>11 – 25</option>
+                <option>26 – 50</option>
+                <option>51 – 100</option>
+                <option>101 – 250</option>
+                <option>251 – 500</option>
+                <option>Más de 500</option>
+              </select>
+              <div class="err">Selecciona el número de empleados</div></div>
+            <div class="campo" data-f="correo"><label for="g-correo">Correo</label><input type="email" id="g-correo" autocomplete="email" placeholder="nombre@empresa.com"><div class="err">Escribe un correo válido</div></div>
+          </div>
+          <label class="hp" aria-hidden="true">No llenar<input type="checkbox" id="g-bot" tabindex="-1"></label>
+          <label class="priv" id="priv"><input type="checkbox" id="g-ok"><span>He leído y acepto el aviso de privacidad de Flint Consulting.</span></label>
+          <p class="gnota">Recibirás tu informe por correo. Sin spam y sin llamadas no solicitadas.</p>
+          <div class="gmsg" id="gmsg" role="alert"></div>
+          <div class="nav fija" style="margin-top:24px">
+            <button type="button" class="btn back" data-atras><span aria-hidden="true">←</span><span class="lbl">Regresar</span></button>
+            <button type="submit" class="btn main" id="ver"><span class="t">Desbloquear mi resultado</span> <span class="arr" aria-hidden="true">→</span></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESULTADO ═══ -->
+<section class="panel" id="p-res">
+  <div class="skew rin">
+    <div class="glass pad hero-dark">
+      <div class="hero">
+        <div>
+          <div class="eyebrow" id="r-eyebrow">Tu diagnóstico</div>
+          <h2 id="r-tit"></h2>
+          <p class="lede" id="r-msg"></p>
+          <span class="band-chip" id="r-chip"><i></i><span></span></span>
+        </div>
+        <div class="aro">
+          <svg viewBox="0 0 214 214" role="img" aria-labelledby="aro-t">
+            <title id="aro-t">Calificación Value Growth</title>
+            <defs><linearGradient id="aro-g" x1="0" y1="0" x2="1" y2="1">
+              <stop id="aro-s1" offset="0" stop-color="#00AEEF"/><stop id="aro-s2" offset="1" stop-color="#BFE9FA"/>
+            </linearGradient></defs>
+            <circle cx="107" cy="107" r="94" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="10"></circle>
+            <circle id="aro-arc" cx="107" cy="107" r="94" fill="none" stroke="url(#aro-g)" stroke-width="10"
+                    stroke-linecap="round" stroke-dasharray="590.6" stroke-dashoffset="590.6"></circle>
+          </svg>
+          <div class="cen"><b id="r-score">0</b><span id="r-de">de 100</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass pad rin" style="animation-delay:.2s">
+    <h3 class="card-t">Estimación de <em>valor</em></h3>
+    <p class="card-s">Calculada con múltiplos de EBITDA de tu industria sobre el promedio de tus últimos tres ejercicios.</p>
+    <div class="grid2">
+      <div class="vc sub-glass"><div class="lab">Valor estimado hoy</div><div class="big" id="v-hoy">—</div><div class="nt" id="v-hoy-nt"></div></div>
+      <div class="vc sub-glass hi"><div class="lab">Si llegaras a 80 puntos</div><div class="big" id="v-pot">—</div><div class="nt" id="v-pot-nt"></div></div>
+    </div>
+    <div class="escala" id="v-escala">
+      <div class="pista"><div class="tramo" id="e-tramo"></div><div class="tick" id="e-tick"></div><div class="aguja" id="e-aguja"></div></div>
+      <div class="marcas"><span>Bajo de tu industria<b id="e-q1">—</b></span>
+        <span style="text-align:center">Mediana<b id="e-med">—</b></span>
+        <span style="text-align:right">Alto<b id="e-q3">—</b></span></div>
+    </div>
+    <p class="legal">Es un valor indicativo, no una valuación. Una valuación formal considera tu deuda, tu capital de trabajo, tus contratos y tus proyecciones, y puede arrojar un número distinto. Sirve para ubicarte, no para negociar.</p>
+  </div>
+
+  <div class="glass pad rin" style="animation-delay:.4s;margin-top:18px">
+    <h3 class="card-t">Score por <em>componente</em></h3>
+    <p class="card-s">Cada componente pesa distinto en tu calificación. Los que están en rojo son los que más te están costando valor.</p>
+    <div class="radar-wrap">
+      <svg class="radar" id="radar" viewBox="0 0 480 440" role="img" aria-label="Perfil de valor por componente"></svg>
+      <div id="r-pilares"></div>
+    </div>
+  </div>
+
+  <div class="rin" style="animation-delay:.6s;margin-top:18px">
+    <div class="grid2">
+      <div class="glass ins prio">
+        <div class="ins-tag">Tus tres prioridades</div>
+        <h4>Donde está el valor que hoy no estás capturando</h4>
+        <ul id="r-prio"></ul>
+      </div>
+      <div class="glass ins fort">
+        <div class="ins-tag">Tus tres fortalezas</div>
+        <h4>Lo que ya tienes construido y conviene proteger</h4>
+        <ul id="r-fort"></ul>
+      </div>
+    </div>
+    <div class="correo"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg>
+      <p><b>Tu informe completo va en camino.</b> En unos minutos te llega por correo el reporte con los ocho componentes explicados uno por uno, tu estimación de valor y las acciones concretas para cada prioridad.</p></div>
+  </div>
+
+  <div class="skew rin" style="animation-delay:.78s;margin-top:18px">
+    <div class="glass pad ctac">
+      <div class="eyebrow">Siguiente paso</div>
+      <h3>Una hora para entender <em>qué mueve tu número</em></h3>
+      <p>El informe te dice dónde estás. La sesión de diagnóstico ejecutivo te dice qué hacer: revisamos tus ocho componentes con un especialista de Flint y salimos con las tres palancas que más valor mueven en tu empresa.</p>
+      <div class="precio"><b>$200</b><span>USD · 60 min</span></div>
+      <div><a class="btn main" id="cta-btn" href="#">Pagar y agendar mi sesión <span class="arr" aria-hidden="true">→</span></a></div>
+      <p class="fine">Al confirmar el pago se abre el calendario para que elijas el horario que te acomode.</p>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Flint Consulting® · Value Growth Score · Estimación indicativa basada en múltiplos de industria</span>
+    <button class="btn-text" id="reiniciar">↻ Contestar de nuevo</button>
+  </div>
+</section>
+
+</div>
+
+<script id="vg-data" type="application/json">{"partes": [{"titulo": "Tu negocio", "corto": "Negocio", "preguntas": [{"n": 1, "id": 1, "stem": "En una frase, ¿cómo describirías tu negocio a una persona que recién conoces? (Es decir, ¿a qué se dedica tu empresa?)", "nota": null, "instr": null, "comp": "Contexto", "tipo": "abierta"}, {"n": 2, "id": 2, "stem": "¿Cómo está tu industria hoy?", "nota": null, "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) En declive", "b) Creciendo al ritmo de la economía", "c) Creciendo un poco más rápido que la economía", "d) Creciendo mucho más rápido que la economía", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 25], "w": 0.11}]}, {"titulo": "Tus clientes", "corto": "Clientes", "preguntas": [{"n": 3, "id": 3, "stem": "¿Qué tan fácil es para tus clientes conseguir con otro proveedor lo que tú vendes?", "nota": null, "instr": null, "comp": "Diferenciación y Elasticidad", "tipo": "opciones", "opciones": ["a) Es un producto o servicio común: lo pueden conseguir con muchos proveedores.", "b) Lo pueden conseguir con algunos proveedores.", "c) Es un producto o servicio de nicho: les costaría encontrar otro proveedor.", "d) Somos los únicos que lo ofrecemos.", "e) No estoy seguro"], "pts": [0, 25, 75, 100, 25], "w": 0.24}, {"n": 4, "id": 4, "stem": "¿Qué participación de mercado tienes?", "nota": null, "instr": null, "comp": "Diferenciación y Elasticidad", "tipo": "opciones", "opciones": ["a) Más del 40% del mercado (posición dominante)", "b) 15 – 40% del mercado (jugador relevante)", "c) 5 – 15% del mercado", "d) 1 – 5% del mercado", "e) No estoy seguro"], "pts": [100, 75, 50, 25, 25], "w": 0.23}, {"n": 5, "id": 5, "stem": "¿Cuál de las siguientes opciones describe mejor tu relación personal con los clientes de tu empresa?", "nota": null, "instr": null, "comp": "Keyman Risk", "tipo": "opciones", "opciones": ["a) Conozco a cada uno de mis clientes por su nombre y esperan que me involucre personalmente cuando compran en mi empresa", "b) Conozco a la mayoría de mis clientes por su nombre y, por lo general, quieren tratar conmigo en lugar de con uno de mis empleados", "c) Conozco a algunos de mis clientes por su nombre y algunos de ellos prefieren tratar conmigo en lugar de con uno de mis empleados", "d) No conozco personalmente a mis clientes y rara vez me involucro en el servicio a un cliente individual", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 25], "w": 0.32}, {"n": 6, "id": 6, "stem": "¿Cuál de las siguientes opciones describe mejor el nivel típico de personalización que ofreces a tus clientes?", "nota": null, "instr": null, "comp": "Diferenciación y Elasticidad", "tipo": "opciones", "opciones": ["a) Ofrecemos una solución personalizada completa para satisfacer las necesidades únicas de cada cliente al que servimos.", "b) Tenemos un conjunto básico de productos, metodologías y servicios, pero a menudo los personalizamos mucho para los clientes.", "c) Tenemos un conjunto estándar de productos, servicios y metodologías que modificamos ligeramente para algunos clientes.", "d) No personalizamos nuestros productos, servicios o metodologías para clientes individuales.", "e) No estoy seguro"], "pts": [100, 75, 50, 0, 25], "w": 0.33}, {"n": 7, "id": 7, "stem": "Por favor, estima el porcentaje de tus clientes que están MUY SATISFECHOS con los servicios/productos que ofrece tu empresa:", "nota": null, "instr": null, "comp": "Satisfacción del Cliente", "tipo": "opciones", "opciones": ["a) Menos del 25% de nuestros clientes están \"muy satisfechos\"", "b) Entre el 25% y el 50% de nuestros clientes están \"muy satisfechos\"", "c) Entre 51% y 75% de nuestros clientes están \"muy satisfechos\"", "d) Más del 75% de nuestros clientes están \"muy satisfechos\"", "e) No estoy seguro, no medimos la satisfacción del cliente"], "pts": [10, 25, 50, 100, 15], "w": 0.7}, {"n": 8, "id": 8, "stem": "¿Con qué frecuencia tus clientes recomiendan tu empresa con sus amigos y colegas?", "nota": null, "instr": null, "comp": "Satisfacción del Cliente", "tipo": "opciones", "opciones": ["a) Siempre", "b) A veces", "c) Raramente", "d) Nunca", "e) No estoy seguro"], "pts": [100, 50, 30, 0, 25], "w": 0.25}, {"n": 9, "id": 9, "stem": "En los últimos 12 meses, ¿qué proporción de tus clientes se quejó por escrito?", "nota": "Cuenta correos, cartas o mensajes por el formulario de tu sitio web.", "instr": null, "comp": "Satisfacción del Cliente", "tipo": "opciones", "opciones": ["a) Ninguno", "b) Menos del 1%", "c) Entre 1% y 5%", "d) Entre 5% y 10%", "e) Más del 10%", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 5, 25], "w": 0.05}, {"n": 10, "id": 10, "stem": "¿Cómo se comporta tu utilidad cada que obtienes un cliente nuevo?", "nota": null, "instr": null, "comp": "Diferenciación y Elasticidad", "tipo": "opciones", "opciones": ["a) Baja.", "b) Se mantiene más o menos igual.", "c) Mejora poco.", "d) Mejora bastante.", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 25], "w": 0.2}, {"n": 11, "id": 11, "stem": "¿En qué momento te pagan normalmente tus clientes?", "nota": "Piensa en cuándo entra el dinero, no en cuándo emites la factura.", "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Nos pagan todo después de entregar.", "b) Un anticipo al inicio y el resto al entregar.", "c) Nos pagan en parcialidades a lo largo de la entrega.", "d) Nos pagan todo por adelantado, al momento de la compra.", "e) No estoy seguro"], "pts": [20, 50, 75, 100, 25], "w": 0.22}, {"n": 12, "id": 12, "stem": "¿Qué porcentaje de tus ventas totales representó tu cliente más grande el año pasado?", "nota": null, "instr": null, "comp": "Radar de Dependencia", "tipo": "opciones", "opciones": ["a) 1 – 15%", "b) 16 – 25%", "c) 26 – 50%", "d) 51% o más", "e) No estoy seguro"], "pts": [100, 75, 50, 0, 25], "w": 0.2}, {"n": 13, "id": 13, "stem": "Si perdieras a tu cliente más grande, tu negocio:", "nota": null, "instr": null, "comp": "Radar de Dependencia", "tipo": "opciones", "opciones": ["a) Prácticamente no se afectaría.", "b) Se afectaría poco y seguiría operando.", "c) Se afectaría bastante, pero seguiría operando.", "d) No sobreviviría.", "e) No estoy seguro"], "pts": [100, 75, 50, 0, 25], "w": 0.58}, {"n": 14, "id": 14, "stem": "¿Qué porcentaje de tus ventas es recurrente?", "nota": "Es recurrente el ingreso que se renueva sin una nueva decisión de compra: suscripciones, igualas, contratos de mantenimiento o rentas mensuales, donde el cliente tiene que cancelar para dejar de pagar. No cuenta el cliente frecuente que decide cada compra.", "instr": null, "comp": "Ingresos Recurrentes", "tipo": "opciones", "opciones": ["a) Ninguno", "b) 1 – 25%", "c) 26 – 50%", "d) 51 – 75%", "e) 76 – 100%", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.75}]}, {"titulo": "Tu personal", "corto": "Personal", "preguntas": [{"n": 15, "id": 15, "stem": "¿Qué porcentaje de tus ventas atiendes personalmente tú o tus socios?", "nota": "Nos referimos a las ventas en las que tú o un socio están directamente involucrados con el cliente.", "instr": null, "comp": "Keyman Risk", "tipo": "opciones", "opciones": ["a) Ninguno", "b) 1 – 25%", "c) 26 – 50%", "d) 51 – 75%", "e) 76 – 100%", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 0, 25], "w": 0.1}, {"n": 16, "id": 16, "stem": "Piensa en la persona que más contribuye a cada una de las siguientes áreas de tu negocio. ¿Qué tan fácil o difícil sería reemplazarlos?", "nota": "Para la sección I) y II) si esta persona eres tú, selecciona IMPOSIBLE.", "instr": null, "comp": "Radar de Dependencia", "tipo": "subs", "subs": [{"label": "I) Ventas y mercadotecnia:", "opciones": ["a) Muy fácil", "b) Fácil", "c) Difícil", "d) Muy difícil", "e) Imposible", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 0, 25], "w": 0.08}, {"label": "II) Diseño y entrega de productos/servicios:", "opciones": ["a) Muy fácil", "b) Fácil", "c) Difícil", "d) Muy difícil", "e) Imposible", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 0, 25], "w": 0.07}, {"label": "III) Proveedor externo. ¿Qué tan fácil o difícil sería reemplazar a su proveedor más importante?", "opciones": ["a) Muy fácil", "b) Fácil", "c) Difícil", "d) Muy difícil", "e) Imposible", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 0, 25], "w": 0.07}]}]}, {"titulo": "Pensemos en el futuro", "corto": "Futuro", "preguntas": [{"n": 17, "id": 17, "stem": "¿Qué esperas que pase con tus ventas en los próximos 12 meses?", "nota": null, "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Que disminuyan", "b) Que se mantengan igual", "c) Que aumenten hasta 10%", "d) Que aumenten entre 11% y 20%", "e) Que aumenten entre 21% y 30%", "f) Que aumenten más de 30%", "g) No estoy seguro"], "pts": [0, 25, 50, 75, 90, 100, 25], "w": 0.24}, {"n": 18, "id": 18, "stem": "¿Cuánto más le podrías vender a tus clientes actuales?", "nota": null, "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Prácticamente nada: ya les vendemos todo lo que nos pueden comprar.", "b) 1-2 productos o servicios adicionales de nuestro portafolio actual.", "c) 3-5 productos o servicios adicionales de nuestro portafolio actual.", "d) +5 productos o servicios adicionales de nuestro portafolio actual.", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 25], "w": 0.15}, {"n": 19, "id": 19, "stem": "Si tus clientes te contratan 5 veces el volumen que vendes hoy, atenderlo sería:", "nota": "Piensa en tu capacidad real de abastecerlo: inventario, producción, personal y capacidad de servicio.", "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Imposible", "b) Muy difícil", "c) Difícil", "d) Fácil", "e) Muy fácil", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.23}, {"n": 20, "id": 20, "stem": "Abrir tu negocio en otra ciudad o región sería:", "nota": null, "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Imposible", "b) Muy difícil", "c) Difícil", "d) Fácil", "e) Muy fácil", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.21}, {"n": 21, "id": 21, "stem": "Si tuvieras que ausentarte tres meses sin poder trabajar, tu negocio:", "nota": null, "instr": null, "comp": "Keyman Risk", "tipo": "opciones", "opciones": ["a) Prácticamente no se afectaría.", "b) Se afectaría poco y seguiría operando.", "c) Se afectaría bastante, pero seguiría operando.", "d) No sobreviviría.", "e) No estoy seguro"], "pts": [100, 75, 50, 0, 25], "w": 0.31}, {"n": 22, "id": 22, "stem": "Si pudieras lograr solo UNA de las siguientes metas en los próximos 12 meses, ¿cuál sería?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Aumentar mis ventas.", "b) Aumentar mi utilidad.", "c) Ganar reconocimiento en mi industria."], "pts": null, "w": null, "extra": [1, 0, 0]}, {"n": 23, "id": 23, "stem": "¿A quién acudirías para pedir asesoría sobre cómo aumentar el valor de tu empresa? Marca todas las que apliquen.", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["Contador", "Banquero de Inversión", "Broker en compraventa de empresas", "Coach de negocios", "Consultor de negocios", "Familiar o amigo cercano", "Asesor de plan de salida o sucesión", "Otro empresario", "Asesor de inversiones", "Abogado", "Especialista en fusiones y adquisiciones", "Nadie", "Otro"], "pts": null, "w": null, "multi": true}, {"n": 24, "id": 24, "stem": "¿Cuál de estas se parece más a tu idea de riqueza?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Tener suficiente dinero para hacer lo que quieras, cuando quieras.", "b) Tener al menos 10 millones de dólares en activos invertidos.", "c) Tener ahorrado lo suficiente para cubrir tus gastos por el resto de tu vida."], "pts": null, "w": null}, {"n": 25, "id": 25, "stem": "¿Cuál es tu mayor preocupación al pensar en vender tu negocio?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) No obtener el valor que creo que vale mi negocio.", "b) No tener nada que hacer en la jubilación.", "c) Decepcionar a mis empleados.", "d) Que nadie pueda manejar las cosas tan bien como yo.", "e) Que el legado que construí no continúe, o cambie a algo distinto de lo que yo quería."], "pts": null, "w": null}, {"n": 26, "id": 26, "stem": "¿Cuál de las siguientes opciones describe mejor tu objetivo a largo plazo para tu negocio? Planeo:", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Vender mi negocio a un tercero.", "b) Hacer la transición de mi negocio a mis hijos.", "c) Hacer la transición de mi negocio a la próxima generación de gerentes.", "d) Cerrar mi negocio.", "e) Otro"], "pts": null, "w": null}, {"n": 27, "id": 27, "stem": "¿Cuál de las siguientes opciones describe mejor lo que buscas en un asesor?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Experiencia con empresas de rápido crecimiento.", "b) Experiencia en mi sector.", "c) Experiencia con empresas de mi región."], "pts": null, "w": null}]}, {"titulo": "Datos y cifras", "corto": "Cifras", "preguntas": [{"n": 28, "id": 28, "stem": "¿Cuál de las siguientes opciones describe mejor a tu equipo directivo?", "nota": null, "instr": null, "comp": "Keyman Risk", "tipo": "opciones", "opciones": ["a) No tenemos equipo directivo.", "b) Hay dos o tres personas de alto nivel que funcionan como líderes, pero sin roles definidos.", "c) Tenemos gerentes a cargo de la parte comercial y de la operación.", "d) Tenemos un equipo directivo con un esquema de compensación de largo plazo que los mantiene en la empresa.", "e) No estoy seguro"], "pts": [0, 25, 75, 100, 25], "w": 0.27}, {"n": 29, "id": 29, "stem": "En tu último ejercicio completo, ¿cuál fue tu margen operativo?", "nota": "Margen operativo = utilidad de operación ÷ ventas. La utilidad de operación es lo que queda después del costo de ventas y los gastos de operación, antes de intereses e impuestos.", "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Tuvimos pérdidas", "b) 0 – 10%", "c) 11 – 20%", "d) Más del 20%", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 0], "w": 0.26}, {"n": 30, "id": 30, "stem": "¿Cuánta deuda con costo financiero (intereses) tiene tu empresa hoy?", "nota": "Incluye créditos bancarios, arrendamientos financieros y préstamos de socios. No incluyas lo que le debes a proveedores.", "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) No tenemos deuda.", "b) Menos de un año de utilidad para pagar la deuda.", "c) Entre uno y dos años de utilidad para pagar la deuda.", "d) Entre dos y tres años de utilidad para pagar la deuda.", "e) Más de tres años de utilidad para pagar la deuda.", "f) No estoy seguro"], "pts": [100, 80, 55, 30, 0, 0], "w": 0.09}, {"n": 31, "id": 31, "stem": "Comparando tu último ejercicio con el anterior, tus ventas:", "nota": null, "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Disminuyeron", "b) Se mantuvieron igual", "c) Aumentaron hasta en un 10%", "d) Aumentaron entre un 11 y un 20%", "e) Aumentaron en un 21-30%", "f) Aumentaron más del 30%", "g) No estoy seguro"], "pts": [20, 25, 50, 75, 90, 100, 25], "w": 0.33}, {"n": 32, "id": 32, "stem": "¿Cómo se generan hoy los estados financieros de tu empresa?", "nota": null, "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Le damos todo a nuestro contador (estados de cuenta, facturas, recibos) y él genera los registros. No hay proceso interno ni revisión.", "b) El contador (interno o externo) registra la información periódicamente, pero solo con fines fiscales. Revisamos los estados financieros de vez en cuando, sin calendario fijo.", "c) Tenemos cierre mensual con calendario definido y entregamos los estados financieros a la dirección con regularidad, pero no los comparamos contra presupuesto.", "d) Cerramos en los primeros 10-15 días del mes siguiente, comparamos contra presupuesto y la dirección usa la información para decidir.", "e) Cierre ágil (menos de una semana), reportes gerenciales y KPIs, y un CFO (interno o fraccional) que traduce los números en decisiones estratégicas."], "pts": [0, 25, 60, 85, 100], "w": 0.17}, {"n": 33, "id": 33, "stem": "¿Cuál es tu margen de utilidad bruto típico?", "nota": "Margen bruto = (ventas − costo de ventas) ÷ ventas. El costo de ventas es lo que te cuesta producir o entregar lo que vendes: materia prima, mano de obra directa y costos de producción. No incluye renta, administración, ventas ni marketing.", "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Menos del 40%", "b) 40 – 60%", "c) 61 – 80%", "d) Más del 80%", "e) No estoy seguro"], "pts": [0, 50, 75, 100, 0], "w": 0.17}, {"n": 34, "id": 34, "stem": "¿Cuál describe mejor tu situación de efectivo?", "nota": null, "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Necesitamos más efectivo del que generamos, por lo que regularmente buscamos capital o crédito.", "b) Necesitamos más efectivo del que generamos, por lo que ocasionalmente buscamos capital o crédito.", "c) Generamos efectivo de sobra y lo reinvertimos o lo dejamos en la empresa como reserva.", "d) Generamos efectivo de sobra y lo repartimos a los accionistas de forma regular.", "e) No estoy seguro"], "pts": [0, 25, 75, 100, 0], "w": 0.13}, {"n": 35, "id": 35, "stem": "¿Cuántas personas conocen o han buscado tus servicios a través de estos medios?", "nota": "Cuenta personas con una relación activa con tus canales propios (suscriptores de newsletter y seguidores en redes sociales). No cuentes bases de datos o listas de correos que no representen suscriptores activos. Si una persona te sigue en varios canales, cuéntala una sola vez.", "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Ninguno", "b) 1 – 999", "c) 1,000 – 9,999", "d) 10,000 – 99,999", "e) 100,000 o más", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.06}, {"n": 36, "id": 36, "stem": "¿Cuáles fueron tus ventas en cada uno de los últimos tres ejercicios? Anótalas en dólares.", "nota": null, "instr": null, "comp": "Desempeño Financiero", "tipo": "numerica", "campos": ["Ventas del año pasado", "Ventas de hace 2 años", "Ventas de hace 3 años"], "rol": "ventas"}, {"n": 37, "id": 37, "stem": "¿Cuál fue tu EBITDA en cada uno de los últimos tres ejercicios? Anótalo en dólares, no en porcentaje.", "nota": "EBITDA = utilidad de operación + depreciación + amortización. No uses la utilidad neta ni la utilidad antes de impuestos.", "instr": null, "comp": "Desempeño Financiero", "tipo": "numerica", "campos": ["EBITDA del año pasado", "EBITDA de hace 2 años", "EBITDA de hace 3 años"], "rol": "ebitda"}, {"n": 38, "id": 44, "stem": "¿Qué tan separadas están las finanzas del negocio de las finanzas personales de los socios?", "nota": null, "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Usamos las mismas cuentas y no separamos los gastos personales de los del negocio.", "b) Las cuentas están mezcladas, pero identificamos qué gastos son personales.", "c) Tenemos cuentas separadas, aunque algunos gastos personales todavía pasan por la empresa.", "d) Están totalmente separadas: los socios reciben sueldo y dividendos, y ningún gasto personal pasa por la empresa.", "e) No estoy seguro"], "pts": [0, 35, 70, 100, 0], "w": 0.09}, {"n": 39, "id": 41, "stem": "¿La empresa cuenta con información financiera auditada?", "nota": "Auditada significa que un despacho externo revisó y dictaminó tus estados financieros. La declaración anual por sí sola no cuenta.", "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Sí", "b) No"], "pts": [100, 0], "w": 0.05}, {"n": 40, "id": 42, "stem": "¿Cuándo les pagas a tus proveedores?", "nota": "Piensa en tus principales proveedores y gastos fijos: en cuánto tiempo les pagas después de que te facturan.", "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Al contado o por adelantado.", "b) A 30 días.", "c) A 60 días o más.", "d) Varía, depende del proveedor.", "e) No estoy seguro"], "pts": [0, 50, 100, 50, 25], "w": 0.15}, {"n": 41, "id": 43, "stem": "¿Cuánto de tus ganancias reinviertes en equipo, tecnología o instalaciones?", "nota": "Piensa en compras como maquinaria, equipo de cómputo, remodelación de oficina o vehículos: lo que compras para que el negocio siga operando o crezca, no los gastos del día a día.", "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Casi nada, el negocio casi no requiere estas compras.", "b) Una parte pequeña: menos de 1 de cada 6 pesos que gano (menos del 15%).", "c) Una parte considerable: entre 1 de cada 6 y 1 de cada 3 pesos (15% – 33%).", "d) Una parte muy grande: más de 1 de cada 3 pesos (más del 33%). El negocio requiere inversión constante para mantenerse.", "e) No estoy seguro"], "pts": [100, 75, 40, 0, 25], "w": 0.15}, {"n": 42, "id": 45, "stem": "¿Qué tan seguido usas préstamos, líneas de crédito o tarjetas para que la empresa opere?", "nota": "No nos referimos a un crédito que pediste una vez para crecer, sino a si necesitas apoyo de un banco o de una financiera de forma regular para pagar nómina, proveedores o gastos del mes.", "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Nunca, el negocio se sostiene con lo que genera.", "b) Rara vez, solo en meses difíciles o por una emergencia.", "c) Seguido, es parte normal de cómo operamos cada mes.", "d) Siempre, sin ese apoyo no podríamos operar.", "e) No estoy seguro"], "pts": [100, 65, 25, 0, 25], "w": 0.15}, {"n": 43, "id": 46, "stem": "¿Qué porcentaje de tus ingresos proviene de clientes con más de 3 años de antigüedad contigo?", "nota": "Cuenta a los clientes que te siguen comprando desde hace más de tres años, aunque no tengan contrato ni suscripción.", "instr": null, "comp": "Ingresos Recurrentes", "tipo": "opciones", "opciones": ["a) Ninguno", "b) 1 – 25%", "c) 26 – 50%", "d) 51 – 75%", "e) 76 – 100%", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.25}]}, {"titulo": "Vender tu negocio", "corto": "Vender", "preguntas": [{"n": 44, "id": 38, "stem": "¿Has recibido una oferta por escrito (carta de intención, expresión de interés) para comprar tu negocio en el último año?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Sí", "b) No"], "pts": null, "w": null, "extra": [1, 0]}, {"n": 45, "id": 39, "stem": "¿Qué múltiplo de tu EBITDA representó esa oferta?", "nota": "Calcula el múltiplo con el dinero o las acciones que te ofrecían al cierre. No incluyas lo que estuviera condicionado a resultados futuros, como un earn out o un contrato de consultoría. Si contestaste “No” en la pregunta anterior, elige “0 veces EBITDA”.", "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) 0 veces EBITDA", "b) 1 vez EBITDA", "c) 2 veces EBITDA", "d) 3 veces EBITDA", "e) 4 veces EBITDA", "f) 5 veces EBITDA", "g) 6 veces EBITDA", "h) 7 veces EBITDA", "i) 8 o más veces EBITDA", "j) No estoy seguro"], "pts": null, "w": null, "extra": [0, 0, 0, 0.25, 0.5, 0.75, 1, 1, 1.5, 0]}, {"n": 46, "id": 40, "stem": "¿Cuál de las siguientes opciones describe mejor tu industria?", "nota": "Por favor, selecciona solo una:", "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Agricultura, cría de animales, aprovechamiento forestal, pesca y caza (SCIAN 11)", "b) Minería, petróleo y gas (SCIAN 21)", "c) Energía eléctrica, agua y gas (SCIAN 22)", "d) Construcción (SCIAN 23)", "e) Industrias manufactureras (SCIAN 31–33)", "f) Comercio al por menor especializado (SCIAN 46)", "g) Comercio al por mayor (SCIAN 43)", "h) Comercio al por menor en general (SCIAN 46)", "i) Transporte de carga y pasajeros: marítimo, terrestre, ferroviario, aéreo y por ducto (SCIAN 48)", "j) Correos, mensajería y almacenamiento (SCIAN 49)", "k) Información en medios masivos: prensa, radio, televisión y telecomunicaciones (SCIAN 51)", "l) Servicios financieros y de seguros (SCIAN 52)", "m) Servicios inmobiliarios y de alquiler (SCIAN 53)", "n) Servicios profesionales, científicos y técnicos (SCIAN 54)", "o) Corporativos (SCIAN 55)", "p) Servicios de apoyo a los negocios y manejo de residuos (SCIAN 56)", "q) Servicios educativos (SCIAN 61)", "r) Servicios de salud y asistencia social (SCIAN 62)", "s) Servicios de esparcimiento, culturales y deportivos (SCIAN 71)", "t) Servicios de alojamiento temporal y de alimentos y bebidas (SCIAN 72)", "u) Otros servicios excepto actividades gubernamentales (SCIAN 81)", "v) Actividades legislativas y gubernamentales (SCIAN 93)"], "pts": null, "w": null, "industria": true}, {"n": 47, "id": 47, "stem": "¿En qué año comenzó tu negocio?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "abierta"}, {"n": 48, "id": 48, "stem": "¿Cuántos años planeas continuar operando tu negocio?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "abierta"}, {"n": 49, "id": 49, "stem": "Por último, indica tu año de nacimiento.", "nota": "Lo usamos solo para ubicar en qué etapa estás respecto a tus planes de salida del negocio.", "instr": null, "comp": "Contexto", "tipo": "abierta"}]}], "componentes": [{"nombre": "Desempeño Financiero", "def": "Tu historial de ingresos y ganancias, junto con el profesionalismo de tus registros.", "peso": 20, "acc": "Ordenar el cierre mensual y llevar tus estados financieros a nivel dictaminado.", "for": "Tus números aguantan una revisión — úsalos como argumento de precio.", "derivada": {"w": 0.04, "pts": [0, 25, 50, 75, 100], "cortes": [-0.3, -0.1, 0.1, 0.3]}}, {"nombre": "Potencial de Crecimiento", "def": "Tu probabilidad de crecer en el futuro, y a qué ritmo.", "peso": 15, "acc": "Documentar de dónde va a salir el crecimiento de los próximos tres años.", "for": "Tu historia de crecimiento es vendible — sostenla con un plan escrito."}, {"nombre": "Radar de Dependencia", "def": "Qué tan dependiente es tu empresa de un solo cliente, empleado o proveedor.", "peso": 8, "acc": "Bajar la concentración de clientes y documentar quién puede reemplazar a quién.", "for": "No dependes de una sola pieza — eso baja el riesgo que percibe un comprador."}, {"nombre": "Generación de Flujos", "def": "Si tu negocio es una fuente de efectivo o un pozo que hay que llenar.", "peso": 12, "acc": "Cobrar antes: anticipos, parcialidades y una política de crédito real.", "for": "Tu ciclo de cobro financia la operación — es una ventaja concreta."}, {"nombre": "Ingresos Recurrentes", "def": "La proporción y calidad del ingreso que se cobra solo cada mes.", "peso": 12, "acc": "Convertir parte de tus ventas en igualas o contratos con renovación automática.", "for": "El ingreso recurrente es lo que más múltiplo te da — protégelo."}, {"nombre": "Diferenciación y Elasticidad", "def": "Qué tan diferenciada está tu empresa de su competencia.", "peso": 10, "acc": "Definir qué te hace difícil de reemplazar y dejar de competir por precio.", "for": "Tienes poder de precio — no lo regales en descuentos."}, {"nombre": "Satisfacción del Cliente", "def": "La probabilidad de que tus clientes vuelvan y te recomienden.", "peso": 8, "acc": "Empezar a medir satisfacción y recompra con un método fijo, no por percepción.", "for": "Tus clientes regresan y te recomiendan — eso pesa en la valuación."}, {"nombre": "Keyman Risk", "def": "Cómo se comportaría tu negocio si no pudieras estar presente tres meses.", "peso": 15, "acc": "Sacarte de la operación diaria: delegar ventas y la relación con clientes clave.", "for": "El negocio camina sin ti — eso es exactamente lo que un comprador paga."}], "industrias": [{"n": "Agricultura, cría de animales, aprovechamiento forestal, pesca y caza (SCIAN 11)", "q1": 4.5, "med": 6, "q3": 8, "margen": 0.1176}, {"n": "Minería, petróleo y gas (SCIAN 21)", "q1": 3.5, "med": 5.5, "q3": 7.5, "margen": 0.0578}, {"n": "Energía eléctrica, agua y gas (SCIAN 22)", "q1": 5, "med": 7, "q3": 9, "margen": 0.1318}, {"n": "Construcción (SCIAN 23)", "q1": 6, "med": 8, "q3": 10, "margen": 0.1565}, {"n": "Industrias manufactureras (SCIAN 31–33)", "q1": 5.8, "med": 6, "q3": 6.2, "margen": 0.1535}, {"n": "Comercio al por menor especializado (SCIAN 46)", "q1": 4, "med": 6, "q3": 8, "margen": 0.099}, {"n": "Comercio al por mayor (SCIAN 43)", "q1": 5, "med": 7, "q3": 9, "margen": 0.1203}, {"n": "Comercio al por menor en general (SCIAN 46)", "q1": 6, "med": 8, "q3": 10, "margen": 0.1821}, {"n": "Transporte de carga y pasajeros: marítimo, terrestre, ferroviario, aéreo y por ducto (SCIAN 48)", "q1": 5.5, "med": 7, "q3": 9, "margen": 0.1179}, {"n": "Correos, mensajería y almacenamiento (SCIAN 49)", "q1": 5, "med": 6.5, "q3": 8.5, "margen": 0.1133}, {"n": "Información en medios masivos: prensa, radio, televisión y telecomunicaciones (SCIAN 51)", "q1": 5, "med": 6.5, "q3": 8.5, "margen": 0.1109}, {"n": "Servicios financieros y de seguros (SCIAN 52)", "q1": 15, "med": 18, "q3": 22, "margen": 0.6282}, {"n": "Servicios inmobiliarios y de alquiler (SCIAN 53)", "q1": 8, "med": 10, "q3": 12.5, "margen": 0.2033}, {"n": "Servicios profesionales, científicos y técnicos (SCIAN 54)", "q1": 8, "med": 10, "q3": 12, "margen": 0.1675}, {"n": "Corporativos (SCIAN 55)", "q1": 12, "med": 15, "q3": 18, "margen": 0.414}, {"n": "Servicios de apoyo a los negocios y manejo de residuos (SCIAN 56)", "q1": 7.5, "med": 10, "q3": 12, "margen": 0.1582}, {"n": "Servicios educativos (SCIAN 61)", "q1": 6, "med": 8, "q3": 10, "margen": 0.1425}, {"n": "Servicios de salud y asistencia social (SCIAN 62)", "q1": 5.5, "med": 7, "q3": 9, "margen": 0.1132}, {"n": "Servicios de esparcimiento, culturales y deportivos (SCIAN 71)", "q1": 7, "med": 9, "q3": 11, "margen": 0.1961}, {"n": "Servicios de alojamiento temporal y de alimentos y bebidas (SCIAN 72)", "q1": 7, "med": 9, "q3": 11, "margen": 0.1542}, {"n": "Otros servicios excepto actividades gubernamentales (SCIAN 81)", "q1": 7.5, "med": 9.5, "q3": 11.5, "margen": 0.1675}, {"n": "Actividades legislativas y gubernamentales (SCIAN 93)", "q1": 0, "med": 0, "q3": 0, "margen": 0.0}]}</script>
+<script>
+(function(){
+"use strict";
+/* ====== ENVÍO DEL LEAD — WEB3FORMS ======
+   Misma Access Key del Diagnóstico de Madurez Financiera: los correos llegan
+   a connect@flintconsulting.mx. El resultado sólo se muestra si el envío
+   se confirma. */
+var WEB3FORMS_ACCESS_KEY='37a22a38-2817-4df5-89a1-053920267cea';
+
+var D=JSON.parse(document.getElementById('vg-data').textContent);
+var P=D.partes, COMP=D.componentes, IND=D.industrias;
+var R={},NUM={},actual=-1,enviado=false;
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function letra(t){var m=t.match(/^([a-z])\)\s*(.*)$/);return m?[m[1],m[2]]:[null,t];}
+function q(s){return document.querySelector(s);}
+function pad2(n){return (n<10?'0':'')+n;}
+
+/* dentro de un iframe: la barra inferior no puede ser fija, y avisamos la altura al padre */
+var EMB=false;try{EMB=window.self!==window.top;}catch(e){EMB=true;}
+if(EMB) document.documentElement.classList.add('embedded');
+function altura(){if(!EMB)return;try{parent.postMessage({flintDiagnosticoHeight:document.documentElement.scrollHeight},'*');}catch(e){}}
+if(EMB&&window.ResizeObserver) new ResizeObserver(altura).observe(document.body);
+
+var CHECK='<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+var BROTE='<svg viewBox="0 0 24 24"><path d="M12 21v-9"/><path d="M12 12c0-4 3-7 8-7 0 4-3 7-8 7z"/><path d="M12 14c0-3-2.5-5.5-7-5.5 0 3 2.5 5.5 7 5.5z"/></svg>';
+var GRAD=[['#00AEEF','#062435'],['#5FD0F7','#07324A'],['#00AEEF','#1B2A33'],['#BFE9FA','#0A5C80'],['#0A5C80','#00AEEF'],['#00AEEF','#3A3A3A']];
+var NUDGE=[
+  'Empezamos por lo básico: <b>qué haces y cómo va tu industria</b>.',
+  'La sección más larga. <b>Aquí se decide buena parte del múltiplo</b> que pagaría un comprador.',
+  'Sección corta: <b>qué tanto depende la operación de ciertas personas</b>.',
+  '<b>Lo que viene después de hoy</b> pesa tanto como tus números.',
+  'Ten a la mano <b>tus ventas y tu EBITDA</b> de los últimos tres ejercicios.',
+  'Última sección. <b>Con tu industria calculamos tu rango de valor</b>.'];
+
+/* intro: ocho componentes, sin revelar pesos */
+q('#rejilla').innerHTML=COMP.map(function(c,i){
+  return '<div class="celda sub-glass"><div class="k">'+pad2(i+1)+'</div><h3>'+esc(c.nombre)+'</h3><p>'+esc(c.def)+'</p></div>';}).join('');
+
+/* todas las preguntas en una sola pantalla, agrupadas por sección */
+function opsHtml(key,opciones,multi){
+  var cortas=opciones.length>6&&opciones.every(function(o){return letra(o)[1].length<=34;});
+  return '<div class="ops'+(cortas?' grid':'')+'">'+opciones.map(function(o,oi){var l=letra(o);
+    return '<button type="button" class="op" data-k="'+key+'" data-i="'+oi+'"'+(multi?' data-multi="1" aria-pressed="false"':'')+
+      '><span class="mk">'+(multi||!l[0]?CHECK:esc(l[0]))+'</span><span class="txt">'+esc(l[1])+'</span></button>';
+  }).join('')+'</div>';
+}
+var TOTQ=P.reduce(function(s,p){return s+p.preguntas.length;},0);
+(function(){
+  var h='<section class="panel" id="p-q"><div class="skew">'+
+     ''+
+     '<div class="glass pad">'+
+     '';
+  P.forEach(function(p,pi){
+    h+='<div class="parte" id="parte-'+pi+'"><div class="cab"><div class="big-n">'+pad2(pi+1)+'</div><div><div class="tag">Sección '+(pi+1)+' de '+P.length+
+       ' · '+p.preguntas.length+(p.preguntas.length===1?' pregunta':' preguntas')+'</div><h2>'+esc(p.titulo)+'</h2>'+
+       (NUDGE[pi]?'<p>'+NUDGE[pi]+'</p>':'')+'</div></div>';
+    p.preguntas.forEach(function(x,xi){
+      h+='<div class="q" data-q="'+x.n+'" style="--i:'+(pi===0?Math.min(xi,6):0)+'"><div class="q-top"><span class="q-num">P'+pad2(x.n)+'</span><div style="flex:1">'+
+         '<p class="q-text">'+esc(x.stem)+'</p>';
+      if(x.nota)  h+='<p class="nota">'+esc(x.nota)+'</p>';
+      if(x.instr) h+='<p class="instr">'+esc(x.instr)+'</p>';
+      h+='</div></div><div class="q-body">';
+      if(x.tipo==='opciones'){
+        h+=opsHtml(x.n,x.opciones,x.multi);
+      } else if(x.tipo==='subs'){
+        x.subs.forEach(function(sb,bi){ h+='<p class="subtit">'+esc(sb.label)+'</p>'+opsHtml(x.n+'-'+bi,sb.opciones,false); });
+      } else if(x.tipo==='numerica'){
+        h+='<div class="campos">'+x.campos.map(function(c,ci){
+          return '<div class="campo"><label for="n'+x.n+'-'+ci+'">'+esc(c)+'</label><div class="pesos"><span class="sig">$</span>'+
+          '<input type="text" inputmode="numeric" id="n'+x.n+'-'+ci+'" data-num="'+x.rol+'-'+ci+'" placeholder="0"></div></div>';
+        }).join('')+'</div>';
+      } else {
+        h+='<textarea data-txt="'+x.n+'" aria-label="Respuesta a la pregunta '+x.n+'" placeholder="Escribe tu respuesta"></textarea>';
+      }
+      h+='</div></div>';
+    });
+    h+='</div>';
+  });
+  h+='</div></div><div class="nav fija"><button class="btn back" data-atras><span aria-hidden="true">←</span><span class="lbl">Regresar</span></button>'+
+     '<span class="nav-hint" data-faltan></span>'+
+     '<button class="btn main" data-sig>Ver mi resultado <span class="arr" aria-hidden="true">→</span></button></div></section>';
+  q('#paneles').innerHTML=h;
+})();
+
+/* riel: un segmento por sección (se llena según lo contestado) + datos */
+q('#rail').innerHTML=P.map(function(){return '<div class="rail-seg"><i></i></div>';}).join('')+'<div class="rail-seg"><i></i></div>';
+var SEGS=document.querySelectorAll('.rail-seg i');
+function riel(estado,fracs,resp){
+  SEGS.forEach(function(s,k){
+    var w=0;
+    if(estado===0) w=k<P.length?Math.round((fracs[k]||0)*100):0;
+    else if(estado>0) w=(k<P.length||estado===2)?100:0;
+    s.style.width=w+'%';
+  });
+  var t=q('#paso-txt');
+  if(estado<0) t.textContent='Diagnóstico';
+  else if(estado===0) t.innerHTML='<b>'+resp+'</b> / '+TOTQ;
+  else if(estado===1) t.textContent='Tus datos';
+  else t.textContent='Resultado';
+}
+function mostrar(id){
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.skew.is-active').forEach(function(s){s.classList.remove('is-active');});
+  var el=document.getElementById(id);el.classList.add('on');
+  requestAnimationFrame(function(){requestAnimationFrame(function(){
+    el.querySelectorAll('.skew').forEach(function(s){s.classList.add('is-active');});});});
+  window.scrollTo(0,0);
+  if(EMB){try{parent.postMessage({flintScrollTop:true},'*');}catch(e){}}
+  setTimeout(altura,50);
+}
+
+/* pendientes: bloquea avance */
+function pend(pi){
+  var faltan=[],tot=0;
+  P[pi].preguntas.forEach(function(x){
+    if(x.tipo==='opciones'&&!x.multi){tot++;if(!R[x.n])faltan.push(x.n);}
+    else if(x.tipo==='subs'){x.subs.forEach(function(sb,bi){tot++;if(!R[x.n+'-'+bi])faltan.push(x.n);});}
+    else if(x.tipo==='numerica'){x.campos.forEach(function(c,ci){tot++;if(NUM[x.rol+'-'+ci]==null)faltan.push(x.n);});}
+    else if(x.tipo==='abierta'){tot++;if(!(R['t'+x.n]&&R['t'+x.n].txt.trim()))faltan.push(x.n);}
+  });
+  return {faltan:faltan,tot:tot};
+}
+function tieneMulti(n){for(var k in R){if(R[k]&&k.indexOf(n+'#')===0)return true;}return false;}
+function pinta(){
+  var u={},fracs=[],resp=0;
+  P.forEach(function(p,pi){
+    var f=pend(pi);
+    f.faltan.forEach(function(n){u[n]=1;});
+    fracs.push(f.tot?(f.tot-f.faltan.length)/f.tot:1);
+    p.preguntas.forEach(function(x){
+      var d=q('#p-q .q[data-q="'+x.n+'"]');
+      var ok=x.multi?tieneMulti(x.n):f.faltan.indexOf(x.n)<0;
+      if(ok) resp++;
+      if(d){d.classList.toggle('ok',ok); if(ok) d.classList.remove('pend');}
+    });
+  });
+  var k=Object.keys(u).length,el=q('#p-q [data-faltan]'),b=q('#p-q [data-sig]'),lf=q('#p-q [data-left]');
+  if(el){el.innerHTML = k? 'Faltan <b>'+k+'</b> '+(k===1?'pregunta':'preguntas') : 'Todo contestado';el.classList.toggle('done',!k);}
+  if(lf) lf.textContent = k? 'Faltan '+k : 'Completo';
+  if(b){b.classList.toggle('off',k>0);b.setAttribute('aria-disabled',k>0?'true':'false');}
+  riel(0,fracs,resp);
+}
+function marcaPend(){
+  var faltan=[],primero=null;
+  P.forEach(function(p,pi){faltan=faltan.concat(pend(pi).faltan);});
+  document.querySelectorAll('#p-q .q').forEach(function(d){
+    var n=+d.dataset.q, malo=faltan.indexOf(n)>=0;
+    d.classList.toggle('pend',malo);
+    if(malo&&!primero) primero=d;
+  });
+  if(primero) primero.scrollIntoView({block:'center',behavior:'smooth'});
+}
+/* actual: -1 intro · 0 preguntas · 1 datos · 2 resultado */
+function irA(i){
+  actual=i;
+  if(i<0){mostrar('p-intro');riel(-1);return;}
+  if(i===0){mostrar('p-q');pinta();return;}
+  /* el score NO se calcula ni se pinta aquí: sólo después de enviar */
+  if(enviado){actual=2;mostrar('p-res');riel(2);}
+  else{mostrar('p-gate');riel(1);}
+}
+q('#empezar').addEventListener('click',function(){irA(0);});
+document.addEventListener('click',function(e){
+  var op=e.target.closest('.op');
+  if(op){
+    var k=op.dataset.k,i=+op.dataset.i;
+    if(op.dataset.multi){op.classList.toggle('sel');var on=op.classList.contains('sel');
+      op.setAttribute('aria-pressed',on);R[k+'#'+i]=on?{i:i}:null;}
+    else{op.parentNode.querySelectorAll('.op').forEach(function(o){o.classList.remove('sel');});
+         op.classList.add('sel');R[k]={i:i};}
+    if(actual===0)pinta();
+    return;
+  }
+  var s=e.target.closest('[data-sig]');
+  if(s){ if(s.classList.contains('off')){marcaPend();return;} irA(1); return;}
+  if(e.target.closest('[data-atras]')){
+    if(actual===1){irA(0);var n=q('#p-q .nav');if(n&&!matchMedia('(max-width:720px)').matches)n.scrollIntoView({block:'end'});else window.scrollTo(0,document.body.scrollHeight);}
+    else irA(-1);
+  }
+});
+document.addEventListener('input',function(e){
+  var t=e.target;
+  if(t.dataset&&t.dataset.num){var v=t.value.replace(/[^\d]/g,'');
+    t.value=v?Number(v).toLocaleString('es-MX'):'';NUM[t.dataset.num]=v?+v:null;}
+  if(t.dataset&&t.dataset.txt) R['t'+t.dataset.txt]={txt:t.value};
+  if(actual===0)pinta();
+});
+
+/* calculo */
+function industria(){var qi=null;P.forEach(function(p){p.preguntas.forEach(function(x){if(x.industria)qi=x.n;});});
+  return (qi!=null&&R[qi])?IND[R[qi].i]:null;}
+function calc(){
+  var acc={};
+  COMP.forEach(function(c){acc[c.nombre]={a:0,w:0};});
+  P.forEach(function(p){p.preguntas.forEach(function(x){
+    var t=acc[x.comp]; if(!t) return;
+    if(x.tipo==='opciones'&&x.w!=null&&x.pts){t.w+=x.w;var r=R[x.n];if(r)t.a+=x.pts[r.i]*x.w;}
+    else if(x.tipo==='subs'){x.subs.forEach(function(sb,bi){t.w+=sb.w;var r=R[x.n+'-'+bi];if(r)t.a+=sb.pts[r.i]*sb.w;});}
+  });});
+  /* componente derivado: margen EBITDA propio contra el margen típico de la industria */
+  COMP.forEach(function(c){
+    if(!c.derivada)return; var t=acc[c.nombre]; if(!t)return;
+    var d=c.derivada; t.w+=d.w;
+    var ind=industria();
+    var ve=prom('ventas'), eb=prom('ebitda');
+    if(ve&&eb&&ind&&ind.margen>0){
+      var dif=(eb/ve-ind.margen)/ind.margen, i=0;
+      while(i<d.cortes.length&&dif>d.cortes[i])i++;
+      t.a+=d.pts[i]*d.w;
+    }
+  });
+  var comps=COMP.map(function(c){var t=acc[c.nombre];
+    return {nombre:c.nombre,def:c.def,peso:c.peso,acc:c.acc,fort:c['for'],pct:t.w?t.a/t.w:0};});
+  var total=comps.reduce(function(s,c){return s+c.pct*c.peso/100;},0);
+  var ex=0;
+  P.forEach(function(p){p.preguntas.forEach(function(x){
+    if(x.extra){var r=R[x.n];if(r)ex+=x.extra[r.i]||0;}});});
+  total=Math.max(0,Math.min(100,total+ex));
+  return {comps:comps,total:total};
+}
+function prom(rol){var v=[0,1,2].map(function(i){return NUM[rol+'-'+i];})
+  .filter(function(x){return typeof x==='number'&&x>0;});
+  return v.length?v.reduce(function(a,b){return a+b;},0)/v.length:null;}
+function mxn(n){if(n==null)return '—';
+  if(n>=1e6)return '$'+(n/1e6).toLocaleString('es-MX',{maximumFractionDigits:1})+' M';
+  return '$'+Math.round(n).toLocaleString('es-MX');}
+var BANDAS={fuerte:['#00B0F0','#7FD8F8','Fortaleza','#0089BD'],medio:['#E8A93A','#F5D08A','Atención','#A86B00'],debil:['#E5654B','#F4A391','Prioridad','#C0392B']};
+function banda(p){return p>=70?'fuerte':p>=45?'medio':'debil';}
+
+var TIERS=[
+ {min:80,h:'Tu empresa ya se ve <em>comprable</em>',
+  m:'Los fundamentos están puestos. Lo que queda es sostener el múltiplo y decidir cuándo quieres tener la conversación de salida.'},
+ {min:60,h:'Vales más de lo que crees, y <em>menos de lo que podrías</em>',
+  m:'Varias piezas ya funcionan, pero hay dependencias que un comprador vería de inmediato y descontaría del precio. Son arreglables en meses, no en años.'},
+ {min:40,h:'El negocio funciona; <em>el valor todavía no</em>',
+  m:'Tienes una empresa que opera, pero su valor está amarrado a ti y a un puñado de relaciones. Ese es el trabajo de los próximos doce meses.'},
+ {min:0, h:'Hoy el negocio <em>depende de ti para existir</em>',
+  m:'La mayor parte del valor que ves en tus números desaparecería sin ti. Es el punto de partida más común, y el que más rápido mejora cuando se trabaja en orden.'}];
+
+/* valor: mismo cálculo del original, reutilizado en pantalla y en el correo */
+function valor(c){
+  var eb=prom('ebitda'),vt=prom('ventas'),ind=industria();
+  if(!(eb&&ind&&ind.med>0)) return null;
+  function mult(s){var m=s>=50?ind.med+((s-50)/50)*(ind.q3-ind.med)
+                          :ind.med-((50-s)/50)*(ind.med-ind.q1);return Math.max(ind.q1,Math.min(ind.q3,m));}
+  var m0=mult(c.total);
+  return {eb:eb,vt:vt,ind:ind,m0:m0,v0:eb*m0,lo:eb*ind.q1,hi:eb*ind.q3,med:eb*ind.med,v8:eb*mult(80)};
+}
+
+function radar(comps){
+  var svg=q('#radar'),cx=240,cy=218,Rr=148,n=comps.length,h='';
+  function pt(i,r){var a=-Math.PI/2+i*2*Math.PI/n;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];}
+  [.25,.5,.75,1].forEach(function(f){
+    h+='<polygon points="'+comps.map(function(_,i){return pt(i,Rr*f).join(',');}).join(' ')+'" fill="none" stroke="rgba(23,23,23,'+(f===1?.16:.07)+')" stroke-width="1"/>';});
+  comps.forEach(function(_,i){var p=pt(i,Rr);h+='<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0]+'" y2="'+p[1]+'" stroke="rgba(23,23,23,.07)"/>';});
+  var poly=comps.map(function(c,i){return pt(i,Rr*Math.max(.04,c.pct/100)).join(',');}).join(' ');
+  h+='<g class="poly"><polygon points="'+poly+'" fill="rgba(0,176,240,.16)" stroke="#00B0F0" stroke-width="2" stroke-linejoin="round"/>';
+  comps.forEach(function(c,i){var p=pt(i,Rr*Math.max(.04,c.pct/100));h+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="4" fill="#00B0F0" stroke="#fff" stroke-width="1.5"/>';});
+  h+='</g>';
+  comps.forEach(function(c,i){
+    var p=pt(i,Rr+30),w=c.nombre.split(' '),mid=Math.ceil(w.length/2),l1=w.slice(0,mid).join(' '),l2=w.slice(mid).join(' ');
+    var anc=Math.abs(p[0]-cx)<10?'middle':(p[0]>cx?'start':'end');
+    var y=p[1]-(l2?8:2)+(p[1]>cy+20?8:0);
+    h+='<text x="'+p[0]+'" y="'+y+'" text-anchor="'+anc+'">'+esc(l1)+(l2?'<tspan x="'+p[0]+'" dy="13">'+esc(l2)+'</tspan>':'')+
+       '<tspan class="v" x="'+p[0]+'" dy="14" style="fill:#8A8A8A;font-size:11px;font-weight:600">'+Math.round(c.pct)+'</tspan></text>';
+  });
+  svg.innerHTML=h;svg.classList.remove('on');
+  setTimeout(function(){svg.classList.add('on');},350);
+}
+
+function render(nombre,empresa){
+  var c=calc(),sc=Math.round(c.total),t=TIERS.find(function(x){return sc>=x.min;});
+  var b=BANDAS[banda(sc)];
+  q('#r-eyebrow').textContent='Tu diagnóstico'+(empresa?' · '+empresa:'');
+  q('#r-tit').innerHTML=t.h;
+  q('#r-msg').textContent=t.m;
+  var chip=q('#r-chip');chip.style.color=b[0];chip.querySelector('span').textContent=b[2];
+  q('#aro-s1').setAttribute('stop-color',b[0]);q('#aro-s2').setAttribute('stop-color',b[1]);
+  var C=2*Math.PI*94, arc=q('#aro-arc');
+  arc.style.transition='none';arc.setAttribute('stroke-dasharray',C.toFixed(1));arc.setAttribute('stroke-dashoffset',C.toFixed(1));
+  arc.getBoundingClientRect();arc.style.transition='';
+  setTimeout(function(){arc.setAttribute('stroke-dashoffset',(C*(1-sc/100)).toFixed(1));},250);
+  var el=q('#r-score'),t0=null;el.textContent='0';
+  function cuenta(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/1700),e=1-Math.pow(1-k,4);
+    el.textContent=Math.round(sc*e);if(k<1)requestAnimationFrame(cuenta);}
+  setTimeout(function(){requestAnimationFrame(cuenta);},250);
+
+  /* valor */
+  var v=valor(c);
+  if(v){
+    q('#v-escala').style.display='';
+    q('#v-hoy').textContent=mxn(v.v0);
+    q('#v-hoy-nt').textContent='EBITDA promedio de '+mxn(v.eb)+' × '+v.m0.toFixed(1)+'x'+
+      (v.vt?' · margen de '+(v.eb/v.vt*100).toFixed(1)+'%':'');
+    q('#v-pot').textContent=mxn(v.v8);
+    q('#v-pot-nt').textContent = v.v8>v.v0? ('Son '+mxn(v.v8-v.v0)+' más, sin vender una sola unidad extra.')
+                                        : 'Ya estás por encima de ese nivel.';
+    q('#e-q1').textContent=mxn(v.lo);q('#e-med').textContent=mxn(v.med);q('#e-q3').textContent=mxn(v.hi);
+    var pos=v.hi>v.lo?(v.v0-v.lo)/(v.hi-v.lo)*100:50, pm=v.hi>v.lo?(v.med-v.lo)/(v.hi-v.lo)*100:50;
+    q('#e-tramo').style.width='0';q('#e-aguja').style.left='0';
+    q('#e-tick').style.left='calc('+pm+'% - 1px)';
+    setTimeout(function(){q('#e-tramo').style.width=pos+'%';q('#e-aguja').style.left=pos+'%';},450);
+  }else{
+    q('#v-hoy').textContent='Sin estimación';
+    q('#v-hoy-nt').textContent='Necesitamos tu EBITDA de los últimos tres ejercicios y tu industria.';
+    q('#v-pot').textContent='—';q('#v-pot-nt').textContent='';
+    q('#v-escala').style.display='none';
+  }
+
+  radar(c.comps);
+
+  /* pilares */
+  q('#r-pilares').innerHTML=c.comps.map(function(x){
+    var k=banda(x.pct),bb=BANDAS[k];
+    return '<div class="pilar"><div class="fila"><span class="nm">'+esc(x.nombre)+
+      '</span><span class="pt">'+Math.round(x.pct)+'<small> / 100</small></span></div>'+
+      '<div class="track"><div class="fill '+k+'" data-w="'+Math.max(2,x.pct)+'"></div></div>'+
+      '<div class="ver"><span class="chip" style="color:'+bb[3]+'">'+bb[2]+'</span><span>'+esc(x.def)+'</span></div></div>';
+  }).join('');
+  setTimeout(function(){document.querySelectorAll('#r-pilares .fill').forEach(function(f,i){
+    setTimeout(function(){f.style.width=f.dataset.w+'%';},i*70);});},600);
+
+  var ord=c.comps.slice().sort(function(a,b){return a.pct-b.pct;});
+  function li(a,k){return a.map(function(x){
+    return '<li><div><b>'+esc(x.nombre)+'</b> · '+esc(k==='p'?x.acc:x.fort)+
+      '<small>'+Math.round(x.pct)+' de 100</small></div></li>';}).join('');}
+  q('#r-prio').innerHTML=li(ord.slice(0,3),'p');
+  q('#r-fort').innerHTML=li(ord.slice(-3).reverse(),'f');
+}
+
+/* ====== FORMULARIO DEL LEAD ====== */
+function respuestasTexto(){
+  var out=[];
+  P.forEach(function(p){
+    out.push('— '+p.titulo.toUpperCase()+' —');
+    p.preguntas.forEach(function(x){
+      var r='Sin respuesta';
+      if(x.tipo==='opciones'){
+        if(x.multi){var s=x.opciones.filter(function(_,i){return R[x.n+'#'+i];});if(s.length)r=s.join(', ');}
+        else if(R[x.n]) r=x.opciones[R[x.n].i];
+      }else if(x.tipo==='subs'){
+        r=x.subs.map(function(sb,bi){var a=R[x.n+'-'+bi];return sb.label+' '+(a?sb.opciones[a.i]:'Sin respuesta');}).join(' | ');
+      }else if(x.tipo==='numerica'){
+        r=x.campos.map(function(c,ci){var v=NUM[x.rol+'-'+ci];return c+': '+(v!=null?mxn(v):'—');}).join(' | ');
+      }else if(R['t'+x.n]) r=R['t'+x.n].txt.trim()||r;
+      out.push('P'+pad2(x.n)+' · '+x.stem+'\n   → '+r);
+    });
+  });
+  return out.join('\n');
+}
+function campoMal(f,malo){var c=q('.campo[data-f="'+f+'"]');if(c)c.classList.toggle('bad',malo);return malo;}
+['g-nombre','g-empresa','g-correo','g-emp'].forEach(function(id){
+  q('#'+id).addEventListener(id==='g-emp'?'change':'input',function(){this.closest('.campo').classList.remove('bad');q('#gmsg').classList.remove('on');});});
+q('#g-ok').addEventListener('change',function(){q('#priv').classList.remove('bad');});
+
+q('#gform').addEventListener('submit',function(e){
+  e.preventDefault();
+  var lead={nombre:q('#g-nombre').value.trim(),empresa:q('#g-empresa').value.trim(),
+            empleados:q('#g-emp').value,correo:q('#g-correo').value.trim(),ok:q('#g-ok').checked};
+  var mal=false;
+  mal=campoMal('nombre',!lead.nombre)||mal;
+  mal=campoMal('empresa',!lead.empresa)||mal;
+  mal=campoMal('emp',!lead.empleados)||mal;
+  mal=campoMal('correo',!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(lead.correo))||mal;
+  q('#priv').classList.toggle('bad',!lead.ok);
+  if(mal||!lead.ok){
+    var m=q('#gmsg');m.textContent='Necesitamos tu nombre, empresa, número de empleados, un correo válido y tu aceptación del aviso de privacidad para enviarte el informe.';m.classList.add('on');
+    return;
+  }
+  if(q('#g-bot').checked) return;
+
+  var btn=q('#ver'),lbl=btn.querySelector('.t'),arr=btn.querySelector('.arr');
+  btn.disabled=true;lbl.textContent='Enviando…';arr.innerHTML='<span class="spin"></span>';
+  q('#gmsg').classList.remove('on');
+
+  var c=calc(),sc=Math.round(c.total),t=TIERS.find(function(x){return sc>=x.min;}),v=valor(c);
+  var payload={
+    access_key:WEB3FORMS_ACCESS_KEY,
+    subject:'Nuevo Value Growth Score — '+lead.empresa+' ('+lead.nombre+')',
+    from_name:'Value Growth Score · Flint',
+    replyto:lead.correo,
+    'Nombre':lead.nombre,
+    'Empresa':lead.empresa,
+    'Número de empleados':lead.empleados,
+    'Correo electrónico':lead.correo,
+    'Acepta Aviso de Privacidad':'Sí',
+    'Value Growth Score':sc+' / 100',
+    'Nivel':t.h.replace(/<[^>]+>/g,''),
+    'Score por componente':'\n'+c.comps.map(function(x){return x.nombre+': '+Math.round(x.pct)+' / 100';}).join('\n'),
+    'Estimación de valor':v?('Hoy: '+mxn(v.v0)+' ('+v.m0.toFixed(1)+'x EBITDA promedio de '+mxn(v.eb)+') · Con 80 puntos: '+mxn(v.v8)+
+                            ' · Rango industria: '+mxn(v.lo)+' – '+mxn(v.hi)+' · '+v.ind.n):'Sin estimación (faltan EBITDA o industria)',
+    'Respuestas':'\n'+respuestasTexto()
+  };
+  fetch('https://api.web3forms.com/submit',{method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if(!d||!d.success) throw new Error((d&&d.message)||'Envío rechazado');
+      enviado=true;
+      render(lead.nombre,lead.empresa);
+      actual=2;mostrar('p-res');riel(2);
+    })
+    .catch(function(err){
+      console.error('[Value Growth] Web3Forms:',err);
+      var m=q('#gmsg');m.textContent='No pudimos enviar tus datos. Revisa tu conexión e inténtalo de nuevo; tu resultado se desbloquea en cuanto se confirme el envío.';m.classList.add('on');
+    })
+    .then(function(){btn.disabled=false;lbl.textContent='Desbloquear mi resultado';arr.textContent='→';});
+});
+
+q('#reiniciar').addEventListener('click',function(){
+  R={};NUM={};enviado=false;
+  document.querySelectorAll('.op.sel').forEach(function(o){o.classList.remove('sel');});
+  document.querySelectorAll('.q').forEach(function(d){d.classList.remove('ok','pend');});
+  document.querySelectorAll('input[data-num],textarea').forEach(function(i){i.value='';});
+  irA(-1);
+});
+riel(-1);
+requestAnimationFrame(function(){requestAnimationFrame(function(){q('#p-intro .skew').classList.add('is-active');});});
+})();
+</script>
+</body>
+</html>
