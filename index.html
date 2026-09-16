@@ -28,7 +28,7 @@
   --cian-txt:#0089BD;     /* cyan legible en texto chico */
   --cianluz:#EDF9FF;
   --oscuro:#171717;
-  --fuerte:#00B0F0; --medio:#D9951F; --debil:#E5654B;
+  --fuerte:#12B76A; --medio:#FFB400; --debil:#FF1F3D;
   --r:16px; --r-sm:12px;
   --sombra:4px 4px 24px rgba(129,129,129,.08);
   --sombra-h:6px 10px 34px rgba(129,129,129,.16);
@@ -145,7 +145,7 @@ h1 em,h2 em,h3 em,h4 em{font-style:italic;color:var(--cian)}
   animation:qIn .6s var(--ease-out) both;animation-delay:calc(var(--i) * 70ms + 120ms)}
 @keyframes qIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .q.ok{border-color:rgba(0,176,240,.35)}
-.q.pend{border-color:var(--debil);box-shadow:0 0 0 3px rgba(229,101,75,.12)}
+.q.pend{border-color:var(--debil);box-shadow:0 0 0 3px rgba(255,31,61,.14)}
 @media(max-width:560px){.q{padding:18px 14px}}
 .q-top{display:flex;gap:16px;align-items:flex-start}
 @media(max-width:560px){.q-top{flex-direction:column;gap:10px}}
@@ -296,12 +296,11 @@ html.embedded .topbar{position:static}
 .legal{margin-top:24px;padding:14px 18px;border-radius:12px;background:var(--niebla);font-size:13.5px;color:var(--texto);line-height:1.55}
 
 .radar-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:start}
-.radar-wrap .radar{position:sticky;top:110px}
-@media(max-width:820px){.radar-wrap{grid-template-columns:1fr}.radar-wrap .radar{position:static}}
-.radar{width:100%;max-width:470px;margin:0 auto;display:block;overflow:visible}
+@media(max-width:820px){.radar-wrap{grid-template-columns:1fr}}
+.radar{width:100%;max-width:520px;margin:0 auto;display:block;overflow:visible}
 .radar .poly{transform-origin:center;transform-box:fill-box;transform:scale(0);transition:transform 1.5s var(--ease-out)}
 .radar.on .poly{transform:scale(1)}
-.radar text{font-family:var(--ui);fill:var(--tinta);font-size:12px;font-weight:500}
+.radar text{font-family:var(--ui);font-size:12px;font-weight:500}
 
 .pilar{padding:16px 0}
 .pilar+.pilar{border-top:1px solid var(--linea)}
@@ -311,16 +310,16 @@ html.embedded .topbar{position:static}
 .pilar .pt small{font-size:12px;font-weight:400;color:var(--tenue)}
 .pilar .track{height:7px;border-radius:99px;background:#EDEDED;overflow:hidden;margin:10px 0 9px}
 .pilar .fill{height:100%;width:0;border-radius:99px;transition:width 1.3s var(--ease-out)}
-.fill.debil{background:var(--debil)}
-.fill.medio{background:var(--medio)}
-.fill.fuerte{background:var(--fuerte)}
+.fill.debil{background:linear-gradient(90deg,#D10024,var(--debil));box-shadow:0 0 12px rgba(255,31,61,.45)}
+.fill.medio{background:linear-gradient(90deg,#FF8A00,var(--medio))}
+.fill.fuerte{background:linear-gradient(90deg,#079455,var(--fuerte))}
 .pilar .ver{font-size:13.5px;color:var(--texto);display:flex;gap:9px;align-items:baseline}
 .pilar .chip{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;flex-shrink:0}
 
 .ins{padding:30px 28px 26px}
 .ins-tag{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:10px}
 .ins.prio{background:var(--niebla)}
-.ins.prio .ins-tag{color:#A86B00}
+.ins.prio .ins-tag{color:#D10024}
 .ins.fort{background:var(--cianluz);border-color:rgba(0,176,240,.25)}
 .ins.fort .ins-tag{color:var(--cian-txt)}
 .ins h4{font-size:26px;margin-bottom:18px;line-height:1.2}
@@ -328,7 +327,7 @@ html.embedded .topbar{position:static}
 .ins li{display:flex;gap:14px;padding:14px 0;font-size:15px;line-height:1.5;color:var(--texto);border-bottom:1px solid rgba(0,0,0,.07)}
 .ins li:last-child{border-bottom:0;padding-bottom:0}
 .ins li::before{content:counter(it,decimal-leading-zero);counter-increment:it;font-family:var(--display);font-size:20px;line-height:1.1;color:var(--cian);min-width:26px;flex-shrink:0}
-.ins.prio li::before{color:var(--medio)}
+.ins.prio li::before{color:var(--debil)}
 .ins li b{color:var(--tinta);font-weight:600}
 .ins li small{display:block;font-size:12.5px;color:var(--tenue);margin-top:4px;font-variant-numeric:tabular-nums}
 
@@ -358,6 +357,87 @@ html.embedded .topbar{position:static}
 
 .foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:34px;padding-top:22px;
   border-top:1px solid var(--linea);font-size:13px;color:var(--tenue)}
+
+
+/* ═══ PÁGINAS DE CINCO PREGUNTAS ═══ */
+.pagina{display:none}
+.pagina.on{display:block}
+.cab.sig{margin-top:52px;padding-top:44px;border-top:1px solid var(--linea)}
+
+/* ═══ CANDADO ANIMADO ═══ */
+.lock{background:#111;border-color:#111;color:#E5E5E5;padding:34px 28px 28px;position:relative;overflow:hidden}
+.lock::before{content:"";position:absolute;inset:-40%;pointer-events:none;
+  background:radial-gradient(40% 40% at 50% 38%,rgba(0,176,240,.30),transparent 70%);animation:respira 4s ease-in-out infinite}
+.lock>*{position:relative}
+@keyframes respira{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+.lk-escena{position:relative;width:210px;height:210px;margin:0 auto 34px}
+.lk-pista{position:absolute;inset:0;border-radius:50%;border:3px solid rgba(255,255,255,.07)}
+.lk-halo{position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 0deg,transparent 0 58%,rgba(0,176,240,.08) 66%,rgba(0,176,240,.6) 86%,#BDEFFF 90%,transparent 90.5%);
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));
+          mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));
+  animation:gira 2.8s linear infinite}
+.lk-trazos{position:absolute;inset:16px;border-radius:50%;border:1px dashed rgba(255,255,255,.16);animation:gira 40s linear infinite reverse}
+.lk-orbita{position:absolute;inset:0;animation:gira 7s linear infinite}
+.lk-orbita::before{content:"";position:absolute;top:-4px;left:50%;width:8px;height:8px;margin-left:-4px;border-radius:50%;
+  background:#fff;box-shadow:0 0 12px 3px rgba(0,176,240,.9)}
+.lk-orbita.o2{inset:16px;animation-duration:11s;animation-direction:reverse}
+.lk-orbita.o2::before{width:5px;height:5px;margin-left:-2.5px;top:-2.5px;background:#7FD8F8}
+@keyframes gira{to{transform:rotate(360deg)}}
+.lk-cifras{position:absolute;inset:30px 30px 44px;border-radius:50%;overflow:hidden;display:flex;justify-content:center;align-items:center;gap:4px;
+  -webkit-mask:linear-gradient(transparent,#000 32%,#000 68%,transparent);mask:linear-gradient(transparent,#000 32%,#000 68%,transparent)}
+.lk-col{height:96px;overflow:hidden;filter:blur(4.5px)}
+.lk-col i{display:block;font-style:normal;font-family:var(--display);font-size:88px;line-height:96px;color:#7FD8F8;text-shadow:0 0 24px rgba(0,176,240,.9);animation:rueda 1.6s linear infinite}
+.lk-col:nth-child(2) i{animation-duration:1.1s;color:#fff}
+@keyframes rueda{to{transform:translateY(-50%)}}
+.lk-ic{position:absolute;left:50%;bottom:-8px;width:60px;height:60px;margin-left:-30px;border-radius:18px;display:grid;place-items:center;
+  background:rgba(20,20,20,.72);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  animation:late 2.4s ease-out infinite;transition:background .4s,box-shadow .4s}
+@keyframes late{0%{box-shadow:0 0 0 0 rgba(0,176,240,.55)}70%{box-shadow:0 0 0 22px rgba(0,176,240,0)}100%{box-shadow:0 0 0 0 rgba(0,176,240,0)}}
+.lk-ic svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;overflow:visible;
+  transform-origin:50% 90%;animation:tiembla 4.5s ease-in-out infinite}
+@keyframes tiembla{0%,82%,100%{transform:rotate(0)}85%{transform:rotate(-9deg)}88%{transform:rotate(8deg)}91%{transform:rotate(-5deg)}94%{transform:rotate(3deg)}}
+.lk-ic .grillete{transform-box:fill-box;transform-origin:100% 100%;transition:transform .55s cubic-bezier(.34,1.56,.64,1)}
+.lock.abierto .lk-ic{background:var(--cian);border-color:var(--cian);animation:none;box-shadow:0 0 50px rgba(0,176,240,.8)}
+.lock.abierto .lk-ic svg{animation:none}
+.lock.abierto .grillete{transform:translateY(-5px) rotate(28deg)}
+.lock.abierto .lk-cifras{opacity:0;transition:opacity .4s}
+.lock.abierto .lk-halo{animation-duration:.7s}
+.lock h3{font-family:var(--display);font-weight:400;font-size:26px;color:#fff;line-height:1.2}
+.lock h3 em{font-style:italic;background:linear-gradient(100deg,#00B0F0 20%,#E8FAFF 45%,#00B0F0 70%);background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:brillo 3s linear infinite}
+@keyframes brillo{from{background-position:120% 0}to{background-position:-100% 0}}
+.lock p{color:#A3A3A3;font-size:14.5px;margin-top:6px}
+.lock .unlock{border-top-color:rgba(255,255,255,.1)}
+.lock .unlock li{color:#E5E5E5;border-bottom-color:rgba(255,255,255,.08)}
+
+/* ═══ RADAR EN OSCURO ═══ */
+.radar-box{background:#111;border-radius:var(--r);padding:26px 18px 18px;position:sticky;top:110px}
+.radar-box .radar{position:static}
+.radar text{fill:#E5E5E5}
+@media(max-width:820px){.radar-box{position:static}}
+
+/* ═══ CTA: AGENDAR SESIÓN ═══ */
+.cta2{display:grid;grid-template-columns:1.25fr 1fr;overflow:hidden;padding:0}
+@media(max-width:820px){.cta2{grid-template-columns:1fr}}
+.cta-txt{padding:clamp(28px,4.4vw,52px)}
+.cta-txt h3{font-size:clamp(30px,3.6vw,44px);line-height:1.1;margin:16px 0 14px;max-width:18ch}
+.cta-txt>p{font-size:16px;line-height:1.6;max-width:52ch}
+.cta-lista{list-style:none;margin-top:22px;display:grid;gap:12px}
+.cta-lista li{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--tinta)}
+.cta-lista li::before{content:"";flex-shrink:0;width:22px;height:22px;border-radius:6px;margin-top:1px;
+  background:var(--cianluz) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4L18 8' fill='none' stroke='%230089BD' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
+.cta-precio{background:#111;color:#D4D4D4;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.cta-precio::before{content:"";position:absolute;right:-30%;top:-40%;width:90%;height:90%;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,176,240,.22),transparent 65%);pointer-events:none}
+.cta-precio>*{position:relative}
+.cta-precio .lab{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#A3A3A3;font-weight:600}
+.cta-precio .monto{display:flex;align-items:baseline;gap:10px;margin:12px 0 4px}
+.cta-precio .monto b{font-family:var(--display);font-weight:400;font-size:clamp(56px,6vw,72px);color:#fff;line-height:1}
+.cta-precio .monto span{font-size:15px;color:#A3A3A3;font-weight:500}
+.cta-precio .dur{font-size:15px;color:#E5E5E5;padding-bottom:22px;margin-bottom:24px;border-bottom:1px solid rgba(255,255,255,.1)}
+.cta-precio .btn{justify-content:center}
+.cta-precio .fine{font-size:13px;color:#8A8A8A;margin-top:14px;line-height:1.5}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
@@ -390,7 +470,6 @@ html.embedded .topbar{position:static}
       <div class="intro-meta">
         <div><div class="n num">49</div><div class="t">Preguntas</div></div>
         <div><div class="n num">8</div><div class="t">Componentes</div></div>
-        <div><div class="n num">~14</div><div class="t">Minutos</div></div>
         <div><div class="n num">1</div><div class="t">Rango de valor</div></div>
       </div>
     </div>
@@ -401,13 +480,13 @@ html.embedded .topbar{position:static}
 
   <div class="sect-title">Cómo funciona</div>
   <div class="pasos">
-    <div class="paso sub-glass"><div class="nn">1</div><div><h3>Contestas</h3><p>Cuarenta y nueve preguntas en seis secciones, todas en una sola pantalla. Sin datos que buscar, salvo tus ventas y tu EBITDA.</p></div></div>
+    <div class="paso sub-glass"><div class="nn">1</div><div><h3>Contestas</h3><p>Cuarenta y nueve preguntas en seis secciones, de cinco en cinco. Sin datos que buscar, salvo tus ventas y tu EBITDA.</p></div></div>
     <div class="paso sub-glass"><div class="nn">2</div><div><h3>Dejas tus datos</h3><p>Tu nombre, empresa y correo desbloquean tu score sobre 100, el desglose por componente y tu rango de valor.</p></div></div>
     <div class="paso sub-glass"><div class="nn">3</div><div><h3>Recibes tu informe</h3><p>El reporte completo, con la explicación de cada componente, te llega por correo.</p></div></div>
   </div>
 
   <div class="nav fija" style="margin-top:28px">
-    <span class="nav-hint" style="text-align:left">Todas las preguntas en una sola pantalla; puedes cambiar respuestas antes de terminar.</span>
+    <span class="nav-hint" style="text-align:left">Contestas de cinco en cinco y puedes regresar antes de terminar.</span>
     <button class="btn main" id="empezar">Comenzar diagnóstico <span class="arr" aria-hidden="true">→</span></button>
   </div>
 </section>
@@ -419,19 +498,16 @@ html.embedded .topbar{position:static}
   <div class="skew">
     <div class="glass pad">
       <div class="gate">
-        <div class="lock sub-glass">
-          <div class="lock-ring" aria-hidden="true">
-            <svg viewBox="0 0 170 170" width="170" height="170">
-              <circle cx="85" cy="85" r="74" fill="none" stroke="#E5E5E5" stroke-width="9"/>
-              <circle cx="85" cy="85" r="74" fill="none" stroke="#00B0F0" stroke-opacity=".6" stroke-width="9" stroke-dasharray="4 10" stroke-linecap="round"/>
-            </svg>
-            <div class="blur">??</div>
-            <div class="ic"><span><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span></div>
+        <div class="lock sub-glass" id="lock">
+          <div class="lk-escena" aria-hidden="true">
+            <div class="lk-pista"></div><div class="lk-trazos"></div><div class="lk-halo"></div>
+            <div class="lk-orbita"></div><div class="lk-orbita o2"></div>
+            <div class="lk-cifras"><div class="lk-col"></div><div class="lk-col"></div></div>
+            <div class="lk-ic"><svg viewBox="0 0 24 24"><path class="grillete" d="M8 11V7.5a4 4 0 0 1 8 0V11"/><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M12 15v2.2"/></svg></div>
           </div>
-          <h3>Tu score ya está calculado</h3>
-          <p>Se desbloquea al enviar tus datos.</p>
+          <h3>Tu calificación <em>ya está lista</em></h3>
+          <p>Déjanos tus datos y la desbloqueamos en este momento.</p>
           <ul class="unlock">
-            <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Tu Value Growth Score sobre 100</li>
             <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Estimación de valor con múltiplos de tu industria</li>
             <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Score por cada uno de los ocho componentes</li>
             <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Tus tres prioridades y tus tres fortalezas</li>
@@ -502,14 +578,14 @@ html.embedded .topbar{position:static}
 
   <div class="glass pad rin" style="animation-delay:.2s">
     <h3 class="card-t">Estimación de <em>valor</em></h3>
-    <p class="card-s">Calculada con múltiplos de EBITDA de tu industria sobre el promedio de tus últimos tres ejercicios.</p>
+    <p class="card-s">Calculada sobre el promedio de tu EBITDA de los últimos tres ejercicios, con un múltiplo de transacciones privadas del tamaño de tu empresa, ajustado por tu industria.</p>
     <div class="grid2">
       <div class="vc sub-glass"><div class="lab">Valor estimado hoy</div><div class="big" id="v-hoy">—</div><div class="nt" id="v-hoy-nt"></div></div>
-      <div class="vc sub-glass hi"><div class="lab">Si llegaras a 80 puntos</div><div class="big" id="v-pot">—</div><div class="nt" id="v-pot-nt"></div></div>
+      <div class="vc sub-glass hi"><div class="lab">Si subes tus dos componentes más débiles</div><div class="big" id="v-pot">—</div><div class="nt" id="v-pot-nt"></div></div>
     </div>
     <div class="escala" id="v-escala">
       <div class="pista"><div class="tramo" id="e-tramo"></div><div class="tick" id="e-tick"></div><div class="aguja" id="e-aguja"></div></div>
-      <div class="marcas"><span>Bajo de tu industria<b id="e-q1">—</b></span>
+      <div class="marcas"><span>Bajo del rango<b id="e-q1">—</b></span>
         <span style="text-align:center">Mediana<b id="e-med">—</b></span>
         <span style="text-align:right">Alto<b id="e-q3">—</b></span></div>
     </div>
@@ -520,7 +596,7 @@ html.embedded .topbar{position:static}
     <h3 class="card-t">Score por <em>componente</em></h3>
     <p class="card-s">Cada componente pesa distinto en tu calificación. Los que están en rojo son los que más te están costando valor.</p>
     <div class="radar-wrap">
-      <svg class="radar" id="radar" viewBox="0 0 480 440" role="img" aria-label="Perfil de valor por componente"></svg>
+      <div class="radar-box"><svg class="radar" id="radar" viewBox="-50 -6 580 452" role="img" aria-label="Perfil de valor por componente"></svg></div>
       <div id="r-pilares"></div>
     </div>
   </div>
@@ -543,13 +619,24 @@ html.embedded .topbar{position:static}
   </div>
 
   <div class="skew rin" style="animation-delay:.78s;margin-top:18px">
-    <div class="glass pad ctac">
-      <div class="eyebrow">Siguiente paso</div>
-      <h3>Una hora para entender <em>qué mueve tu número</em></h3>
-      <p>El informe te dice dónde estás. La sesión de diagnóstico ejecutivo te dice qué hacer: revisamos tus ocho componentes con un especialista de Flint y salimos con las tres palancas que más valor mueven en tu empresa.</p>
-      <div class="precio"><b>$200</b><span>USD · 60 min</span></div>
-      <div><a class="btn main" id="cta-btn" href="#">Pagar y agendar mi sesión <span class="arr" aria-hidden="true">→</span></a></div>
-      <p class="fine">Al confirmar el pago se abre el calendario para que elijas el horario que te acomode.</p>
+    <div class="glass cta2">
+      <div class="cta-txt">
+        <div class="eyebrow">Siguiente paso</div>
+        <h3>Una hora para entender <em>qué mueve tu número</em></h3>
+        <p>El informe te dice dónde estás. La sesión de diagnóstico ejecutivo te dice qué hacer: revisamos tus ocho componentes con un especialista de Flint y salimos con las tres palancas que más valor mueven en tu empresa.</p>
+        <ul class="cta-lista">
+          <li>Revisión de tus ocho componentes con un especialista de Flint</li>
+          <li>Las tres palancas que más valor mueven en tu empresa</li>
+          <li>Sesión uno a uno, a tu horario</li>
+        </ul>
+      </div>
+      <div class="cta-precio">
+        <span class="lab">Sesión de diagnóstico ejecutivo</span>
+        <div class="monto"><b>$200</b><span>USD</span></div>
+        <div class="dur">60 minutos con un especialista</div>
+        <a class="btn main" id="cta-btn" href="#">Pagar y agendar mi sesión <span class="arr" aria-hidden="true">→</span></a>
+        <p class="fine">Al confirmar el pago se abre el calendario para que elijas el horario que te acomode.</p>
+      </div>
     </div>
   </div>
 
@@ -561,7 +648,7 @@ html.embedded .topbar{position:static}
 
 </div>
 
-<script id="vg-data" type="application/json">{"partes": [{"titulo": "Tu negocio", "corto": "Negocio", "preguntas": [{"n": 1, "id": 1, "stem": "En una frase, ¿cómo describirías tu negocio a una persona que recién conoces? (Es decir, ¿a qué se dedica tu empresa?)", "nota": null, "instr": null, "comp": "Contexto", "tipo": "abierta"}, {"n": 2, "id": 2, "stem": "¿Cómo está tu industria hoy?", "nota": null, "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) En declive", "b) Creciendo al ritmo de la economía", "c) Creciendo un poco más rápido que la economía", "d) Creciendo mucho más rápido que la economía", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 25], "w": 0.11}]}, {"titulo": "Tus clientes", "corto": "Clientes", "preguntas": [{"n": 3, "id": 3, "stem": "¿Qué tan fácil es para tus clientes conseguir con otro proveedor lo que tú vendes?", "nota": null, "instr": null, "comp": "Diferenciación y Elasticidad", "tipo": "opciones", "opciones": ["a) Es un producto o servicio común: lo pueden conseguir con muchos proveedores.", "b) Lo pueden conseguir con algunos proveedores.", "c) Es un producto o servicio de nicho: les costaría encontrar otro proveedor.", "d) Somos los únicos que lo ofrecemos.", "e) No estoy seguro"], "pts": [0, 25, 75, 100, 25], "w": 0.24}, {"n": 4, "id": 4, "stem": "¿Qué participación de mercado tienes?", "nota": null, "instr": null, "comp": "Diferenciación y Elasticidad", "tipo": "opciones", "opciones": ["a) Más del 40% del mercado (posición dominante)", "b) 15 – 40% del mercado (jugador relevante)", "c) 5 – 15% del mercado", "d) 1 – 5% del mercado", "e) No estoy seguro"], "pts": [100, 75, 50, 25, 25], "w": 0.23}, {"n": 5, "id": 5, "stem": "¿Cuál de las siguientes opciones describe mejor tu relación personal con los clientes de tu empresa?", "nota": null, "instr": null, "comp": "Keyman Risk", "tipo": "opciones", "opciones": ["a) Conozco a cada uno de mis clientes por su nombre y esperan que me involucre personalmente cuando compran en mi empresa", "b) Conozco a la mayoría de mis clientes por su nombre y, por lo general, quieren tratar conmigo en lugar de con uno de mis empleados", "c) Conozco a algunos de mis clientes por su nombre y algunos de ellos prefieren tratar conmigo en lugar de con uno de mis empleados", "d) No conozco personalmente a mis clientes y rara vez me involucro en el servicio a un cliente individual", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 25], "w": 0.32}, {"n": 6, "id": 6, "stem": "¿Cuál de las siguientes opciones describe mejor el nivel típico de personalización que ofreces a tus clientes?", "nota": null, "instr": null, "comp": "Diferenciación y Elasticidad", "tipo": "opciones", "opciones": ["a) Ofrecemos una solución personalizada completa para satisfacer las necesidades únicas de cada cliente al que servimos.", "b) Tenemos un conjunto básico de productos, metodologías y servicios, pero a menudo los personalizamos mucho para los clientes.", "c) Tenemos un conjunto estándar de productos, servicios y metodologías que modificamos ligeramente para algunos clientes.", "d) No personalizamos nuestros productos, servicios o metodologías para clientes individuales.", "e) No estoy seguro"], "pts": [100, 75, 50, 0, 25], "w": 0.33}, {"n": 7, "id": 7, "stem": "Por favor, estima el porcentaje de tus clientes que están MUY SATISFECHOS con los servicios/productos que ofrece tu empresa:", "nota": null, "instr": null, "comp": "Satisfacción del Cliente", "tipo": "opciones", "opciones": ["a) Menos del 25% de nuestros clientes están \"muy satisfechos\"", "b) Entre el 25% y el 50% de nuestros clientes están \"muy satisfechos\"", "c) Entre 51% y 75% de nuestros clientes están \"muy satisfechos\"", "d) Más del 75% de nuestros clientes están \"muy satisfechos\"", "e) No estoy seguro, no medimos la satisfacción del cliente"], "pts": [10, 25, 50, 100, 15], "w": 0.7}, {"n": 8, "id": 8, "stem": "¿Con qué frecuencia tus clientes recomiendan tu empresa con sus amigos y colegas?", "nota": null, "instr": null, "comp": "Satisfacción del Cliente", "tipo": "opciones", "opciones": ["a) Siempre", "b) A veces", "c) Raramente", "d) Nunca", "e) No estoy seguro"], "pts": [100, 50, 30, 0, 25], "w": 0.25}, {"n": 9, "id": 9, "stem": "En los últimos 12 meses, ¿qué proporción de tus clientes se quejó por escrito?", "nota": "Cuenta correos, cartas o mensajes por el formulario de tu sitio web.", "instr": null, "comp": "Satisfacción del Cliente", "tipo": "opciones", "opciones": ["a) Ninguno", "b) Menos del 1%", "c) Entre 1% y 5%", "d) Entre 5% y 10%", "e) Más del 10%", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 5, 25], "w": 0.05}, {"n": 10, "id": 10, "stem": "¿Cómo se comporta tu utilidad cada que obtienes un cliente nuevo?", "nota": null, "instr": null, "comp": "Diferenciación y Elasticidad", "tipo": "opciones", "opciones": ["a) Baja.", "b) Se mantiene más o menos igual.", "c) Mejora poco.", "d) Mejora bastante.", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 25], "w": 0.2}, {"n": 11, "id": 11, "stem": "¿En qué momento te pagan normalmente tus clientes?", "nota": "Piensa en cuándo entra el dinero, no en cuándo emites la factura.", "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Nos pagan todo después de entregar.", "b) Un anticipo al inicio y el resto al entregar.", "c) Nos pagan en parcialidades a lo largo de la entrega.", "d) Nos pagan todo por adelantado, al momento de la compra.", "e) No estoy seguro"], "pts": [20, 50, 75, 100, 25], "w": 0.22}, {"n": 12, "id": 12, "stem": "¿Qué porcentaje de tus ventas totales representó tu cliente más grande el año pasado?", "nota": null, "instr": null, "comp": "Radar de Dependencia", "tipo": "opciones", "opciones": ["a) 1 – 15%", "b) 16 – 25%", "c) 26 – 50%", "d) 51% o más", "e) No estoy seguro"], "pts": [100, 75, 50, 0, 25], "w": 0.2}, {"n": 13, "id": 13, "stem": "Si perdieras a tu cliente más grande, tu negocio:", "nota": null, "instr": null, "comp": "Radar de Dependencia", "tipo": "opciones", "opciones": ["a) Prácticamente no se afectaría.", "b) Se afectaría poco y seguiría operando.", "c) Se afectaría bastante, pero seguiría operando.", "d) No sobreviviría.", "e) No estoy seguro"], "pts": [100, 75, 50, 0, 25], "w": 0.58}, {"n": 14, "id": 14, "stem": "¿Qué porcentaje de tus ventas es recurrente?", "nota": "Es recurrente el ingreso que se renueva sin una nueva decisión de compra: suscripciones, igualas, contratos de mantenimiento o rentas mensuales, donde el cliente tiene que cancelar para dejar de pagar. No cuenta el cliente frecuente que decide cada compra.", "instr": null, "comp": "Ingresos Recurrentes", "tipo": "opciones", "opciones": ["a) Ninguno", "b) 1 – 25%", "c) 26 – 50%", "d) 51 – 75%", "e) 76 – 100%", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.75}]}, {"titulo": "Tu personal", "corto": "Personal", "preguntas": [{"n": 15, "id": 15, "stem": "¿Qué porcentaje de tus ventas atiendes personalmente tú o tus socios?", "nota": "Nos referimos a las ventas en las que tú o un socio están directamente involucrados con el cliente.", "instr": null, "comp": "Keyman Risk", "tipo": "opciones", "opciones": ["a) Ninguno", "b) 1 – 25%", "c) 26 – 50%", "d) 51 – 75%", "e) 76 – 100%", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 0, 25], "w": 0.1}, {"n": 16, "id": 16, "stem": "Piensa en la persona que más contribuye a cada una de las siguientes áreas de tu negocio. ¿Qué tan fácil o difícil sería reemplazarlos?", "nota": "Para la sección I) y II) si esta persona eres tú, selecciona IMPOSIBLE.", "instr": null, "comp": "Radar de Dependencia", "tipo": "subs", "subs": [{"label": "I) Ventas y mercadotecnia:", "opciones": ["a) Muy fácil", "b) Fácil", "c) Difícil", "d) Muy difícil", "e) Imposible", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 0, 25], "w": 0.08}, {"label": "II) Diseño y entrega de productos/servicios:", "opciones": ["a) Muy fácil", "b) Fácil", "c) Difícil", "d) Muy difícil", "e) Imposible", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 0, 25], "w": 0.07}, {"label": "III) Proveedor externo. ¿Qué tan fácil o difícil sería reemplazar a su proveedor más importante?", "opciones": ["a) Muy fácil", "b) Fácil", "c) Difícil", "d) Muy difícil", "e) Imposible", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 0, 25], "w": 0.07}]}]}, {"titulo": "Pensemos en el futuro", "corto": "Futuro", "preguntas": [{"n": 17, "id": 17, "stem": "¿Qué esperas que pase con tus ventas en los próximos 12 meses?", "nota": null, "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Que disminuyan", "b) Que se mantengan igual", "c) Que aumenten hasta 10%", "d) Que aumenten entre 11% y 20%", "e) Que aumenten entre 21% y 30%", "f) Que aumenten más de 30%", "g) No estoy seguro"], "pts": [0, 25, 50, 75, 90, 100, 25], "w": 0.24}, {"n": 18, "id": 18, "stem": "¿Cuánto más le podrías vender a tus clientes actuales?", "nota": null, "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Prácticamente nada: ya les vendemos todo lo que nos pueden comprar.", "b) 1-2 productos o servicios adicionales de nuestro portafolio actual.", "c) 3-5 productos o servicios adicionales de nuestro portafolio actual.", "d) +5 productos o servicios adicionales de nuestro portafolio actual.", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 25], "w": 0.15}, {"n": 19, "id": 19, "stem": "Si tus clientes te contratan 5 veces el volumen que vendes hoy, atenderlo sería:", "nota": "Piensa en tu capacidad real de abastecerlo: inventario, producción, personal y capacidad de servicio.", "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Imposible", "b) Muy difícil", "c) Difícil", "d) Fácil", "e) Muy fácil", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.23}, {"n": 20, "id": 20, "stem": "Abrir tu negocio en otra ciudad o región sería:", "nota": null, "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Imposible", "b) Muy difícil", "c) Difícil", "d) Fácil", "e) Muy fácil", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.21}, {"n": 21, "id": 21, "stem": "Si tuvieras que ausentarte tres meses sin poder trabajar, tu negocio:", "nota": null, "instr": null, "comp": "Keyman Risk", "tipo": "opciones", "opciones": ["a) Prácticamente no se afectaría.", "b) Se afectaría poco y seguiría operando.", "c) Se afectaría bastante, pero seguiría operando.", "d) No sobreviviría.", "e) No estoy seguro"], "pts": [100, 75, 50, 0, 25], "w": 0.31}, {"n": 22, "id": 22, "stem": "Si pudieras lograr solo UNA de las siguientes metas en los próximos 12 meses, ¿cuál sería?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Aumentar mis ventas.", "b) Aumentar mi utilidad.", "c) Ganar reconocimiento en mi industria."], "pts": null, "w": null, "extra": [1, 0, 0]}, {"n": 23, "id": 23, "stem": "¿A quién acudirías para pedir asesoría sobre cómo aumentar el valor de tu empresa? Marca todas las que apliquen.", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["Contador", "Banquero de Inversión", "Broker en compraventa de empresas", "Coach de negocios", "Consultor de negocios", "Familiar o amigo cercano", "Asesor de plan de salida o sucesión", "Otro empresario", "Asesor de inversiones", "Abogado", "Especialista en fusiones y adquisiciones", "Nadie", "Otro"], "pts": null, "w": null, "multi": true}, {"n": 24, "id": 24, "stem": "¿Cuál de estas se parece más a tu idea de riqueza?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Tener suficiente dinero para hacer lo que quieras, cuando quieras.", "b) Tener al menos 10 millones de dólares en activos invertidos.", "c) Tener ahorrado lo suficiente para cubrir tus gastos por el resto de tu vida."], "pts": null, "w": null}, {"n": 25, "id": 25, "stem": "¿Cuál es tu mayor preocupación al pensar en vender tu negocio?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) No obtener el valor que creo que vale mi negocio.", "b) No tener nada que hacer en la jubilación.", "c) Decepcionar a mis empleados.", "d) Que nadie pueda manejar las cosas tan bien como yo.", "e) Que el legado que construí no continúe, o cambie a algo distinto de lo que yo quería."], "pts": null, "w": null}, {"n": 26, "id": 26, "stem": "¿Cuál de las siguientes opciones describe mejor tu objetivo a largo plazo para tu negocio? Planeo:", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Vender mi negocio a un tercero.", "b) Hacer la transición de mi negocio a mis hijos.", "c) Hacer la transición de mi negocio a la próxima generación de gerentes.", "d) Cerrar mi negocio.", "e) Otro"], "pts": null, "w": null}, {"n": 27, "id": 27, "stem": "¿Cuál de las siguientes opciones describe mejor lo que buscas en un asesor?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Experiencia con empresas de rápido crecimiento.", "b) Experiencia en mi sector.", "c) Experiencia con empresas de mi región."], "pts": null, "w": null}]}, {"titulo": "Datos y cifras", "corto": "Cifras", "preguntas": [{"n": 28, "id": 28, "stem": "¿Cuál de las siguientes opciones describe mejor a tu equipo directivo?", "nota": null, "instr": null, "comp": "Keyman Risk", "tipo": "opciones", "opciones": ["a) No tenemos equipo directivo.", "b) Hay dos o tres personas de alto nivel que funcionan como líderes, pero sin roles definidos.", "c) Tenemos gerentes a cargo de la parte comercial y de la operación.", "d) Tenemos un equipo directivo con un esquema de compensación de largo plazo que los mantiene en la empresa.", "e) No estoy seguro"], "pts": [0, 25, 75, 100, 25], "w": 0.27}, {"n": 29, "id": 29, "stem": "En tu último ejercicio completo, ¿cuál fue tu margen operativo?", "nota": "Margen operativo = utilidad de operación ÷ ventas. La utilidad de operación es lo que queda después del costo de ventas y los gastos de operación, antes de intereses e impuestos.", "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Tuvimos pérdidas", "b) 0 – 10%", "c) 11 – 20%", "d) Más del 20%", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 0], "w": 0.26}, {"n": 30, "id": 30, "stem": "¿Cuánta deuda con costo financiero (intereses) tiene tu empresa hoy?", "nota": "Incluye créditos bancarios, arrendamientos financieros y préstamos de socios. No incluyas lo que le debes a proveedores.", "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) No tenemos deuda.", "b) Menos de un año de utilidad para pagar la deuda.", "c) Entre uno y dos años de utilidad para pagar la deuda.", "d) Entre dos y tres años de utilidad para pagar la deuda.", "e) Más de tres años de utilidad para pagar la deuda.", "f) No estoy seguro"], "pts": [100, 80, 55, 30, 0, 0], "w": 0.09}, {"n": 31, "id": 31, "stem": "Comparando tu último ejercicio con el anterior, tus ventas:", "nota": null, "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Disminuyeron", "b) Se mantuvieron igual", "c) Aumentaron hasta en un 10%", "d) Aumentaron entre un 11 y un 20%", "e) Aumentaron en un 21-30%", "f) Aumentaron más del 30%", "g) No estoy seguro"], "pts": [20, 25, 50, 75, 90, 100, 25], "w": 0.33}, {"n": 32, "id": 32, "stem": "¿Cómo se generan hoy los estados financieros de tu empresa?", "nota": null, "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Le damos todo a nuestro contador (estados de cuenta, facturas, recibos) y él genera los registros. No hay proceso interno ni revisión.", "b) El contador (interno o externo) registra la información periódicamente, pero solo con fines fiscales. Revisamos los estados financieros de vez en cuando, sin calendario fijo.", "c) Tenemos cierre mensual con calendario definido y entregamos los estados financieros a la dirección con regularidad, pero no los comparamos contra presupuesto.", "d) Cerramos en los primeros 10-15 días del mes siguiente, comparamos contra presupuesto y la dirección usa la información para decidir.", "e) Cierre ágil (menos de una semana), reportes gerenciales y KPIs, y un CFO (interno o fraccional) que traduce los números en decisiones estratégicas."], "pts": [0, 25, 60, 85, 100], "w": 0.17}, {"n": 33, "id": 33, "stem": "¿Cuál es tu margen de utilidad bruto típico?", "nota": "Margen bruto = (ventas − costo de ventas) ÷ ventas. El costo de ventas es lo que te cuesta producir o entregar lo que vendes: materia prima, mano de obra directa y costos de producción. No incluye renta, administración, ventas ni marketing.", "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Menos del 40%", "b) 40 – 60%", "c) 61 – 80%", "d) Más del 80%", "e) No estoy seguro"], "pts": [0, 50, 75, 100, 0], "w": 0.17}, {"n": 34, "id": 34, "stem": "¿Cuál describe mejor tu situación de efectivo?", "nota": null, "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Necesitamos más efectivo del que generamos, por lo que regularmente buscamos capital o crédito.", "b) Necesitamos más efectivo del que generamos, por lo que ocasionalmente buscamos capital o crédito.", "c) Generamos efectivo de sobra y lo reinvertimos o lo dejamos en la empresa como reserva.", "d) Generamos efectivo de sobra y lo repartimos a los accionistas de forma regular.", "e) No estoy seguro"], "pts": [0, 25, 75, 100, 0], "w": 0.13}, {"n": 35, "id": 35, "stem": "¿Cuántas personas conocen o han buscado tus servicios a través de estos medios?", "nota": "Cuenta personas con una relación activa con tus canales propios (suscriptores de newsletter y seguidores en redes sociales). No cuentes bases de datos o listas de correos que no representen suscriptores activos. Si una persona te sigue en varios canales, cuéntala una sola vez.", "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Ninguno", "b) 1 – 999", "c) 1,000 – 9,999", "d) 10,000 – 99,999", "e) 100,000 o más", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.06}, {"n": 36, "id": 36, "stem": "¿Cuáles fueron tus ventas en cada uno de los últimos tres ejercicios? Anótalas en dólares.", "nota": null, "instr": null, "comp": "Desempeño Financiero", "tipo": "numerica", "campos": ["Ventas del año pasado", "Ventas de hace 2 años", "Ventas de hace 3 años"], "rol": "ventas"}, {"n": 37, "id": 37, "stem": "¿Cuál fue tu EBITDA en cada uno de los últimos tres ejercicios? Anótalo en dólares, no en porcentaje.", "nota": "EBITDA = utilidad de operación + depreciación + amortización. No uses la utilidad neta ni la utilidad antes de impuestos.", "instr": null, "comp": "Desempeño Financiero", "tipo": "numerica", "campos": ["EBITDA del año pasado", "EBITDA de hace 2 años", "EBITDA de hace 3 años"], "rol": "ebitda"}, {"n": 38, "id": 44, "stem": "¿Qué tan separadas están las finanzas del negocio de las finanzas personales de los socios?", "nota": null, "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Usamos las mismas cuentas y no separamos los gastos personales de los del negocio.", "b) Las cuentas están mezcladas, pero identificamos qué gastos son personales.", "c) Tenemos cuentas separadas, aunque algunos gastos personales todavía pasan por la empresa.", "d) Están totalmente separadas: los socios reciben sueldo y dividendos, y ningún gasto personal pasa por la empresa.", "e) No estoy seguro"], "pts": [0, 35, 70, 100, 0], "w": 0.09}, {"n": 39, "id": 41, "stem": "¿La empresa cuenta con información financiera auditada?", "nota": "Auditada significa que un despacho externo revisó y dictaminó tus estados financieros. La declaración anual por sí sola no cuenta.", "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Sí", "b) No"], "pts": [100, 0], "w": 0.05}, {"n": 40, "id": 42, "stem": "¿Cuándo les pagas a tus proveedores?", "nota": "Piensa en tus principales proveedores y gastos fijos: en cuánto tiempo les pagas después de que te facturan.", "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Al contado o por adelantado.", "b) A 30 días.", "c) A 60 días o más.", "d) Varía, depende del proveedor.", "e) No estoy seguro"], "pts": [0, 50, 100, 50, 25], "w": 0.15}, {"n": 41, "id": 43, "stem": "¿Cuánto de tus ganancias reinviertes en equipo, tecnología o instalaciones?", "nota": "Piensa en compras como maquinaria, equipo de cómputo, remodelación de oficina o vehículos: lo que compras para que el negocio siga operando o crezca, no los gastos del día a día.", "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Casi nada, el negocio casi no requiere estas compras.", "b) Una parte pequeña: menos de 1 de cada 6 pesos que gano (menos del 15%).", "c) Una parte considerable: entre 1 de cada 6 y 1 de cada 3 pesos (15% – 33%).", "d) Una parte muy grande: más de 1 de cada 3 pesos (más del 33%). El negocio requiere inversión constante para mantenerse.", "e) No estoy seguro"], "pts": [100, 75, 40, 0, 25], "w": 0.15}, {"n": 42, "id": 45, "stem": "¿Qué tan seguido usas préstamos, líneas de crédito o tarjetas para que la empresa opere?", "nota": "No nos referimos a un crédito que pediste una vez para crecer, sino a si necesitas apoyo de un banco o de una financiera de forma regular para pagar nómina, proveedores o gastos del mes.", "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Nunca, el negocio se sostiene con lo que genera.", "b) Rara vez, solo en meses difíciles o por una emergencia.", "c) Seguido, es parte normal de cómo operamos cada mes.", "d) Siempre, sin ese apoyo no podríamos operar.", "e) No estoy seguro"], "pts": [100, 65, 25, 0, 25], "w": 0.15}, {"n": 43, "id": 46, "stem": "¿Qué porcentaje de tus ingresos proviene de clientes con más de 3 años de antigüedad contigo?", "nota": "Cuenta a los clientes que te siguen comprando desde hace más de tres años, aunque no tengan contrato ni suscripción.", "instr": null, "comp": "Ingresos Recurrentes", "tipo": "opciones", "opciones": ["a) Ninguno", "b) 1 – 25%", "c) 26 – 50%", "d) 51 – 75%", "e) 76 – 100%", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.25}]}, {"titulo": "Vender tu negocio", "corto": "Vender", "preguntas": [{"n": 44, "id": 38, "stem": "¿Has recibido una oferta por escrito (carta de intención, expresión de interés) para comprar tu negocio en el último año?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Sí", "b) No"], "pts": null, "w": null, "extra": [1, 0]}, {"n": 45, "id": 39, "stem": "¿Qué múltiplo de tu EBITDA representó esa oferta?", "nota": "Calcula el múltiplo con el dinero o las acciones que te ofrecían al cierre. No incluyas lo que estuviera condicionado a resultados futuros, como un earn out o un contrato de consultoría. Si contestaste “No” en la pregunta anterior, elige “0 veces EBITDA”.", "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) 0 veces EBITDA", "b) 1 vez EBITDA", "c) 2 veces EBITDA", "d) 3 veces EBITDA", "e) 4 veces EBITDA", "f) 5 veces EBITDA", "g) 6 veces EBITDA", "h) 7 veces EBITDA", "i) 8 o más veces EBITDA", "j) No estoy seguro"], "pts": null, "w": null, "extra": [0, 0, 0, 0.25, 0.5, 0.75, 1, 1, 1.5, 0]}, {"n": 46, "id": 40, "stem": "¿Cuál de las siguientes opciones describe mejor tu industria?", "nota": "Por favor, selecciona solo una:", "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Agricultura, cría de animales, aprovechamiento forestal, pesca y caza (SCIAN 11)", "b) Minería, petróleo y gas (SCIAN 21)", "c) Energía eléctrica, agua y gas (SCIAN 22)", "d) Construcción (SCIAN 23)", "e) Industrias manufactureras (SCIAN 31–33)", "f) Comercio al por menor especializado (SCIAN 46)", "g) Comercio al por mayor (SCIAN 43)", "h) Comercio al por menor en general (SCIAN 46)", "i) Transporte de carga y pasajeros: marítimo, terrestre, ferroviario, aéreo y por ducto (SCIAN 48)", "j) Correos, mensajería y almacenamiento (SCIAN 49)", "k) Información en medios masivos: prensa, radio, televisión y telecomunicaciones (SCIAN 51)", "l) Servicios financieros y de seguros (SCIAN 52)", "m) Servicios inmobiliarios y de alquiler (SCIAN 53)", "n) Servicios profesionales, científicos y técnicos (SCIAN 54)", "o) Corporativos (SCIAN 55)", "p) Servicios de apoyo a los negocios y manejo de residuos (SCIAN 56)", "q) Servicios educativos (SCIAN 61)", "r) Servicios de salud y asistencia social (SCIAN 62)", "s) Servicios de esparcimiento, culturales y deportivos (SCIAN 71)", "t) Servicios de alojamiento temporal y de alimentos y bebidas (SCIAN 72)", "u) Otros servicios excepto actividades gubernamentales (SCIAN 81)", "v) Actividades legislativas y gubernamentales (SCIAN 93)"], "pts": null, "w": null, "industria": true}, {"n": 47, "id": 47, "stem": "¿En qué año comenzó tu negocio?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "abierta"}, {"n": 48, "id": 48, "stem": "¿Cuántos años planeas continuar operando tu negocio?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "abierta"}, {"n": 49, "id": 49, "stem": "Por último, indica tu año de nacimiento.", "nota": "Lo usamos solo para ubicar en qué etapa estás respecto a tus planes de salida del negocio.", "instr": null, "comp": "Contexto", "tipo": "abierta"}]}], "componentes": [{"nombre": "Desempeño Financiero", "def": "Tu historial de ingresos y ganancias, junto con el profesionalismo de tus registros.", "peso": 20, "acc": "Ordenar el cierre mensual y llevar tus estados financieros a nivel dictaminado.", "for": "Tus números aguantan una revisión — úsalos como argumento de precio.", "derivada": {"w": 0.04, "pts": [0, 25, 50, 75, 100], "cortes": [-0.3, -0.1, 0.1, 0.3]}}, {"nombre": "Potencial de Crecimiento", "def": "Tu probabilidad de crecer en el futuro, y a qué ritmo.", "peso": 15, "acc": "Documentar de dónde va a salir el crecimiento de los próximos tres años.", "for": "Tu historia de crecimiento es vendible — sostenla con un plan escrito."}, {"nombre": "Radar de Dependencia", "def": "Qué tan dependiente es tu empresa de un solo cliente, empleado o proveedor.", "peso": 8, "acc": "Bajar la concentración de clientes y documentar quién puede reemplazar a quién.", "for": "No dependes de una sola pieza — eso baja el riesgo que percibe un comprador."}, {"nombre": "Generación de Flujos", "def": "Si tu negocio es una fuente de efectivo o un pozo que hay que llenar.", "peso": 12, "acc": "Cobrar antes: anticipos, parcialidades y una política de crédito real.", "for": "Tu ciclo de cobro financia la operación — es una ventaja concreta."}, {"nombre": "Ingresos Recurrentes", "def": "La proporción y calidad del ingreso que se cobra solo cada mes.", "peso": 12, "acc": "Convertir parte de tus ventas en igualas o contratos con renovación automática.", "for": "El ingreso recurrente es lo que más múltiplo te da — protégelo."}, {"nombre": "Diferenciación y Elasticidad", "def": "Qué tan diferenciada está tu empresa de su competencia.", "peso": 10, "acc": "Definir qué te hace difícil de reemplazar y dejar de competir por precio.", "for": "Tienes poder de precio — no lo regales en descuentos."}, {"nombre": "Satisfacción del Cliente", "def": "La probabilidad de que tus clientes vuelvan y te recomienden.", "peso": 8, "acc": "Empezar a medir satisfacción y recompra con un método fijo, no por percepción.", "for": "Tus clientes regresan y te recomiendan — eso pesa en la valuación."}, {"nombre": "Keyman Risk", "def": "Cómo se comportaría tu negocio si no pudieras estar presente tres meses.", "peso": 15, "acc": "Sacarte de la operación diaria: delegar ventas y la relación con clientes clave.", "for": "El negocio camina sin ti — eso es exactamente lo que un comprador paga."}], "industrias": [{"n": "Agricultura, cría de animales, aprovechamiento forestal, pesca y caza (SCIAN 11)", "q1": 4.5, "med": 6, "q3": 8, "margen": 0.1176}, {"n": "Minería, petróleo y gas (SCIAN 21)", "q1": 3.5, "med": 5.5, "q3": 7.5, "margen": 0.0578}, {"n": "Energía eléctrica, agua y gas (SCIAN 22)", "q1": 5, "med": 7, "q3": 9, "margen": 0.1318}, {"n": "Construcción (SCIAN 23)", "q1": 6, "med": 8, "q3": 10, "margen": 0.1565}, {"n": "Industrias manufactureras (SCIAN 31–33)", "q1": 5.8, "med": 6, "q3": 6.2, "margen": 0.1535}, {"n": "Comercio al por menor especializado (SCIAN 46)", "q1": 4, "med": 6, "q3": 8, "margen": 0.099}, {"n": "Comercio al por mayor (SCIAN 43)", "q1": 5, "med": 7, "q3": 9, "margen": 0.1203}, {"n": "Comercio al por menor en general (SCIAN 46)", "q1": 6, "med": 8, "q3": 10, "margen": 0.1821}, {"n": "Transporte de carga y pasajeros: marítimo, terrestre, ferroviario, aéreo y por ducto (SCIAN 48)", "q1": 5.5, "med": 7, "q3": 9, "margen": 0.1179}, {"n": "Correos, mensajería y almacenamiento (SCIAN 49)", "q1": 5, "med": 6.5, "q3": 8.5, "margen": 0.1133}, {"n": "Información en medios masivos: prensa, radio, televisión y telecomunicaciones (SCIAN 51)", "q1": 5, "med": 6.5, "q3": 8.5, "margen": 0.1109}, {"n": "Servicios financieros y de seguros (SCIAN 52)", "q1": 15, "med": 18, "q3": 22, "margen": 0.6282}, {"n": "Servicios inmobiliarios y de alquiler (SCIAN 53)", "q1": 8, "med": 10, "q3": 12.5, "margen": 0.2033}, {"n": "Servicios profesionales, científicos y técnicos (SCIAN 54)", "q1": 8, "med": 10, "q3": 12, "margen": 0.1675}, {"n": "Corporativos (SCIAN 55)", "q1": 12, "med": 15, "q3": 18, "margen": 0.414}, {"n": "Servicios de apoyo a los negocios y manejo de residuos (SCIAN 56)", "q1": 7.5, "med": 10, "q3": 12, "margen": 0.1582}, {"n": "Servicios educativos (SCIAN 61)", "q1": 6, "med": 8, "q3": 10, "margen": 0.1425}, {"n": "Servicios de salud y asistencia social (SCIAN 62)", "q1": 5.5, "med": 7, "q3": 9, "margen": 0.1132}, {"n": "Servicios de esparcimiento, culturales y deportivos (SCIAN 71)", "q1": 7, "med": 9, "q3": 11, "margen": 0.1961}, {"n": "Servicios de alojamiento temporal y de alimentos y bebidas (SCIAN 72)", "q1": 7, "med": 9, "q3": 11, "margen": 0.1542}, {"n": "Otros servicios excepto actividades gubernamentales (SCIAN 81)", "q1": 7.5, "med": 9.5, "q3": 11.5, "margen": 0.1675}, {"n": "Actividades legislativas y gubernamentales (SCIAN 93)", "q1": 0, "med": 0, "q3": 0, "margen": 0.0}]}</script>
+<script id="vg-data" type="application/json">{"partes": [{"titulo": "Tu negocio", "corto": "Negocio", "preguntas": [{"n": 1, "id": 1, "stem": "En una frase, ¿cómo describirías tu negocio a una persona que recién conoces? (Es decir, ¿a qué se dedica tu empresa?)", "nota": null, "instr": null, "comp": "Contexto", "tipo": "abierta"}, {"n": 2, "id": 2, "stem": "¿Cómo está tu industria hoy?", "nota": null, "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) En declive", "b) Creciendo al ritmo de la economía", "c) Creciendo un poco más rápido que la economía", "d) Creciendo mucho más rápido que la economía", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 25], "w": 0.11}]}, {"titulo": "Tus clientes", "corto": "Clientes", "preguntas": [{"n": 3, "id": 3, "stem": "¿Qué tan fácil es para tus clientes conseguir con otro proveedor lo que tú vendes?", "nota": null, "instr": null, "comp": "Diferenciación y Elasticidad", "tipo": "opciones", "opciones": ["a) Es un producto o servicio común: lo pueden conseguir con muchos proveedores.", "b) Lo pueden conseguir con algunos proveedores.", "c) Es un producto o servicio de nicho: les costaría encontrar otro proveedor.", "d) Somos los únicos que lo ofrecemos.", "e) No estoy seguro"], "pts": [0, 25, 75, 100, 25], "w": 0.24}, {"n": 4, "id": 4, "stem": "¿Qué participación de mercado tienes?", "nota": null, "instr": null, "comp": "Diferenciación y Elasticidad", "tipo": "opciones", "opciones": ["a) Más del 40% del mercado (posición dominante)", "b) 15 – 40% del mercado (jugador relevante)", "c) 5 – 15% del mercado", "d) 1 – 5% del mercado", "e) No estoy seguro"], "pts": [100, 75, 50, 25, 25], "w": 0.23}, {"n": 5, "id": 5, "stem": "¿Cuál de las siguientes opciones describe mejor tu relación personal con los clientes de tu empresa?", "nota": null, "instr": null, "comp": "Keyman Risk", "tipo": "opciones", "opciones": ["a) Conozco a cada uno de mis clientes por su nombre y esperan que me involucre personalmente cuando compran en mi empresa", "b) Conozco a la mayoría de mis clientes por su nombre y, por lo general, quieren tratar conmigo en lugar de con uno de mis empleados", "c) Conozco a algunos de mis clientes por su nombre y algunos de ellos prefieren tratar conmigo en lugar de con uno de mis empleados", "d) No conozco personalmente a mis clientes y rara vez me involucro en el servicio a un cliente individual", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 25], "w": 0.32}, {"n": 6, "id": 6, "stem": "¿Cuál de las siguientes opciones describe mejor el nivel típico de personalización que ofreces a tus clientes?", "nota": null, "instr": null, "comp": "Diferenciación y Elasticidad", "tipo": "opciones", "opciones": ["a) Ofrecemos una solución personalizada completa para satisfacer las necesidades únicas de cada cliente al que servimos.", "b) Tenemos un conjunto básico de productos, metodologías y servicios, pero a menudo los personalizamos mucho para los clientes.", "c) Tenemos un conjunto estándar de productos, servicios y metodologías que modificamos ligeramente para algunos clientes.", "d) No personalizamos nuestros productos, servicios o metodologías para clientes individuales.", "e) No estoy seguro"], "pts": [100, 75, 50, 0, 25], "w": 0.33}, {"n": 7, "id": 7, "stem": "Por favor, estima el porcentaje de tus clientes que están MUY SATISFECHOS con los servicios/productos que ofrece tu empresa:", "nota": null, "instr": null, "comp": "Satisfacción del Cliente", "tipo": "opciones", "opciones": ["a) Menos del 25% de nuestros clientes están \"muy satisfechos\"", "b) Entre el 25% y el 50% de nuestros clientes están \"muy satisfechos\"", "c) Entre 51% y 75% de nuestros clientes están \"muy satisfechos\"", "d) Más del 75% de nuestros clientes están \"muy satisfechos\"", "e) No estoy seguro, no medimos la satisfacción del cliente"], "pts": [10, 25, 50, 100, 15], "w": 0.7}, {"n": 8, "id": 8, "stem": "¿Con qué frecuencia tus clientes recomiendan tu empresa con sus amigos y colegas?", "nota": null, "instr": null, "comp": "Satisfacción del Cliente", "tipo": "opciones", "opciones": ["a) Siempre", "b) A veces", "c) Raramente", "d) Nunca", "e) No estoy seguro"], "pts": [100, 50, 30, 0, 25], "w": 0.25}, {"n": 9, "id": 9, "stem": "En los últimos 12 meses, ¿qué proporción de tus clientes se quejó por escrito?", "nota": "Cuenta correos, cartas o mensajes por el formulario de tu sitio web.", "instr": null, "comp": "Satisfacción del Cliente", "tipo": "opciones", "opciones": ["a) Ninguno", "b) Menos del 1%", "c) Entre 1% y 5%", "d) Entre 5% y 10%", "e) Más del 10%", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 5, 25], "w": 0.05}, {"n": 10, "id": 10, "stem": "¿Cómo se comporta tu utilidad cada que obtienes un cliente nuevo?", "nota": null, "instr": null, "comp": "Diferenciación y Elasticidad", "tipo": "opciones", "opciones": ["a) Baja.", "b) Se mantiene más o menos igual.", "c) Mejora poco.", "d) Mejora bastante.", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 25], "w": 0.2}, {"n": 11, "id": 11, "stem": "¿En qué momento te pagan normalmente tus clientes?", "nota": "Piensa en cuándo entra el dinero, no en cuándo emites la factura.", "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Nos pagan todo después de entregar.", "b) Un anticipo al inicio y el resto al entregar.", "c) Nos pagan en parcialidades a lo largo de la entrega.", "d) Nos pagan todo por adelantado, al momento de la compra.", "e) No estoy seguro"], "pts": [20, 50, 75, 100, 25], "w": 0.22}, {"n": 12, "id": 12, "stem": "¿Qué porcentaje de tus ventas totales representó tu cliente más grande el año pasado?", "nota": null, "instr": null, "comp": "Radar de Dependencia", "tipo": "opciones", "opciones": ["a) 1 – 15%", "b) 16 – 25%", "c) 26 – 50%", "d) 51% o más", "e) No estoy seguro"], "pts": [100, 75, 50, 0, 25], "w": 0.2}, {"n": 13, "id": 13, "stem": "Si perdieras a tu cliente más grande, tu negocio:", "nota": null, "instr": null, "comp": "Radar de Dependencia", "tipo": "opciones", "opciones": ["a) Prácticamente no se afectaría.", "b) Se afectaría poco y seguiría operando.", "c) Se afectaría bastante, pero seguiría operando.", "d) No sobreviviría.", "e) No estoy seguro"], "pts": [100, 75, 50, 0, 25], "w": 0.58}, {"n": 14, "id": 14, "stem": "¿Qué porcentaje de tus ventas es recurrente?", "nota": "Es recurrente el ingreso que se renueva sin una nueva decisión de compra: suscripciones, igualas, contratos de mantenimiento o rentas mensuales, donde el cliente tiene que cancelar para dejar de pagar. No cuenta el cliente frecuente que decide cada compra.", "instr": null, "comp": "Ingresos Recurrentes", "tipo": "opciones", "opciones": ["a) Ninguno", "b) 1 – 25%", "c) 26 – 50%", "d) 51 – 75%", "e) 76 – 100%", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.75}]}, {"titulo": "Tu personal", "corto": "Personal", "preguntas": [{"n": 15, "id": 15, "stem": "¿Qué porcentaje de tus ventas atiendes personalmente tú o tus socios?", "nota": "Nos referimos a las ventas en las que tú o un socio están directamente involucrados con el cliente.", "instr": null, "comp": "Keyman Risk", "tipo": "opciones", "opciones": ["a) Ninguno", "b) 1 – 25%", "c) 26 – 50%", "d) 51 – 75%", "e) 76 – 100%", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 0, 25], "w": 0.1}, {"n": 16, "id": 16, "stem": "Piensa en la persona que más contribuye a cada una de las siguientes áreas de tu negocio. ¿Qué tan fácil o difícil sería reemplazarlos?", "nota": "Para la sección I) y II) si esta persona eres tú, selecciona IMPOSIBLE.", "instr": null, "comp": "Radar de Dependencia", "tipo": "subs", "subs": [{"label": "I) Ventas y mercadotecnia:", "opciones": ["a) Muy fácil", "b) Fácil", "c) Difícil", "d) Muy difícil", "e) Imposible", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 0, 25], "w": 0.08}, {"label": "II) Diseño y entrega de productos/servicios:", "opciones": ["a) Muy fácil", "b) Fácil", "c) Difícil", "d) Muy difícil", "e) Imposible", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 0, 25], "w": 0.07}, {"label": "III) Proveedor externo. ¿Qué tan fácil o difícil sería reemplazar a su proveedor más importante?", "opciones": ["a) Muy fácil", "b) Fácil", "c) Difícil", "d) Muy difícil", "e) Imposible", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 0, 25], "w": 0.07}]}]}, {"titulo": "Pensemos en el futuro", "corto": "Futuro", "preguntas": [{"n": 17, "id": 17, "stem": "¿Qué esperas que pase con tus ventas en los próximos 12 meses?", "nota": null, "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Que disminuyan", "b) Que se mantengan igual", "c) Que aumenten hasta 10%", "d) Que aumenten entre 11% y 20%", "e) Que aumenten entre 21% y 30%", "f) Que aumenten más de 30%", "g) No estoy seguro"], "pts": [0, 25, 50, 75, 90, 100, 25], "w": 0.24}, {"n": 18, "id": 18, "stem": "¿Cuánto más le podrías vender a tus clientes actuales?", "nota": null, "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Prácticamente nada: ya les vendemos todo lo que nos pueden comprar.", "b) 1-2 productos o servicios adicionales de nuestro portafolio actual.", "c) 3-5 productos o servicios adicionales de nuestro portafolio actual.", "d) +5 productos o servicios adicionales de nuestro portafolio actual.", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 25], "w": 0.15}, {"n": 19, "id": 19, "stem": "Si tus clientes te contratan 5 veces el volumen que vendes hoy, atenderlo sería:", "nota": "Piensa en tu capacidad real de abastecerlo: inventario, producción, personal y capacidad de servicio.", "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Imposible", "b) Muy difícil", "c) Difícil", "d) Fácil", "e) Muy fácil", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.23}, {"n": 20, "id": 20, "stem": "Abrir tu negocio en otra ciudad o región sería:", "nota": null, "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Imposible", "b) Muy difícil", "c) Difícil", "d) Fácil", "e) Muy fácil", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.21}, {"n": 21, "id": 21, "stem": "Si tuvieras que ausentarte tres meses sin poder trabajar, tu negocio:", "nota": null, "instr": null, "comp": "Keyman Risk", "tipo": "opciones", "opciones": ["a) Prácticamente no se afectaría.", "b) Se afectaría poco y seguiría operando.", "c) Se afectaría bastante, pero seguiría operando.", "d) No sobreviviría.", "e) No estoy seguro"], "pts": [100, 75, 50, 0, 25], "w": 0.31}, {"n": 22, "id": 22, "stem": "Si pudieras lograr solo UNA de las siguientes metas en los próximos 12 meses, ¿cuál sería?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Aumentar mis ventas.", "b) Aumentar mi utilidad.", "c) Ganar reconocimiento en mi industria."], "pts": null, "w": null, "extra": [1, 0, 0]}, {"n": 23, "id": 23, "stem": "¿A quién acudirías para pedir asesoría sobre cómo aumentar el valor de tu empresa? Marca todas las que apliquen.", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["Contador", "Banquero de Inversión", "Broker en compraventa de empresas", "Coach de negocios", "Consultor de negocios", "Familiar o amigo cercano", "Asesor de plan de salida o sucesión", "Otro empresario", "Asesor de inversiones", "Abogado", "Especialista en fusiones y adquisiciones", "Nadie", "Otro"], "pts": null, "w": null, "multi": true}, {"n": 24, "id": 24, "stem": "¿Cuál de estas se parece más a tu idea de riqueza?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Tener suficiente dinero para hacer lo que quieras, cuando quieras.", "b) Tener al menos 10 millones de dólares en activos invertidos.", "c) Tener ahorrado lo suficiente para cubrir tus gastos por el resto de tu vida."], "pts": null, "w": null}, {"n": 25, "id": 25, "stem": "¿Cuál es tu mayor preocupación al pensar en vender tu negocio?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) No obtener el valor que creo que vale mi negocio.", "b) No tener nada que hacer en la jubilación.", "c) Decepcionar a mis empleados.", "d) Que nadie pueda manejar las cosas tan bien como yo.", "e) Que el legado que construí no continúe, o cambie a algo distinto de lo que yo quería."], "pts": null, "w": null}, {"n": 26, "id": 26, "stem": "¿Cuál de las siguientes opciones describe mejor tu objetivo a largo plazo para tu negocio? Planeo:", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Vender mi negocio a un tercero.", "b) Hacer la transición de mi negocio a mis hijos.", "c) Hacer la transición de mi negocio a la próxima generación de gerentes.", "d) Cerrar mi negocio.", "e) Otro"], "pts": null, "w": null}, {"n": 27, "id": 27, "stem": "¿Cuál de las siguientes opciones describe mejor lo que buscas en un asesor?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Experiencia con empresas de rápido crecimiento.", "b) Experiencia en mi sector.", "c) Experiencia con empresas de mi región."], "pts": null, "w": null}]}, {"titulo": "Datos y cifras", "corto": "Cifras", "preguntas": [{"n": 28, "id": 28, "stem": "¿Cuál de las siguientes opciones describe mejor a tu equipo directivo?", "nota": null, "instr": null, "comp": "Keyman Risk", "tipo": "opciones", "opciones": ["a) No tenemos equipo directivo.", "b) Hay dos o tres personas de alto nivel que funcionan como líderes, pero sin roles definidos.", "c) Tenemos gerentes a cargo de la parte comercial y de la operación.", "d) Tenemos un equipo directivo con un esquema de compensación de largo plazo que los mantiene en la empresa.", "e) No estoy seguro"], "pts": [0, 25, 75, 100, 25], "w": 0.27}, {"n": 29, "id": 29, "stem": "En tu último ejercicio completo, ¿cuál fue tu margen operativo?", "nota": "Margen operativo = utilidad de operación ÷ ventas. La utilidad de operación es lo que queda después del costo de ventas y los gastos de operación, antes de intereses e impuestos.", "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Tuvimos pérdidas", "b) 0 – 10%", "c) 11 – 20%", "d) Más del 20%", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 0], "w": 0.26}, {"n": 30, "id": 30, "stem": "¿Cuánta deuda con costo financiero (intereses) tiene tu empresa hoy?", "nota": "Incluye créditos bancarios, arrendamientos financieros y préstamos de socios. No incluyas lo que le debes a proveedores.", "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) No tenemos deuda.", "b) Menos de un año de utilidad para pagar la deuda.", "c) Entre uno y dos años de utilidad para pagar la deuda.", "d) Entre dos y tres años de utilidad para pagar la deuda.", "e) Más de tres años de utilidad para pagar la deuda.", "f) No estoy seguro"], "pts": [100, 80, 55, 30, 0, 0], "w": 0.09}, {"n": 31, "id": 31, "stem": "Comparando tu último ejercicio con el anterior, tus ventas:", "nota": null, "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Disminuyeron", "b) Se mantuvieron igual", "c) Aumentaron hasta en un 10%", "d) Aumentaron entre un 11 y un 20%", "e) Aumentaron en un 21-30%", "f) Aumentaron más del 30%", "g) No estoy seguro"], "pts": [20, 25, 50, 75, 90, 100, 25], "w": 0.33}, {"n": 32, "id": 32, "stem": "¿Cómo se generan hoy los estados financieros de tu empresa?", "nota": null, "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Le damos todo a nuestro contador (estados de cuenta, facturas, recibos) y él genera los registros. No hay proceso interno ni revisión.", "b) El contador (interno o externo) registra la información periódicamente, pero solo con fines fiscales. Revisamos los estados financieros de vez en cuando, sin calendario fijo.", "c) Tenemos cierre mensual con calendario definido y entregamos los estados financieros a la dirección con regularidad, pero no los comparamos contra presupuesto.", "d) Cerramos en los primeros 10-15 días del mes siguiente, comparamos contra presupuesto y la dirección usa la información para decidir.", "e) Cierre ágil (menos de una semana), reportes gerenciales y KPIs, y un CFO (interno o fraccional) que traduce los números en decisiones estratégicas."], "pts": [0, 25, 60, 85, 100], "w": 0.17}, {"n": 33, "id": 33, "stem": "¿Cuál es tu margen de utilidad bruto típico?", "nota": "Margen bruto = (ventas − costo de ventas) ÷ ventas. El costo de ventas es lo que te cuesta producir o entregar lo que vendes: materia prima, mano de obra directa y costos de producción. No incluye renta, administración, ventas ni marketing.", "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Menos del 40%", "b) 40 – 60%", "c) 61 – 80%", "d) Más del 80%", "e) No estoy seguro"], "pts": [0, 50, 75, 100, 0], "w": 0.17}, {"n": 34, "id": 34, "stem": "¿Cuál describe mejor tu situación de efectivo?", "nota": null, "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Necesitamos más efectivo del que generamos, por lo que regularmente buscamos capital o crédito.", "b) Necesitamos más efectivo del que generamos, por lo que ocasionalmente buscamos capital o crédito.", "c) Generamos efectivo de sobra y lo reinvertimos o lo dejamos en la empresa como reserva.", "d) Generamos efectivo de sobra y lo repartimos a los accionistas de forma regular.", "e) No estoy seguro"], "pts": [0, 25, 75, 100, 0], "w": 0.13}, {"n": 35, "id": 35, "stem": "¿Cuántas personas conocen o han buscado tus servicios a través de estos medios?", "nota": "Cuenta personas con una relación activa con tus canales propios (suscriptores de newsletter y seguidores en redes sociales). No cuentes bases de datos o listas de correos que no representen suscriptores activos. Si una persona te sigue en varios canales, cuéntala una sola vez.", "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Ninguno", "b) 1 – 999", "c) 1,000 – 9,999", "d) 10,000 – 99,999", "e) 100,000 o más", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.06}, {"n": 36, "id": 36, "stem": "¿Cuáles fueron tus ventas en cada uno de los últimos tres ejercicios? Anótalas en dólares.", "nota": null, "instr": null, "comp": "Desempeño Financiero", "tipo": "numerica", "campos": ["Ventas del año pasado", "Ventas de hace 2 años", "Ventas de hace 3 años"], "rol": "ventas"}, {"n": 37, "id": 37, "stem": "¿Cuál fue tu EBITDA en cada uno de los últimos tres ejercicios? Anótalo en dólares, no en porcentaje.", "nota": "EBITDA = utilidad de operación + depreciación + amortización. No uses la utilidad neta ni la utilidad antes de impuestos.", "instr": null, "comp": "Desempeño Financiero", "tipo": "numerica", "campos": ["EBITDA del año pasado", "EBITDA de hace 2 años", "EBITDA de hace 3 años"], "rol": "ebitda"}, {"n": 38, "id": 44, "stem": "¿Qué tan separadas están las finanzas del negocio de las finanzas personales de los socios?", "nota": null, "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Usamos las mismas cuentas y no separamos los gastos personales de los del negocio.", "b) Las cuentas están mezcladas, pero identificamos qué gastos son personales.", "c) Tenemos cuentas separadas, aunque algunos gastos personales todavía pasan por la empresa.", "d) Están totalmente separadas: los socios reciben sueldo y dividendos, y ningún gasto personal pasa por la empresa.", "e) No estoy seguro"], "pts": [0, 35, 70, 100, 0], "w": 0.09}, {"n": 39, "id": 41, "stem": "¿La empresa cuenta con información financiera auditada?", "nota": "Auditada significa que un despacho externo revisó y dictaminó tus estados financieros. La declaración anual por sí sola no cuenta.", "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Sí", "b) No"], "pts": [100, 0], "w": 0.05}, {"n": 40, "id": 42, "stem": "¿Cuándo les pagas a tus proveedores?", "nota": "Piensa en tus principales proveedores y gastos fijos: en cuánto tiempo les pagas después de que te facturan.", "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Al contado o por adelantado.", "b) A 30 días.", "c) A 60 días o más.", "d) Varía, depende del proveedor.", "e) No estoy seguro"], "pts": [0, 50, 100, 50, 25], "w": 0.15}, {"n": 41, "id": 43, "stem": "¿Cuánto de tus ganancias reinviertes en equipo, tecnología o instalaciones?", "nota": "Piensa en compras como maquinaria, equipo de cómputo, remodelación de oficina o vehículos: lo que compras para que el negocio siga operando o crezca, no los gastos del día a día.", "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Casi nada, el negocio casi no requiere estas compras.", "b) Una parte pequeña: menos de 1 de cada 6 pesos que gano (menos del 15%).", "c) Una parte considerable: entre 1 de cada 6 y 1 de cada 3 pesos (15% – 33%).", "d) Una parte muy grande: más de 1 de cada 3 pesos (más del 33%). El negocio requiere inversión constante para mantenerse.", "e) No estoy seguro"], "pts": [100, 75, 40, 0, 25], "w": 0.15}, {"n": 42, "id": 45, "stem": "¿Qué tan seguido usas préstamos, líneas de crédito o tarjetas para que la empresa opere?", "nota": "No nos referimos a un crédito que pediste una vez para crecer, sino a si necesitas apoyo de un banco o de una financiera de forma regular para pagar nómina, proveedores o gastos del mes.", "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Nunca, el negocio se sostiene con lo que genera.", "b) Rara vez, solo en meses difíciles o por una emergencia.", "c) Seguido, es parte normal de cómo operamos cada mes.", "d) Siempre, sin ese apoyo no podríamos operar.", "e) No estoy seguro"], "pts": [100, 65, 25, 0, 25], "w": 0.15}, {"n": 43, "id": 46, "stem": "¿Qué porcentaje de tus ingresos proviene de clientes con más de 3 años de antigüedad contigo?", "nota": "Cuenta a los clientes que te siguen comprando desde hace más de tres años, aunque no tengan contrato ni suscripción.", "instr": null, "comp": "Ingresos Recurrentes", "tipo": "opciones", "opciones": ["a) Ninguno", "b) 1 – 25%", "c) 26 – 50%", "d) 51 – 75%", "e) 76 – 100%", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.25}]}, {"titulo": "Vender tu negocio", "corto": "Vender", "preguntas": [{"n": 44, "id": 38, "stem": "¿Has recibido una oferta por escrito (carta de intención, expresión de interés) para comprar tu negocio en el último año?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Sí", "b) No"], "pts": null, "w": null, "extra": [1, 0]}, {"n": 45, "id": 39, "stem": "¿Qué múltiplo de tu EBITDA representó esa oferta?", "nota": "Calcula el múltiplo con el dinero o las acciones que te ofrecían al cierre. No incluyas lo que estuviera condicionado a resultados futuros, como un earn out o un contrato de consultoría. Si contestaste “No” en la pregunta anterior, elige “0 veces EBITDA”.", "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) 0 veces EBITDA", "b) 1 vez EBITDA", "c) 2 veces EBITDA", "d) 3 veces EBITDA", "e) 4 veces EBITDA", "f) 5 veces EBITDA", "g) 6 veces EBITDA", "h) 7 veces EBITDA", "i) 8 o más veces EBITDA", "j) No estoy seguro"], "pts": null, "w": null, "extra": [0, 0, 0, 0.25, 0.5, 0.75, 1, 1, 1.5, 0]}, {"n": 46, "id": 40, "stem": "¿Cuál de las siguientes opciones describe mejor tu industria?", "nota": "Si tu empresa es un corporativo o una controladora, elige la industria de su negocio operativo principal.", "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Agricultura, cría de animales, aprovechamiento forestal, pesca y caza (SCIAN 11)", "b) Minería, petróleo y gas (SCIAN 21)", "c) Energía eléctrica, agua y gas (SCIAN 22)", "d) Construcción (SCIAN 23)", "e) Industrias manufactureras (SCIAN 31–33)", "f) Comercio al por menor especializado (SCIAN 46)", "g) Comercio al por mayor (SCIAN 43)", "h) Comercio al por menor en general (SCIAN 46)", "i) Transporte de carga y pasajeros: marítimo, terrestre, ferroviario, aéreo y por ducto (SCIAN 48)", "j) Correos, mensajería y almacenamiento (SCIAN 49)", "k) Información en medios masivos: prensa, radio, televisión y telecomunicaciones (SCIAN 51)", "l) Servicios financieros y de seguros (SCIAN 52)", "m) Servicios inmobiliarios y de alquiler (SCIAN 53)", "n) Servicios profesionales, científicos y técnicos (SCIAN 54)", "o) Servicios de apoyo a los negocios y manejo de residuos (SCIAN 56)", "p) Servicios educativos (SCIAN 61)", "q) Servicios de salud y asistencia social (SCIAN 62)", "r) Servicios de esparcimiento, culturales y deportivos (SCIAN 71)", "s) Servicios de alojamiento temporal y de alimentos y bebidas (SCIAN 72)", "t) Otros servicios excepto actividades gubernamentales (SCIAN 81)", "u) Actividades legislativas y gubernamentales (SCIAN 93)"], "pts": null, "w": null, "industria": true}, {"n": 47, "id": 47, "stem": "¿En qué año comenzó tu negocio?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "abierta"}, {"n": 48, "id": 48, "stem": "¿Cuántos años planeas continuar operando tu negocio?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "abierta"}, {"n": 49, "id": 49, "stem": "Por último, indica tu año de nacimiento.", "nota": "Lo usamos solo para ubicar en qué etapa estás respecto a tus planes de salida del negocio.", "instr": null, "comp": "Contexto", "tipo": "abierta"}]}], "componentes": [{"nombre": "Desempeño Financiero", "def": "Tu historial de ingresos y ganancias, junto con el profesionalismo de tus registros.", "peso": 20, "acc": "Ordenar el cierre mensual y llevar tus estados financieros a nivel dictaminado.", "for": "Tus números aguantan una revisión, úsalos como argumento de precio.", "derivada": {"w": 0.04, "pts": [0, 25, 50, 75, 100], "cortes": [-0.3, -0.1, 0.1, 0.3]}}, {"nombre": "Potencial de Crecimiento", "def": "Tu probabilidad de crecer en el futuro, y a qué ritmo.", "peso": 15, "acc": "Documentar de dónde va a salir el crecimiento de los próximos tres años.", "for": "Tu historia de crecimiento es vendible, sostenla con un plan escrito."}, {"nombre": "Radar de Dependencia", "def": "Qué tan dependiente es tu empresa de un solo cliente, empleado o proveedor.", "peso": 8, "acc": "Bajar la concentración de clientes y documentar quién puede reemplazar a quién.", "for": "No dependes de una sola pieza, eso baja el riesgo que percibe un comprador."}, {"nombre": "Generación de Flujos", "def": "Si tu operación genera el efectivo que necesita para funcionar, o depende de crédito para sostenerse.", "peso": 12, "acc": "Cobrar antes: anticipos, parcialidades y una política de crédito real.", "for": "Tu ciclo de cobro financia la operación, es una ventaja concreta."}, {"nombre": "Ingresos Recurrentes", "def": "Qué parte de tus ventas se repite sin que tengas que volver a venderla.", "peso": 12, "acc": "Convertir parte de tus ventas en igualas o contratos con renovación automática.", "for": "El ingreso recurrente es lo que más múltiplo te da, protégelo."}, {"nombre": "Diferenciación y Elasticidad", "def": "Qué tan diferenciada está tu empresa de su competencia.", "peso": 10, "acc": "Definir qué te hace difícil de reemplazar y dejar de competir por precio.", "for": "Tienes poder de precio, no lo regales en descuentos."}, {"nombre": "Satisfacción del Cliente", "def": "La probabilidad de que tus clientes vuelvan y te recomienden.", "peso": 8, "acc": "Empezar a medir satisfacción y recompra con un método fijo, no por percepción.", "for": "Tus clientes regresan y te recomiendan, eso pesa en la valuación."}, {"nombre": "Keyman Risk", "def": "Cómo se comportaría tu negocio si no pudieras estar presente.", "peso": 15, "acc": "Sacarte de la operación diaria: delegar ventas y la relación con clientes clave.", "for": "El negocio camina sin ti, eso es exactamente lo que un comprador paga."}], "industrias": [{"n": "a) Agricultura, cría de animales, aprovechamiento forestal, pesca y caza (SCIAN 11)", "rel": 0.7765, "margen": 0.0862, "nota": ""}, {"n": "b) Minería, petróleo y gas (SCIAN 21)", "rel": 0.8905, "margen": 0.1315, "nota": ""}, {"n": "c) Energía eléctrica, agua y gas (SCIAN 22)", "rel": 0.6751, "margen": 0.2244, "nota": ""}, {"n": "d) Construcción (SCIAN 23)", "rel": 0.7973, "margen": 0.0577, "nota": ""}, {"n": "e) Industrias manufactureras (SCIAN 31–33)", "rel": 1.0995, "margen": 0.1088, "nota": ""}, {"n": "f) Comercio al por menor especializado (SCIAN 46)", "rel": 1.1276, "margen": 0.072, "nota": ""}, {"n": "g) Comercio al por mayor (SCIAN 43)", "rel": 0.7167, "margen": 0.0419, "nota": ""}, {"n": "h) Comercio al por menor en general (SCIAN 46)", "rel": 1.0932, "margen": 0.0806, "nota": ""}, {"n": "i) Transporte de carga y pasajeros: marítimo, terrestre, ferroviario, aéreo y por ducto (SCIAN 48)", "rel": 0.7303, "margen": 0.1055, "nota": ""}, {"n": "j) Correos, mensajería y almacenamiento (SCIAN 49)", "rel": 0.5403, "margen": 0.1658, "nota": ""}, {"n": "k) Información en medios masivos: prensa, radio, televisión y telecomunicaciones (SCIAN 51)", "rel": 1.1982, "margen": 0.1105, "nota": ""}, {"n": "l) Servicios financieros y de seguros (SCIAN 52)", "rel": 0, "margen": 0.0843, "nota": "Las entidades financieras no se valúan por múltiplos de EBITDA, sino por múltiplos de capital contable y de utilidad. Tu calificación de los ocho componentes sí aplica; el valor lo revisamos contigo en la sesión."}, {"n": "m) Servicios inmobiliarios y de alquiler (SCIAN 53)", "rel": 1.2398, "margen": 0.4324, "nota": ""}, {"n": "n) Servicios profesionales, científicos y técnicos (SCIAN 54)", "rel": 1.3041, "margen": 0.0615, "nota": ""}, {"n": "o) Servicios de apoyo a los negocios y manejo de residuos (SCIAN 56)", "rel": 1.1005, "margen": 0.1791, "nota": ""}, {"n": "p) Servicios educativos (SCIAN 61)", "rel": 0.6154, "margen": 0.2535, "nota": ""}, {"n": "q) Servicios de salud y asistencia social (SCIAN 62)", "rel": 0.8172, "margen": 0.0412, "nota": ""}, {"n": "r) Servicios de esparcimiento, culturales y deportivos (SCIAN 71)", "rel": 1.0977, "margen": 0.1686, "nota": ""}, {"n": "s) Servicios de alojamiento temporal y de alimentos y bebidas (SCIAN 72)", "rel": 1.0, "margen": 0.2098, "nota": ""}, {"n": "t) Otros servicios excepto actividades gubernamentales (SCIAN 81)", "rel": 1.3041, "margen": 0.0615, "nota": ""}, {"n": "u) Actividades legislativas y gubernamentales (SCIAN 93)", "rel": 0, "margen": 0, "nota": "Este diagnóstico no estima el valor de entidades gubernamentales. Tu calificación de los ocho componentes sí aplica."}], "bandas": [[100000, 500000, 2, 4], [500000, 1000000, 3, 5], [1000000, 2000000, 4, 6], [2000000, 4000000, 5, 7], [4000000, 7000000, 6, 8]], "piso": 100000, "techo": 7000000}</script>
 <script>
 (function(){
 "use strict";
@@ -600,7 +687,7 @@ var NUDGE=[
 q('#rejilla').innerHTML=COMP.map(function(c,i){
   return '<div class="celda sub-glass"><div class="k">'+pad2(i+1)+'</div><h3>'+esc(c.nombre)+'</h3><p>'+esc(c.def)+'</p></div>';}).join('');
 
-/* todas las preguntas en una sola pantalla, agrupadas por sección */
+/* preguntas de cinco en cinco, con el encabezado de su sección */
 function opsHtml(key,opciones,multi){
   var cortas=opciones.length>6&&opciones.every(function(o){return letra(o)[1].length<=34;});
   return '<div class="ops'+(cortas?' grid':'')+'">'+opciones.map(function(o,oi){var l=letra(o);
@@ -608,41 +695,49 @@ function opsHtml(key,opciones,multi){
       '><span class="mk">'+(multi||!l[0]?CHECK:esc(l[0]))+'</span><span class="txt">'+esc(l[1])+'</span></button>';
   }).join('')+'</div>';
 }
-var TOTQ=P.reduce(function(s,p){return s+p.preguntas.length;},0);
+function qHtml(x,j){
+  var h='<div class="q" data-q="'+x.n+'" style="--i:'+j+'"><div class="q-top"><span class="q-num">'+pad2(x.n)+'</span><div style="flex:1">'+
+     '<p class="q-text">'+esc(x.stem)+'</p>';
+  if(x.nota)  h+='<p class="nota">'+esc(x.nota)+'</p>';
+  if(x.instr) h+='<p class="instr">'+esc(x.instr)+'</p>';
+  h+='</div></div><div class="q-body">';
+  if(x.tipo==='opciones'){
+    h+=opsHtml(x.n,x.opciones,x.multi);
+  } else if(x.tipo==='subs'){
+    x.subs.forEach(function(sb,bi){ h+='<p class="subtit">'+esc(sb.label)+'</p>'+opsHtml(x.n+'-'+bi,sb.opciones,false); });
+  } else if(x.tipo==='numerica'){
+    h+='<div class="campos">'+x.campos.map(function(c,ci){
+      return '<div class="campo"><label for="n'+x.n+'-'+ci+'">'+esc(c)+'</label><div class="pesos"><span class="sig">$</span>'+
+      '<input type="text" inputmode="numeric" id="n'+x.n+'-'+ci+'" data-num="'+x.rol+'-'+ci+'" placeholder="0"></div></div>';
+    }).join('')+'</div>';
+  } else {
+    h+='<textarea data-txt="'+x.n+'" aria-label="Respuesta a la pregunta '+x.n+'" placeholder="Escribe tu respuesta"></textarea>';
+  }
+  return h+'</div></div>';
+}
+var POR=5, QL=[], PAG=0;
+P.forEach(function(p,pi){p.preguntas.forEach(function(x,xi){QL.push({x:x,pi:pi,xi:xi});});});
+var NPG=Math.ceil(QL.length/POR), TOTQ=QL.length;
 (function(){
-  var h='<section class="panel" id="p-q"><div class="skew">'+
-     ''+
-     '<div class="glass pad">'+
-     '';
-  P.forEach(function(p,pi){
-    h+='<div class="parte" id="parte-'+pi+'"><div class="cab"><div class="big-n">'+pad2(pi+1)+'</div><div><div class="tag">Sección '+(pi+1)+' de '+P.length+
-       ' · '+p.preguntas.length+(p.preguntas.length===1?' pregunta':' preguntas')+'</div><h2>'+esc(p.titulo)+'</h2>'+
-       (NUDGE[pi]?'<p>'+NUDGE[pi]+'</p>':'')+'</div></div>';
-    p.preguntas.forEach(function(x,xi){
-      h+='<div class="q" data-q="'+x.n+'" style="--i:'+(pi===0?Math.min(xi,6):0)+'"><div class="q-top"><span class="q-num">P'+pad2(x.n)+'</span><div style="flex:1">'+
-         '<p class="q-text">'+esc(x.stem)+'</p>';
-      if(x.nota)  h+='<p class="nota">'+esc(x.nota)+'</p>';
-      if(x.instr) h+='<p class="instr">'+esc(x.instr)+'</p>';
-      h+='</div></div><div class="q-body">';
-      if(x.tipo==='opciones'){
-        h+=opsHtml(x.n,x.opciones,x.multi);
-      } else if(x.tipo==='subs'){
-        x.subs.forEach(function(sb,bi){ h+='<p class="subtit">'+esc(sb.label)+'</p>'+opsHtml(x.n+'-'+bi,sb.opciones,false); });
-      } else if(x.tipo==='numerica'){
-        h+='<div class="campos">'+x.campos.map(function(c,ci){
-          return '<div class="campo"><label for="n'+x.n+'-'+ci+'">'+esc(c)+'</label><div class="pesos"><span class="sig">$</span>'+
-          '<input type="text" inputmode="numeric" id="n'+x.n+'-'+ci+'" data-num="'+x.rol+'-'+ci+'" placeholder="0"></div></div>';
-        }).join('')+'</div>';
-      } else {
-        h+='<textarea data-txt="'+x.n+'" aria-label="Respuesta a la pregunta '+x.n+'" placeholder="Escribe tu respuesta"></textarea>';
+  var h='<section class="panel" id="p-q"><div class="skew"><div class="glass pad">';
+  for(var k=0;k<NPG;k++){
+    var items=QL.slice(k*POR,(k+1)*POR), prev=-1;
+    h+='<div class="pagina" data-pg="'+k+'">';
+    items.forEach(function(it,j){
+      if(it.pi!==prev){
+        var p=P[it.pi], cont=it.xi>0;
+        h+='<div class="cab'+(j>0?' sig':'')+'"><div class="big-n">'+pad2(it.pi+1)+'</div><div><div class="tag">Sección '+(it.pi+1)+' de '+P.length+
+           (cont?' · continuación':' · '+p.preguntas.length+(p.preguntas.length===1?' pregunta':' preguntas'))+'</div><h2>'+esc(p.titulo)+'</h2>'+
+           (!cont&&NUDGE[it.pi]?'<p>'+NUDGE[it.pi]+'</p>':'')+'</div></div>';
+        prev=it.pi;
       }
-      h+='</div></div>';
+      h+=qHtml(it.x,j);
     });
     h+='</div>';
-  });
+  }
   h+='</div></div><div class="nav fija"><button class="btn back" data-atras><span aria-hidden="true">←</span><span class="lbl">Regresar</span></button>'+
      '<span class="nav-hint" data-faltan></span>'+
-     '<button class="btn main" data-sig>Ver mi resultado <span class="arr" aria-hidden="true">→</span></button></div></section>';
+     '<button class="btn main" data-sig><span class="t">Siguiente</span> <span class="arr" aria-hidden="true">→</span></button></div></section>';
   q('#paneles').innerHTML=h;
 })();
 
@@ -662,63 +757,61 @@ function riel(estado,fracs,resp){
   else if(estado===1) t.textContent='Tus datos';
   else t.textContent='Resultado';
 }
-function mostrar(id){
-  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});
-  document.querySelectorAll('.skew.is-active').forEach(function(s){s.classList.remove('is-active');});
-  var el=document.getElementById(id);el.classList.add('on');
-  requestAnimationFrame(function(){requestAnimationFrame(function(){
-    el.querySelectorAll('.skew').forEach(function(s){s.classList.add('is-active');});});});
+function subir(){
   window.scrollTo(0,0);
   if(EMB){try{parent.postMessage({flintScrollTop:true},'*');}catch(e){}}
   setTimeout(altura,50);
 }
+function mostrar(id){
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});
+  document.getElementById(id).classList.add('on');
+  subir();
+}
 
 /* pendientes: bloquea avance */
-function pend(pi){
-  var faltan=[],tot=0;
-  P[pi].preguntas.forEach(function(x){
-    if(x.tipo==='opciones'&&!x.multi){tot++;if(!R[x.n])faltan.push(x.n);}
-    else if(x.tipo==='subs'){x.subs.forEach(function(sb,bi){tot++;if(!R[x.n+'-'+bi])faltan.push(x.n);});}
-    else if(x.tipo==='numerica'){x.campos.forEach(function(c,ci){tot++;if(NUM[x.rol+'-'+ci]==null)faltan.push(x.n);});}
-    else if(x.tipo==='abierta'){tot++;if(!(R['t'+x.n]&&R['t'+x.n].txt.trim()))faltan.push(x.n);}
-  });
-  return {faltan:faltan,tot:tot};
+function falta(x){
+  if(x.tipo==='opciones') return !x.multi&&!R[x.n];
+  if(x.tipo==='subs') return x.subs.some(function(sb,bi){return !R[x.n+'-'+bi];});
+  if(x.tipo==='numerica') return x.campos.some(function(c,ci){return NUM[x.rol+'-'+ci]==null;});
+  return !(R['t'+x.n]&&R['t'+x.n].txt.trim());
 }
 function tieneMulti(n){for(var k in R){if(R[k]&&k.indexOf(n+'#')===0)return true;}return false;}
+function enPagina(){return QL.slice(PAG*POR,(PAG+1)*POR);}
 function pinta(){
-  var u={},fracs=[],resp=0;
-  P.forEach(function(p,pi){
-    var f=pend(pi);
-    f.faltan.forEach(function(n){u[n]=1;});
-    fracs.push(f.tot?(f.tot-f.faltan.length)/f.tot:1);
-    p.preguntas.forEach(function(x){
-      var d=q('#p-q .q[data-q="'+x.n+'"]');
-      var ok=x.multi?tieneMulti(x.n):f.faltan.indexOf(x.n)<0;
-      if(ok) resp++;
-      if(d){d.classList.toggle('ok',ok); if(ok) d.classList.remove('pend');}
-    });
+  var fracs=P.map(function(){return [0,0];}),resp=0;
+  QL.forEach(function(it){
+    var f=falta(it.x), ok=it.x.multi?tieneMulti(it.x.n):!f;
+    if(!it.x.multi){fracs[it.pi][1]++; if(!f)fracs[it.pi][0]++;}
+    if(!f) resp++;
+    var d=q('#p-q .q[data-q="'+it.x.n+'"]');
+    if(d){d.classList.toggle('ok',ok); if(!f) d.classList.remove('pend');}
   });
-  var k=Object.keys(u).length,el=q('#p-q [data-faltan]'),b=q('#p-q [data-sig]'),lf=q('#p-q [data-left]');
-  if(el){el.innerHTML = k? 'Faltan <b>'+k+'</b> '+(k===1?'pregunta':'preguntas') : 'Todo contestado';el.classList.toggle('done',!k);}
-  if(lf) lf.textContent = k? 'Faltan '+k : 'Completo';
-  if(b){b.classList.toggle('off',k>0);b.setAttribute('aria-disabled',k>0?'true':'false');}
-  riel(0,fracs,resp);
+  var k=enPagina().filter(function(it){return falta(it.x);}).length;
+  var el=q('#p-q [data-faltan]'),b=q('#p-q [data-sig]'),ult=PAG===NPG-1;
+  if(el){el.innerHTML='Página '+(PAG+1)+' de '+NPG+' · '+(k?'Faltan <b>'+k+'</b>':'Completa');el.classList.toggle('done',!k);}
+  if(b){b.querySelector('.t').textContent=ult?'Ver mi resultado':'Siguiente';
+    b.classList.toggle('off',k>0);b.setAttribute('aria-disabled',k>0?'true':'false');}
+  riel(0,fracs.map(function(f){return f[1]?f[0]/f[1]:1;}),resp);
 }
 function marcaPend(){
-  var faltan=[],primero=null;
-  P.forEach(function(p,pi){faltan=faltan.concat(pend(pi).faltan);});
-  document.querySelectorAll('#p-q .q').forEach(function(d){
-    var n=+d.dataset.q, malo=faltan.indexOf(n)>=0;
+  var primero=null;
+  enPagina().forEach(function(it){
+    var d=q('#p-q .q[data-q="'+it.x.n+'"]'), malo=falta(it.x);
     d.classList.toggle('pend',malo);
     if(malo&&!primero) primero=d;
   });
   if(primero) primero.scrollIntoView({block:'center',behavior:'smooth'});
 }
+function pagina(k){
+  PAG=Math.max(0,Math.min(NPG-1,k));
+  document.querySelectorAll('#p-q .pagina').forEach(function(pg){pg.classList.toggle('on',+pg.dataset.pg===PAG);});
+  pinta();subir();
+}
 /* actual: -1 intro · 0 preguntas · 1 datos · 2 resultado */
 function irA(i){
   actual=i;
   if(i<0){mostrar('p-intro');riel(-1);return;}
-  if(i===0){mostrar('p-q');pinta();return;}
+  if(i===0){mostrar('p-q');pagina(PAG);return;}
   /* el score NO se calcula ni se pinta aquí: sólo después de enviar */
   if(enviado){actual=2;mostrar('p-res');riel(2);}
   else{mostrar('p-gate');riel(1);}
@@ -736,9 +829,11 @@ document.addEventListener('click',function(e){
     return;
   }
   var s=e.target.closest('[data-sig]');
-  if(s){ if(s.classList.contains('off')){marcaPend();return;} irA(1); return;}
+  if(s){ if(s.classList.contains('off')){marcaPend();return;}
+    if(PAG<NPG-1) pagina(PAG+1); else irA(1); return;}
   if(e.target.closest('[data-atras]')){
-    if(actual===1){irA(0);var n=q('#p-q .nav');if(n&&!matchMedia('(max-width:720px)').matches)n.scrollIntoView({block:'end'});else window.scrollTo(0,document.body.scrollHeight);}
+    if(actual===0&&PAG>0) pagina(PAG-1);
+    else if(actual===1) irA(0);
     else irA(-1);
   }
 });
@@ -751,8 +846,8 @@ document.addEventListener('input',function(e){
 });
 
 /* calculo */
-function industria(){var qi=null;P.forEach(function(p){p.preguntas.forEach(function(x){if(x.industria)qi=x.n;});});
-  return (qi!=null&&R[qi])?IND[R[qi].i]:null;}
+function industriaQ(){var qi=null;P.forEach(function(p){p.preguntas.forEach(function(x){if(x.industria)qi=x.n;});});return qi;}
+function industria(){var qi=industriaQ();return (qi!=null&&R[qi])?IND[R[qi].i]:null;}
 function calc(){
   var acc={};
   COMP.forEach(function(c){acc[c.nombre]={a:0,w:0};});
@@ -779,8 +874,8 @@ function calc(){
   var ex=0;
   P.forEach(function(p){p.preguntas.forEach(function(x){
     if(x.extra){var r=R[x.n];if(r)ex+=x.extra[r.i]||0;}});});
-  total=Math.max(0,Math.min(100,total+ex));
-  return {comps:comps,total:total};
+  total=Math.max(0,Math.min(100,total));
+  return {comps:comps,total:total,extra:ex};
 }
 function prom(rol){var v=[0,1,2].map(function(i){return NUM[rol+'-'+i];})
   .filter(function(x){return typeof x==='number'&&x>0;});
@@ -788,8 +883,36 @@ function prom(rol){var v=[0,1,2].map(function(i){return NUM[rol+'-'+i];})
 function mxn(n){if(n==null)return '—';
   if(n>=1e6)return '$'+(n/1e6).toLocaleString('es-MX',{maximumFractionDigits:1})+' M';
   return '$'+Math.round(n).toLocaleString('es-MX');}
-var BANDAS={fuerte:['#00B0F0','#7FD8F8','Fortaleza','#0089BD'],medio:['#E8A93A','#F5D08A','Atención','#A86B00'],debil:['#E5654B','#F4A391','Prioridad','#C0392B']};
-function banda(p){return p>=70?'fuerte':p>=45?'medio':'debil';}
+
+/* semáforo: 0–30 rojo · 31–60 amarillo · 61–100 verde
+   [color, color claro, etiqueta, color de texto sobre blanco] */
+var SEMAFORO={fuerte:['#12B76A','#5EF0A6','Fortaleza','#067A45'],medio:['#FFB400','#FFD966','Atención','#A36F00'],debil:['#FF1F3D','#FF7A8A','Prioridad','#D10024']};
+function banda(p){return p>60?'fuerte':p>30?'medio':'debil';}
+
+var BTAM=D.bandas,PISO=D.piso,TECHO=D.techo;
+function banda_tam(eb){if(!eb)return null;
+  for(var i=0;i<BTAM.length;i++){if(eb>=BTAM[i][0]&&eb<=BTAM[i][1])return BTAM[i];}
+  return null;}
+function motivo(eb,ind,qi){
+  if(!eb) return 'Captura tus ventas y tu EBITDA para ver la estimación de valor.';
+  if(qi==null||!R[qi]) return 'Elige tu industria para ver la estimación de valor.';
+  if(ind&&ind.rel===0) return ind.nota||'';
+  if(eb<0) return 'Con EBITDA negativo este diagnóstico no estima valor por múltiplos. '+
+    'Tu calificación de los ocho componentes sí aplica y el valor lo revisamos contigo en la sesión.';
+  if(eb>TECHO) return 'Tu EBITDA está arriba del rango que estima este diagnóstico. A ese tamaño la '+
+    'valuación se hace con empresas comparables y no con bandas por tamaño. Tu calificación sí aplica '+
+    'y el valor lo revisamos contigo en la sesión.';
+  if(eb<PISO) return 'Tu EBITDA está abajo del rango que estima este diagnóstico. Tu calificación de '+
+    'los ocho componentes sí aplica y el valor lo revisamos contigo en la sesión.';
+  return null;}
+/* el escenario potencial sube los dos componentes más débiles al promedio de los otros seis */
+function potencial(c){
+  var v=c.comps.map(function(x){return x.pct;}).sort(function(a,b){return a-b;});
+  var prom6=v.slice(2).reduce(function(a,b){return a+b;},0)/(v.length-2);
+  var corte=v[1], usados=0;
+  return c.comps.reduce(function(s,x){
+    var p=x.pct; if(p<=corte&&usados<2&&p<prom6){p=prom6;usados++;}
+    return s+p*x.peso/100;},0);}
 
 var TIERS=[
  {min:80,h:'Tu empresa ya se ve <em>comprable</em>',
@@ -801,32 +924,36 @@ var TIERS=[
  {min:0, h:'Hoy el negocio <em>depende de ti para existir</em>',
   m:'La mayor parte del valor que ves en tus números desaparecería sin ti. Es el punto de partida más común, y el que más rápido mejora cuando se trabaja en orden.'}];
 
-/* valor: mismo cálculo del original, reutilizado en pantalla y en el correo */
+/* valor: mismo cálculo del original (bandas por tamaño × industria), para pantalla y correo */
 function valor(c){
-  var eb=prom('ebitda'),vt=prom('ventas'),ind=industria();
-  if(!(eb&&ind&&ind.med>0)) return null;
-  function mult(s){var m=s>=50?ind.med+((s-50)/50)*(ind.q3-ind.med)
-                          :ind.med-((50-s)/50)*(ind.med-ind.q1);return Math.max(ind.q1,Math.min(ind.q3,m));}
-  var m0=mult(c.total);
-  return {eb:eb,vt:vt,ind:ind,m0:m0,v0:eb*m0,lo:eb*ind.q1,hi:eb*ind.q3,med:eb*ind.med,v8:eb*mult(80)};
+  var qi=industriaQ(),eb=prom('ebitda'),vt=prom('ventas'),ind=industria();
+  var bnd=banda_tam(eb), noAplica=motivo(eb,ind,qi);
+  if(!noAplica&&bnd&&ind&&ind.rel>0){
+    var lo_m=bnd[2]*ind.rel, hi_m=bnd[3]*ind.rel;
+    function mult(s){return lo_m+(Math.max(0,Math.min(100,s))/100)*(hi_m-lo_m);}
+    var m0=mult(c.total), med_m=(lo_m+hi_m)/2;
+    return {ok:true,eb:eb,vt:vt,ind:ind,m0:m0,v0:eb*m0,lo:eb*lo_m,hi:eb*hi_m,med:eb*med_m,v8:eb*mult(potencial(c))};
+  }
+  return {ok:false,motivo:noAplica||'Necesitamos tu EBITDA de los últimos tres ejercicios y tu industria.'};
 }
 
 function radar(comps){
   var svg=q('#radar'),cx=240,cy=218,Rr=148,n=comps.length,h='';
   function pt(i,r){var a=-Math.PI/2+i*2*Math.PI/n;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];}
   [.25,.5,.75,1].forEach(function(f){
-    h+='<polygon points="'+comps.map(function(_,i){return pt(i,Rr*f).join(',');}).join(' ')+'" fill="none" stroke="rgba(23,23,23,'+(f===1?.16:.07)+')" stroke-width="1"/>';});
-  comps.forEach(function(_,i){var p=pt(i,Rr);h+='<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0]+'" y2="'+p[1]+'" stroke="rgba(23,23,23,.07)"/>';});
+    h+='<polygon points="'+comps.map(function(_,i){return pt(i,Rr*f).join(',');}).join(' ')+'" fill="'+(f===1?'rgba(255,255,255,.03)':'none')+'" stroke="rgba(255,255,255,'+(f===1?.28:.12)+')" stroke-width="1"/>';});
+  comps.forEach(function(_,i){var p=pt(i,Rr);h+='<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0]+'" y2="'+p[1]+'" stroke="rgba(255,255,255,.12)"/>';});
   var poly=comps.map(function(c,i){return pt(i,Rr*Math.max(.04,c.pct/100)).join(',');}).join(' ');
-  h+='<g class="poly"><polygon points="'+poly+'" fill="rgba(0,176,240,.16)" stroke="#00B0F0" stroke-width="2" stroke-linejoin="round"/>';
-  comps.forEach(function(c,i){var p=pt(i,Rr*Math.max(.04,c.pct/100));h+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="4" fill="#00B0F0" stroke="#fff" stroke-width="1.5"/>';});
+  h+='<g class="poly"><polygon points="'+poly+'" fill="rgba(0,176,240,.32)" stroke="#33C6F7" stroke-width="2.5" stroke-linejoin="round" style="filter:drop-shadow(0 0 10px rgba(0,176,240,.6))"/>';
+  comps.forEach(function(c,i){var p=pt(i,Rr*Math.max(.04,c.pct/100));
+    h+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="5" fill="'+SEMAFORO[banda(c.pct)][0]+'" stroke="#171717" stroke-width="2"/>';});
   h+='</g>';
   comps.forEach(function(c,i){
     var p=pt(i,Rr+30),w=c.nombre.split(' '),mid=Math.ceil(w.length/2),l1=w.slice(0,mid).join(' '),l2=w.slice(mid).join(' ');
     var anc=Math.abs(p[0]-cx)<10?'middle':(p[0]>cx?'start':'end');
     var y=p[1]-(l2?8:2)+(p[1]>cy+20?8:0);
     h+='<text x="'+p[0]+'" y="'+y+'" text-anchor="'+anc+'">'+esc(l1)+(l2?'<tspan x="'+p[0]+'" dy="13">'+esc(l2)+'</tspan>':'')+
-       '<tspan class="v" x="'+p[0]+'" dy="14" style="fill:#8A8A8A;font-size:11px;font-weight:600">'+Math.round(c.pct)+'</tspan></text>';
+       '<tspan class="v" x="'+p[0]+'" dy="15" style="fill:'+SEMAFORO[banda(c.pct)][1]+';font-size:12px;font-weight:700">'+Math.round(c.pct)+'</tspan></text>';
   });
   svg.innerHTML=h;svg.classList.remove('on');
   setTimeout(function(){svg.classList.add('on');},350);
@@ -834,7 +961,7 @@ function radar(comps){
 
 function render(nombre,empresa){
   var c=calc(),sc=Math.round(c.total),t=TIERS.find(function(x){return sc>=x.min;});
-  var b=BANDAS[banda(sc)];
+  var b=SEMAFORO[banda(sc)];
   q('#r-eyebrow').textContent='Tu diagnóstico'+(empresa?' · '+empresa:'');
   q('#r-tit').innerHTML=t.h;
   q('#r-msg').textContent=t.m;
@@ -851,7 +978,7 @@ function render(nombre,empresa){
 
   /* valor */
   var v=valor(c);
-  if(v){
+  if(v.ok){
     q('#v-escala').style.display='';
     q('#v-hoy').textContent=mxn(v.v0);
     q('#v-hoy-nt').textContent='EBITDA promedio de '+mxn(v.eb)+' × '+v.m0.toFixed(1)+'x'+
@@ -866,7 +993,7 @@ function render(nombre,empresa){
     setTimeout(function(){q('#e-tramo').style.width=pos+'%';q('#e-aguja').style.left=pos+'%';},450);
   }else{
     q('#v-hoy').textContent='Sin estimación';
-    q('#v-hoy-nt').textContent='Necesitamos tu EBITDA de los últimos tres ejercicios y tu industria.';
+    q('#v-hoy-nt').textContent=v.motivo;
     q('#v-pot').textContent='—';q('#v-pot-nt').textContent='';
     q('#v-escala').style.display='none';
   }
@@ -875,11 +1002,11 @@ function render(nombre,empresa){
 
   /* pilares */
   q('#r-pilares').innerHTML=c.comps.map(function(x){
-    var k=banda(x.pct),bb=BANDAS[k];
+    var k=banda(x.pct),bb=SEMAFORO[k];
     return '<div class="pilar"><div class="fila"><span class="nm">'+esc(x.nombre)+
       '</span><span class="pt">'+Math.round(x.pct)+'<small> / 100</small></span></div>'+
       '<div class="track"><div class="fill '+k+'" data-w="'+Math.max(2,x.pct)+'"></div></div>'+
-      '<div class="ver"><span class="chip" style="color:'+bb[3]+'">'+bb[2]+'</span><span>'+esc(x.def)+'</span></div></div>';
+      '<div class="ver"><span class="chip '+k+'" style="color:'+bb[3]+'">'+bb[2]+'</span><span>'+esc(x.def)+'</span></div></div>';
   }).join('');
   setTimeout(function(){document.querySelectorAll('#r-pilares .fill').forEach(function(f,i){
     setTimeout(function(){f.style.width=f.dataset.w+'%';},i*70);});},600);
@@ -907,7 +1034,7 @@ function respuestasTexto(){
       }else if(x.tipo==='numerica'){
         r=x.campos.map(function(c,ci){var v=NUM[x.rol+'-'+ci];return c+': '+(v!=null?mxn(v):'—');}).join(' | ');
       }else if(R['t'+x.n]) r=R['t'+x.n].txt.trim()||r;
-      out.push('P'+pad2(x.n)+' · '+x.stem+'\n   → '+r);
+      out.push(pad2(x.n)+' · '+x.stem+'\n   → '+r);
     });
   });
   return out.join('\n');
@@ -951,8 +1078,8 @@ q('#gform').addEventListener('submit',function(e){
     'Value Growth Score':sc+' / 100',
     'Nivel':t.h.replace(/<[^>]+>/g,''),
     'Score por componente':'\n'+c.comps.map(function(x){return x.nombre+': '+Math.round(x.pct)+' / 100';}).join('\n'),
-    'Estimación de valor':v?('Hoy: '+mxn(v.v0)+' ('+v.m0.toFixed(1)+'x EBITDA promedio de '+mxn(v.eb)+') · Con 80 puntos: '+mxn(v.v8)+
-                            ' · Rango industria: '+mxn(v.lo)+' – '+mxn(v.hi)+' · '+v.ind.n):'Sin estimación (faltan EBITDA o industria)',
+    'Estimación de valor':v.ok?('Hoy: '+mxn(v.v0)+' ('+v.m0.toFixed(1)+'x EBITDA promedio de '+mxn(v.eb)+') · Subiendo los dos componentes más débiles: '+mxn(v.v8)+
+                            ' · Rango: '+mxn(v.lo)+' – '+mxn(v.hi)+' · '+v.ind.n):('Sin estimación: '+v.motivo),
     'Respuestas':'\n'+respuestasTexto()
   };
   fetch('https://api.web3forms.com/submit',{method:'POST',
@@ -961,8 +1088,12 @@ q('#gform').addEventListener('submit',function(e){
     .then(function(d){
       if(!d||!d.success) throw new Error((d&&d.message)||'Envío rechazado');
       enviado=true;
-      render(lead.nombre,lead.empresa);
-      actual=2;mostrar('p-res');riel(2);
+      q('#lock').classList.add('abierto');
+      setTimeout(function(){
+        render(lead.nombre,lead.empresa);
+        actual=2;mostrar('p-res');riel(2);
+        q('#lock').classList.remove('abierto');
+      },matchMedia('(prefers-reduced-motion:reduce)').matches?0:1100);
     })
     .catch(function(err){
       console.error('[Value Growth] Web3Forms:',err);
@@ -972,12 +1103,15 @@ q('#gform').addEventListener('submit',function(e){
 });
 
 q('#reiniciar').addEventListener('click',function(){
-  R={};NUM={};enviado=false;
+  R={};NUM={};enviado=false;PAG=0;
   document.querySelectorAll('.op.sel').forEach(function(o){o.classList.remove('sel');});
   document.querySelectorAll('.q').forEach(function(d){d.classList.remove('ok','pend');});
   document.querySelectorAll('input[data-num],textarea').forEach(function(i){i.value='';});
   irA(-1);
 });
+document.querySelectorAll('.lk-col').forEach(function(col){
+  var d=[];for(var i=0;i<10;i++)d.push(Math.floor(Math.random()*10));
+  col.innerHTML='<i>'+d.concat(d).join('<br>')+'</i>';});
 riel(-1);
 requestAnimationFrame(function(){requestAnimationFrame(function(){q('#p-intro .skew').classList.add('is-active');});});
 })();
