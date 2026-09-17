@@ -133,7 +133,7 @@ h1 em,h2 em,h3 em,h4 em{font-style:italic;color:var(--cian)}
 .cab{display:flex;align-items:flex-start;gap:20px;margin-bottom:26px}
 @media(max-width:560px){.cab{gap:14px}}
 .cab .big-n{width:52px;height:52px;border-radius:8px;background:var(--cian);color:#fff;display:grid;place-items:center;
-  font-size:16px;font-weight:600;flex-shrink:0;margin-top:4px}
+  font-size:16px;font-weight:600;flex-shrink:0;margin-top:0}
 @media(max-width:560px){.cab .big-n{width:42px;height:42px;font-size:14px}}
 .cab .tag{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--cian-txt);font-weight:600;margin-bottom:6px}
 .cab h2{font-size:clamp(28px,3.4vw,40px)}
@@ -469,21 +469,12 @@ html.embedded .topbar{position:static}
       </div>
       <div class="intro-meta">
         <div><div class="n num">49</div><div class="t">Preguntas</div></div>
-        <div><div class="n num">8</div><div class="t">Componentes</div></div>
-        <div><div class="n num">1</div><div class="t">Rango de valor</div></div>
       </div>
     </div>
   </div>
 
   <div class="sect-title">Los ocho componentes que revisa un comprador</div>
   <div class="rejilla" id="rejilla"></div>
-
-  <div class="sect-title">Cómo funciona</div>
-  <div class="pasos">
-    <div class="paso sub-glass"><div class="nn">1</div><div><h3>Contestas</h3><p>Cuarenta y nueve preguntas en seis secciones, de cinco en cinco. Sin datos que buscar, salvo tus ventas y tu EBITDA.</p></div></div>
-    <div class="paso sub-glass"><div class="nn">2</div><div><h3>Dejas tus datos</h3><p>Tu nombre, empresa y correo desbloquean tu score sobre 100, el desglose por componente y tu rango de valor.</p></div></div>
-    <div class="paso sub-glass"><div class="nn">3</div><div><h3>Recibes tu informe</h3><p>El reporte completo, con la explicación de cada componente, te llega por correo.</p></div></div>
-  </div>
 
   <div class="nav fija" style="margin-top:28px">
     <span class="nav-hint" style="text-align:left">Contestas de cinco en cinco y puedes regresar antes de terminar.</span>
@@ -726,8 +717,7 @@ var NPG=Math.ceil(QL.length/POR), TOTQ=QL.length;
     items.forEach(function(it,j){
       if(it.pi!==prev){
         var p=P[it.pi], cont=it.xi>0;
-        h+='<div class="cab'+(j>0?' sig':'')+'"><div class="big-n">'+pad2(it.pi+1)+'</div><div><div class="tag">Sección '+(it.pi+1)+' de '+P.length+
-           (cont?' · continuación':' · '+p.preguntas.length+(p.preguntas.length===1?' pregunta':' preguntas'))+'</div><h2>'+esc(p.titulo)+'</h2>'+
+        h+='<div class="cab'+(j>0?' sig':'')+'"><div class="big-n">'+pad2(it.pi+1)+'</div><div><h2>'+esc(p.titulo)+'</h2>'+
            (!cont&&NUDGE[it.pi]?'<p>'+NUDGE[it.pi]+'</p>':'')+'</div></div>';
         prev=it.pi;
       }
