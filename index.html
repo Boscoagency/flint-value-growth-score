@@ -521,7 +521,7 @@ html.embedded #p-intro>.skew:first-child{display:none}
       <div class="pillrow">
         <span class="pill hi">Nadie paga por el tamaño. Pagan por lo predecible.</span>
         <span class="pill">Sin costo</span>
-        <span class="pill">Informe por correo</span>
+        <span class="pill">Resultado descargable en PDF</span>
       </div>
       <div class="intro-meta">
         <div><div class="n num">49</div><div class="t">Preguntas</div></div>
@@ -584,7 +584,7 @@ html.embedded #p-intro>.skew:first-child{display:none}
           </div>
           <label class="hp" aria-hidden="true">No llenar<input type="checkbox" id="g-bot" tabindex="-1"></label>
           <label class="priv" id="priv"><input type="checkbox" id="g-ok"><span>He leído y acepto el aviso de privacidad de Flint Consulting.</span></label>
-          <p class="gnota">Recibirás tu informe por correo. Sin spam y sin llamadas no solicitadas.</p>
+          <p class="gnota">Al enviar ves tu resultado y puedes descargarlo en PDF. Sin spam y sin llamadas no solicitadas.</p>
           <div class="gmsg" id="gmsg" role="alert"></div>
           <div class="nav fija" style="margin-top:24px">
             <button type="button" class="btn back" data-atras><span aria-hidden="true">←</span><span class="lbl">Regresar</span></button>
@@ -639,8 +639,8 @@ html.embedded #p-intro>.skew:first-child{display:none}
           <h3>Los ocho componentes de tu <em>valor</em></h3>
           <p>Tu calificación de Value Growth se compone de estos ocho componentes clave.</p>
           <ul class="leyenda">
-            <li><i style="background:#FF1F3D"></i>Prioridad<span>0 a 30</span></li>
-            <li><i style="background:#FFB400"></i>Atención<span>31 a 69</span></li>
+            <li><i style="background:#FF1F3D"></i>Prioridad<span>0 a 29</span></li>
+            <li><i style="background:#FFB400"></i>Atención<span>30 a 69</span></li>
             <li><i style="background:#12B76A"></i>Fortaleza<span>70 a 100</span></li>
           </ul>
         </div>
@@ -958,7 +958,7 @@ function mxn(n){if(n==null)return 'N/D';
 /* semáforo: 0-30 rojo · 31-69 amarillo · 70-100 verde (sobre el número redondeado que se muestra)
    [color, color claro, etiqueta, color de texto sobre blanco] */
 var SEMAFORO={fuerte:['#12B76A','#5EF0A6','Fortaleza','#067A45'],medio:['#FFB400','#FFD966','Atención','#A36F00'],debil:['#FF1F3D','#FF7A8A','Prioridad','#D10024']};
-function banda(p){p=Math.round(p);return p>=70?'fuerte':p>30?'medio':'debil';}
+function banda(p){p=Math.round(p);return p>=70?'fuerte':p>=30?'medio':'debil';}
 
 var BTAM=D.bandas,PISO=D.piso,TECHO=D.techo;
 function banda_tam(eb){if(!eb)return null;
