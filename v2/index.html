@@ -1,0 +1,1199 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="googlebot" content="noindex, indexifembedded">
+<script>try{if(window.self!==window.top)document.documentElement.classList.add("embedded")}catch(e){document.documentElement.classList.add("embedded")}</script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Diagnóstico Value Growth de Flint Consulting.">
+<meta name="theme-color" content="#FFFFFF">
+<title>Value Growth Score · Flint Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   FLINT · VALUE GROWTH SCORE
+   Sistema visual de flintconsulting.mx: fondo blanco, Playfair
+   Display en títulos, Inter en texto, tarjetas blancas con borde
+   fino y botones píldora en Flint Cyan.
+   ═══════════════════════════════════════════════════════════ */
+:root{
+  --tinta:#171717;        /* títulos */
+  --texto:#525252;        /* cuerpo */
+  --tenue:#8A8A8A;
+  --linea:#E5E5E5;
+  --linea-f:#D4D4D4;
+  --papel:#FFFFFF;
+  --niebla:#FAFAFA;
+  --cian:#00B0F0;         /* Flint Cyan del sitio */
+  --cian-txt:#0089BD;     /* cyan legible en texto chico */
+  --cianluz:#EDF9FF;
+  --oscuro:#111214;
+  --fuerte:#12B76A; --medio:#FFB400; --debil:#FF1F3D;
+  --r:16px; --r-sm:12px;
+  --sombra:4px 4px 24px rgba(129,129,129,.08);
+  --sombra-h:6px 10px 34px rgba(129,129,129,.16);
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --display:"Playfair Display",Georgia,serif;
+  --ui:"Inter",-apple-system,"Segoe UI",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--papel);color:var(--texto);font-family:var(--ui);line-height:1.55;letter-spacing:-.015em;
+  -webkit-font-smoothing:antialiased;overflow-x:clip}
+button,input,select,textarea{font:inherit;color:inherit;letter-spacing:inherit}
+.num{font-variant-numeric:tabular-nums}
+/* cifras alineadas en Playfair (por defecto trae números de estilo antiguo) */
+.aro .cen b,.an-aro b,.vc .big,.cta-txt h3 em,.cta-precio .monto b,.radar .v,.intro-meta .n{font-variant-numeric:lining-nums tabular-nums;font-feature-settings:"lnum" 1,"tnum" 1}
+
+.shell{max-width:1120px;margin:0 auto;padding:18px 24px 110px;min-height:100vh}
+@media(max-width:720px){.shell{padding:10px 16px 150px}}
+
+/* ═══ TOPBAR ═══ */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 4px;margin-bottom:18px;
+  position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--linea)}
+.wordmark{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.wordmark img{height:34px;width:auto;display:block}
+.wordmark small{font-size:12px;color:var(--tenue);padding-left:14px;border-left:1px solid var(--linea)}
+@media(max-width:720px){.wordmark img{height:28px}}
+@media(max-width:600px){.wordmark small{display:none}}
+.rail{display:flex;gap:6px;flex:1;max-width:360px}
+@media(max-width:720px){.rail{max-width:none}}
+.rail-seg{flex:1;height:4px;border-radius:2px;background:#EDEDED;overflow:hidden;position:relative}
+.rail-seg i{position:absolute;inset:0;width:0;border-radius:2px;background:var(--cian);transition:width .7s var(--ease)}
+.paso-txt{font-size:13px;color:var(--tenue);white-space:nowrap;flex-shrink:0;min-width:84px;text-align:right;font-variant-numeric:tabular-nums}
+.paso-txt b{color:var(--tinta);font-weight:600}
+@media(max-width:480px){.paso-txt{min-width:0;font-size:12px}}
+
+/* ═══ TARJETAS ═══ */
+.skew{position:relative;margin:0 0 18px}
+.glass{position:relative;background:var(--papel);border:1px solid var(--linea);border-radius:var(--r);box-shadow:var(--sombra)}
+.pad{padding:clamp(24px,4vw,48px)}
+@media(max-width:560px){.pad{padding:22px 16px}}
+.sub-glass{background:var(--papel);border:1px solid var(--linea);border-radius:var(--r)}
+
+#p-q>.skew>.glass{background:none;border:0;box-shadow:none;padding:8px 0 0}
+/* Bloque oscuro, como el hero del sitio */
+.hero-dark{background:var(--oscuro);border-color:var(--oscuro);color:#D4D4D4;overflow:hidden;box-shadow:none}
+.hero-dark::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(90% 120% at 100% 0%,rgba(0,176,240,.28),transparent 55%),
+             radial-gradient(60% 80% at 0% 100%,rgba(0,176,240,.10),transparent 60%)}
+.hero-dark::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:56px 56px;-webkit-mask-image:linear-gradient(120deg,transparent 30%,#000);mask-image:linear-gradient(120deg,transparent 30%,#000)}
+.hero-dark>*{position:relative;z-index:1}
+.hero-dark h1,.hero-dark h2{color:#fff}
+.hero-dark .lede{color:#D4D4D4}
+.hero-dark .eyebrow{color:var(--cian)}
+
+/* ═══ PANTALLAS ═══ */
+.panel{display:none}
+.panel.on{display:block;animation:screenIn .55s var(--ease-out) both}
+@keyframes screenIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ═══ TIPOGRAFÍA ═══ */
+.eyebrow{display:inline-flex;align-items:center;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cian-txt);font-weight:600}
+h1,h2,h3,h4{font-family:var(--display);color:var(--tinta);font-weight:400;letter-spacing:-.015em;text-wrap:balance}
+h1{font-size:clamp(40px,6vw,64px);line-height:1.08}
+h2{font-size:clamp(30px,3.8vw,48px);line-height:1.12}
+h1 em,h2 em,h3 em,h4 em{font-style:italic;color:var(--cian)}
+.lede{font-size:clamp(16px,1.5vw,18px);line-height:1.6;color:var(--texto);max-width:62ch}
+
+.pillrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.pill{display:inline-flex;align-items:center;padding:8px 16px;border-radius:99px;font-size:13.5px;font-weight:500;
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff}
+.pill.hi{background:var(--cian);border-color:var(--cian);color:#fff}
+
+/* ═══ INTRO ═══ */
+#p-intro h1{margin:22px 0 18px}
+#p-intro .pad{padding:clamp(32px,6vw,72px)}
+.intro-meta{display:flex;flex-wrap:wrap;gap:24px 56px;margin-top:40px;padding-top:30px;border-top:1px solid rgba(255,255,255,.14)}
+.intro-meta .n{font-family:var(--display);font-size:44px;color:#fff;line-height:1}
+.intro-meta .t{font-size:14px;color:#A3A3A3;margin-top:8px}
+@media(max-width:560px){.intro-meta{display:grid;grid-template-columns:1fr 1fr;gap:22px}}
+
+.sect-title{font-family:var(--display);font-size:clamp(26px,3vw,36px);color:var(--tinta);margin:56px 0 20px;line-height:1.15}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.celda{padding:26px 24px;box-shadow:var(--sombra);transition:box-shadow .3s var(--ease),transform .3s var(--ease),border-color .3s}
+.celda:hover{box-shadow:var(--sombra-h);transform:translateY(-3px);border-color:var(--linea-f)}
+.celda .k{width:40px;height:40px;border-radius:8px;background:var(--cian);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:600}
+.celda h3{font-family:var(--ui);font-size:19px;font-weight:500;color:var(--tinta);margin:18px 0 8px;line-height:1.25;letter-spacing:-.01em}
+.celda p{font-size:15px;color:var(--texto);line-height:1.55}
+.pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+@media(max-width:760px){.pasos{grid-template-columns:1fr}}
+.paso{padding:28px 28px 28px 0;display:block;border:0;border-radius:0}
+.paso+.paso{padding-left:28px;border-left:1px solid var(--linea)}
+@media(max-width:760px){.paso,.paso+.paso{padding:22px 0;border-left:0}.paso+.paso{border-top:1px solid var(--linea)}}
+.paso .nn{font-family:var(--display);font-size:44px;line-height:1;color:var(--cian)}
+.paso h3{font-family:var(--ui);font-size:20px;font-weight:500;color:var(--tinta);margin:14px 0 6px;letter-spacing:-.01em}
+.paso p{font-size:15px;color:var(--texto)}
+
+/* ═══ PREGUNTAS ═══ */
+.cab .big-n{width:52px;height:52px;border-radius:8px;background:var(--cian);color:#fff;display:grid;place-items:center;
+  font-size:16px;font-weight:600;flex-shrink:0;margin-top:0}
+
+.q{padding:24px 26px;margin-bottom:12px;border-radius:var(--r);background:var(--papel);border:1px solid var(--linea);
+  box-shadow:var(--sombra);transition:border-color .3s var(--ease),box-shadow .3s var(--ease);
+  animation:qIn .6s var(--ease-out) both;animation-delay:calc(var(--i) * 70ms + 120ms)}
+@keyframes qIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.q.ok{border-color:rgba(0,176,240,.35)}
+.q.pend{border-color:var(--debil);box-shadow:0 0 0 3px rgba(255,31,61,.14)}
+@media(max-width:560px){.q{padding:18px 14px}}
+.q-top{display:flex;gap:16px;align-items:flex-start}
+@media(max-width:560px){.q-top{flex-direction:column;gap:10px}}
+.q-num{flex-shrink:0;font-size:12px;font-weight:600;color:var(--cian-txt);margin-top:3px;min-width:42px;padding:3px 0;
+  background:rgba(0,176,240,.08);border-radius:6px;text-align:center;font-variant-numeric:tabular-nums}
+.q.ok .q-num{color:#fff;background:var(--cian)}
+.q.pend .q-num{color:var(--debil);background:rgba(255,31,61,.08)}
+.q-text{font-size:17px;line-height:1.5;color:var(--tinta);font-weight:500;text-wrap:pretty;letter-spacing:-.015em}
+.q-body{padding-left:58px}
+@media(max-width:560px){.q-body{padding-left:0}}
+.nota{margin-top:10px;padding:10px 14px;border-radius:10px;background:var(--niebla);color:var(--texto);font-size:14px;line-height:1.5}
+.instr{margin-top:10px;color:var(--cian-txt);font-size:14px;font-weight:500}
+.subtit{margin:22px 0 0;font-weight:600;font-size:15px;color:var(--tinta)}
+
+.ops{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.op{display:flex;gap:13px;align-items:flex-start;padding:12px 14px;text-align:left;cursor:pointer;background:var(--niebla);
+  border:1px solid var(--linea);border-radius:var(--r-sm);transition:border-color .2s var(--ease),background .2s var(--ease)}
+.op:hover{border-color:var(--linea-f);background:#F5F5F5}
+.op:focus-visible{outline:2px solid var(--cian);outline-offset:2px}
+.mk{flex-shrink:0;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:var(--papel);
+  border:1px solid var(--linea-f);font-size:12px;font-weight:600;text-transform:uppercase;color:var(--tenue);transition:all .2s var(--ease)}
+.mk svg{width:13px;height:13px;stroke:#fff;stroke-width:2.6;fill:none;opacity:0}
+.op .txt{font-size:15px;line-height:1.45;color:var(--texto);padding-top:2px}
+.op.sel{border-color:var(--cian);background:var(--cianluz)}
+.op.sel .mk{background:var(--cian);border-color:var(--cian);color:#fff}
+.op.sel .mk svg{opacity:1}
+.op.sel .txt{color:var(--tinta)}
+@media(max-width:560px){.op{padding:11px 12px;gap:11px}.op .txt{font-size:14.5px}}
+
+.campos{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
+.campo label{display:block;font-size:14px;font-weight:500;color:var(--tinta);margin-bottom:7px}
+input[type=text],input[type=email],select,textarea{width:100%;padding:13px 16px;border-radius:var(--r-sm);background:var(--papel);
+  border:1px solid var(--linea-f);color:var(--tinta);font-size:16px;transition:border-color .2s,box-shadow .2s}
+input::placeholder,textarea::placeholder{color:#A3A3A3}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--cian);box-shadow:0 0 0 4px rgba(0,176,240,.14)}
+textarea{min-height:76px;resize:vertical;margin-top:16px;display:block}
+.pesos{position:relative}
+.moneda{margin-top:12px;font-size:13px;line-height:1.45;color:var(--tenue)}
+.pesos input{padding-left:30px;font-variant-numeric:tabular-nums}
+.pesos .sig{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--tenue)}
+select{appearance:none;-webkit-appearance:none;cursor:pointer;padding-right:44px;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23171717' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 17px center}
+select:invalid{color:#A3A3A3}
+
+/* ═══ NAVEGACIÓN ═══ */
+.nav{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:22px}
+.nav-hint{font-size:14px;color:var(--tenue);text-align:center;flex:1}
+.nav-hint b{color:var(--debil);font-weight:600}
+.nav-hint.done{color:var(--cian-txt)}
+@media(max-width:720px){
+  .nav.fija{position:fixed;left:0;right:0;bottom:0;z-index:70;margin:0;
+    padding:12px 84px calc(12px + env(safe-area-inset-bottom)) 14px;
+    background:rgba(255,255,255,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-top:1px solid var(--linea);box-shadow:0 -6px 24px rgba(0,0,0,.05)}
+  .nav.fija .nav-hint{display:none}
+  .nav.fija .btn.main{flex:1;justify-content:center}
+  .nav.fija .btn.back{width:48px;height:48px;padding:0;justify-content:center;flex-shrink:0}
+  .nav.fija .btn.back .lbl{display:none}
+}
+html.embedded .nav.fija{position:static;padding:0;margin-top:22px;background:none;border:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+html.embedded .shell{padding-bottom:40px}
+html.embedded .topbar{position:relative;z-index:60;background:var(--papel);will-change:transform}
+html.embedded .topbar.is-stuck{box-shadow:0 10px 24px -18px rgba(0,0,0,.35);border-radius:0 0 14px 14px}
+/* Embebido en flintconsulting.mx: el hero vive en la página de Webflow */
+html.embedded #p-intro>.skew:first-child{display:none}
+/* Botón de inicio más visible */
+#empezar{padding:18px 38px;font-size:18px;font-weight:600;box-shadow:0 14px 30px -12px rgba(0,176,240,.85)}
+#empezar:hover{transform:translateY(-1px)}
+@media(max-width:600px){#empezar{width:100%;justify-content:center}}
+
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;border-radius:99px;cursor:pointer;
+  font-family:var(--ui);font-size:16px;font-weight:500;text-decoration:none;border:1px solid transparent;
+  transition:background .2s var(--ease),transform .2s var(--ease),opacity .2s}
+.btn:focus-visible{outline:2px solid var(--cian);outline-offset:3px}
+.btn .arr{transition:transform .2s var(--ease)}
+.btn.main{background:var(--cian);color:#fff}
+.btn.main:hover{background:#009FDA}
+.btn.main:hover .arr{transform:translateX(3px)}
+.btn.main.off{background:#EDEDED;color:#A3A3A3}
+.btn.main[disabled]{opacity:.75;cursor:progress}
+.btn.back{background:var(--papel);color:var(--tinta);border-color:var(--linea-f)}
+.btn.back:hover{background:var(--niebla)}
+.btn-text{background:none;border:0;color:var(--texto);cursor:pointer;font-size:14px;font-weight:500;padding:8px 0;border-bottom:1px solid transparent}
+.btn-text:hover{color:var(--tinta);border-bottom-color:var(--tinta)}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ═══ MURO DEL LEAD ═══ */
+.gate{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(26px,4vw,56px);align-items:start}
+@media(max-width:820px){.gate{grid-template-columns:1fr}}
+.lock{padding:28px;text-align:center;background:var(--niebla)}
+.lock-ring{position:relative;width:160px;height:160px;margin:4px auto 18px}
+.lock-ring svg{display:block;width:100%;height:100%}
+.lock-ring .blur{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-size:56px;color:var(--cian);filter:blur(10px);user-select:none}
+.lock-ring .ic{position:absolute;inset:0;display:grid;place-items:center}
+.lock-ring .ic span{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:var(--tinta)}
+.lock-ring .ic svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.lock h3{font-family:var(--ui);font-size:18px;font-weight:500;color:var(--tinta)}
+.lock p{font-size:14px;color:var(--texto);margin-top:4px}
+.unlock{list-style:none;margin-top:20px;text-align:left;border-top:1px solid var(--linea)}
+.unlock li{display:flex;gap:11px;align-items:center;padding:11px 0;font-size:14.5px;color:var(--tinta);border-bottom:1px solid var(--linea)}
+.unlock li:last-child{border-bottom:0;padding-bottom:0}
+.unlock svg{width:16px;height:16px;stroke:var(--cian);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.gate-form h2{margin:14px 0 8px}
+.gform{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+@media(max-width:560px){.gform{grid-template-columns:1fr}}
+.err{display:none;font-size:13px;color:var(--debil);margin-top:6px}
+.campo.bad .err{display:block}
+.campo.bad input,.campo.bad select{border-color:var(--debil)}
+.priv{display:flex;gap:11px;align-items:flex-start;margin-top:20px;font-size:14.5px;color:var(--texto);cursor:pointer;line-height:1.5}
+.priv input{width:18px;height:18px;margin-top:2px;accent-color:var(--cian);flex-shrink:0}
+.priv.bad span{color:var(--debil)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.gnota{font-size:13.5px;color:var(--tenue);margin-top:12px}
+.gmsg{display:none;margin-top:16px;padding:12px 16px;border-radius:12px;font-size:14px;line-height:1.5;background:#FDF0EE;border:1px solid #F4C5BC;color:#9B2F1C}
+.gmsg.on{display:block}
+
+/* ═══ RESULTADO ═══ */
+.rin{animation:rIn .7s var(--ease-out) both}
+@keyframes rIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.hero{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center}
+@media(max-width:760px){.hero{grid-template-columns:1fr;gap:30px}}
+.hero h2{font-size:clamp(32px,4.2vw,50px);margin:16px 0 16px;max-width:20ch}
+.hero .lede{max-width:50ch}
+.band-chip{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:7px 15px;border-radius:99px;
+  font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;border:1px solid currentColor}
+.band-chip i{width:7px;height:7px;border-radius:50%;background:currentColor}
+.aro{position:relative;width:min(240px,64vw);aspect-ratio:1;justify-self:center;max-width:100%}
+.aro svg{width:100%;height:100%;transform:rotate(-90deg);display:block}
+.aro .rejilla{transform-origin:107px 107px;transform:scale(0);opacity:0;transition:transform 1.5s var(--ease-out),opacity .8s}
+.aro.on .rejilla{transform:scale(1);opacity:1}
+.aro #aro-pulso{transform-origin:107px 107px}
+.aro.fin #aro-pulso{animation:pulsoAro 1.3s var(--ease-out)}
+@keyframes pulsoAro{from{opacity:.8;transform:scale(1)}to{opacity:0;transform:scale(1.1)}}
+.aro.fin .cen b{animation:flashNum 1.2s ease-out}
+@keyframes flashNum{0%{text-shadow:0 0 0 transparent}30%{text-shadow:0 0 28px var(--brillo,#00B0F0)}100%{text-shadow:0 0 0 transparent}}
+.aro .cen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.aro .cen b{font-family:var(--display);font-weight:400;font-size:clamp(60px,9vw,88px);color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+.aro .cen span{font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-top:8px;color:#A3A3A3}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.card-t{font-size:clamp(28px,3.2vw,38px);margin-bottom:6px}
+.card-s{font-size:16px;color:var(--texto);margin-bottom:26px;max-width:62ch}
+
+.vc{padding:24px 0 4px;background:none;border:0;border-radius:0;border-top:1px solid var(--linea-f)}
+.vc.hi{border-top:2px solid var(--cian);padding-top:23px}
+.vc .lab{font-size:14px;color:var(--texto);font-weight:500}
+.vc.hi .lab{color:var(--cian-txt)}
+.vc .big{font-family:var(--display);font-size:clamp(34px,4.4vw,48px);color:var(--tinta);margin-top:8px;line-height:1.05;font-variant-numeric:tabular-nums}
+.vc .nt{font-size:14px;color:var(--texto);margin-top:8px}
+.escala{margin-top:30px}
+.escala .pista{height:8px;background:#EDEDED;border-radius:99px;position:relative}
+.escala .tramo{position:absolute;top:0;bottom:0;left:0;width:0;border-radius:99px;background:var(--cian);transition:width 1.3s var(--ease-out)}
+.escala .tick{position:absolute;top:-4px;width:2px;height:16px;background:var(--linea-f);border-radius:1px}
+.escala .aguja{position:absolute;top:-7px;width:22px;height:22px;margin-left:-11px;border-radius:50%;background:var(--papel);
+  border:3px solid var(--tinta);box-shadow:0 2px 8px rgba(0,0,0,.15);transition:left 1.3s var(--ease-out)}
+.escala .marcas{display:flex;justify-content:space-between;gap:10px;margin-top:16px;font-size:13px;color:var(--tenue);font-variant-numeric:tabular-nums}
+.escala .marcas b{display:block;color:var(--tinta);font-weight:600;font-size:15px;margin-top:2px}
+.legal{margin-top:24px;padding:14px 18px;border-radius:12px;background:var(--niebla);font-size:13.5px;color:var(--texto);line-height:1.55}
+
+/* componentes dentro del reporte oscuro: radar + anillos */
+.rep-comp{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(24px,4vw,56px);align-items:center;
+  margin-top:clamp(40px,5vw,64px);padding-top:clamp(36px,4.5vw,56px);border-top:1px solid rgba(255,255,255,.1)}
+@media(max-width:860px){.rep-comp{grid-template-columns:1fr}}
+.rep-head h3{font-size:clamp(28px,3.2vw,40px);line-height:1.12;color:#fff;margin:16px 0 14px}
+.rep-head p{font-size:16px;line-height:1.6;color:#A3A3A3;max-width:40ch}
+.leyenda{list-style:none;margin-top:28px;display:grid;gap:2px;max-width:280px}
+.leyenda li{display:flex;align-items:center;gap:12px;padding:10px 0;font-size:14px;color:#E5E5E5;border-bottom:1px solid rgba(255,255,255,.08)}
+.leyenda li:last-child{border-bottom:0}
+.leyenda i{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.leyenda span{margin-left:auto;color:#8A8A8A;font-variant-numeric:tabular-nums}
+.radar{width:100%;max-width:640px;margin:0 auto;display:block;overflow:visible}
+.radar .poly{transform-origin:center;transform-box:fill-box;transform:scale(0);transition:transform 1.5s var(--ease-out)}
+.radar.on .poly{transform:scale(1)}
+.radar text{font-family:var(--ui);font-size:16.5px;font-weight:500;fill:#CFCFCF;letter-spacing:-.01em}
+.radar text .v{font-family:var(--display);font-size:36px;font-weight:500;letter-spacing:0}
+@media(max-width:560px){.radar text{font-size:18px}.radar text .v{font-size:46px}}
+
+.anillos{display:grid;grid-template-columns:repeat(4,1fr);margin-top:clamp(36px,4.5vw,56px);
+  border-top:1px solid rgba(255,255,255,.1)}
+.anillo{padding:30px 24px 26px;border-right:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+.anillo:nth-child(4n+1){padding-left:0}
+.anillo:nth-child(4n){border-right:0;padding-right:0}
+.anillo:nth-last-child(-n+4){border-bottom:0;padding-bottom:6px}
+@media(max-width:900px){
+  .anillos{grid-template-columns:1fr 1fr}
+  .anillo:nth-child(n){padding:26px 18px 22px;border-right:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+  .anillo:nth-child(2n+1){padding-left:0}
+  .anillo:nth-child(2n){border-right:0;padding-right:0}
+  .anillo:nth-last-child(-n+2){border-bottom:0}}
+.an-aro{position:relative;width:104px;height:104px}
+.an-aro svg{width:100%;height:100%;transform:rotate(-90deg);display:block;overflow:visible}
+.an-aro .arc{transition:stroke-dashoffset 1.5s var(--ease-out)}
+.an-aro b{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-weight:400;font-size:36px;
+  color:#fff;font-variant-numeric:tabular-nums;line-height:1}
+.an-nm{font-size:16px;font-weight:500;color:#fff;line-height:1.3;margin-top:20px}
+.an-chip{display:inline-flex;align-items:center;gap:7px;margin-top:8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.an-chip i{width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor}
+.an-def{font-size:13.5px;line-height:1.5;color:#8F8F8F;margin-top:10px}
+@media(max-width:520px){.an-aro{width:84px;height:84px}.an-aro b{font-size:30px}.an-def{font-size:13px}}
+
+.ins{padding:30px 28px 26px}
+.ins-tag{display:flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-bottom:12px}
+.ins-tag::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.ins.prio{}
+.ins.prio .ins-tag{color:#D10024}
+.ins.prio .ins-tag::before{background:var(--debil);box-shadow:0 0 8px rgba(255,31,61,.5)}
+.ins.fort{}
+.ins.fort .ins-tag{color:var(--cian-txt)}
+.ins h4{font-size:26px;margin-bottom:18px;line-height:1.2}
+.ins ul{list-style:none;counter-reset:it}
+.ins li{display:flex;gap:14px;padding:14px 0;font-size:15px;line-height:1.5;color:var(--texto);border-bottom:1px solid rgba(0,0,0,.07)}
+.ins li:last-child{border-bottom:0;padding-bottom:0}
+.ins li::before{content:counter(it,decimal-leading-zero);counter-increment:it;font-family:var(--display);font-feature-settings:"lnum" 1;font-size:20px;line-height:1.1;color:var(--cian);min-width:26px;flex-shrink:0}
+.ins.prio li::before{color:var(--debil)}
+.ins li b{color:var(--tinta);font-weight:600}
+.ins li small{display:block;font-size:12.5px;color:var(--tenue);margin-top:4px;font-variant-numeric:tabular-nums}
+
+.correo{display:flex;gap:14px;align-items:flex-start;margin-top:16px;padding:18px 22px;border-radius:var(--r);
+  background:var(--papel);border:1px solid var(--linea);box-shadow:var(--sombra)}
+.correo svg{width:40px;height:40px;padding:10px;border-radius:8px;background:var(--cian);stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.correo p{font-size:15px;color:var(--texto);align-self:center}
+.correo b{color:var(--tinta);font-weight:600}
+
+/* CTA: bloque cyan, como la sección de expertise del sitio */
+.ctac{text-align:center;background:var(--cian);border-color:var(--cian);box-shadow:none;overflow:hidden;color:#EDF9FF}
+.ctac::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(70% 90% at 0% 0%,rgba(255,255,255,.22),transparent 60%),radial-gradient(60% 80% at 100% 100%,rgba(0,60,90,.25),transparent 60%)}
+.ctac>*{position:relative}
+.ctac .eyebrow{color:#fff}
+.ctac h3{font-size:clamp(32px,4.2vw,52px);line-height:1.1;margin:16px auto 16px;max-width:20ch;color:#fff}
+.ctac h3 em{color:#fff}
+.ctac p{max-width:54ch;margin:0 auto;font-size:17px;line-height:1.6;color:#EDF9FF}
+.precio{display:inline-flex;align-items:baseline;gap:10px;margin:28px 0;padding:10px 24px;border-radius:99px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35)}
+.precio b{font-family:var(--display);font-weight:400;font-size:36px;color:#fff;line-height:1}
+.precio span{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#fff;font-weight:500}
+.ctac .btn.main{background:#fff;color:var(--tinta)}
+.ctac .btn.main:hover{background:#F2F2F2}
+@media(max-width:560px){.ctac .btn{width:100%;justify-content:center}}
+.ctac .fine{font-size:13.5px;color:rgba(255,255,255,.85);margin-top:18px}
+
+.foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:34px;padding-top:22px;
+  border-top:1px solid var(--linea);font-size:13px;color:var(--tenue)}
+
+
+/* ═══ PÁGINAS DE CINCO PREGUNTAS ═══ */
+.pagina{display:none}
+.pagina.on{display:block}
+
+/* ═══ CANDADO ANIMADO ═══ */
+.lock{background:var(--oscuro);border-color:var(--oscuro);color:#E5E5E5;padding:34px 28px 28px;position:relative;overflow:hidden}
+.lock::before{content:"";position:absolute;inset:-40%;pointer-events:none;
+  background:radial-gradient(40% 40% at 50% 38%,rgba(0,176,240,.30),transparent 70%);animation:respira 4s ease-in-out infinite}
+.lock>*{position:relative}
+@keyframes respira{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+.lk-escena{position:relative;width:210px;height:210px;margin:0 auto 34px}
+.lk-pista{position:absolute;inset:0;border-radius:50%;border:3px solid rgba(255,255,255,.07)}
+.lk-halo{position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 0deg,transparent 0 58%,rgba(0,176,240,.08) 66%,rgba(0,176,240,.6) 86%,#BDEFFF 90%,transparent 90.5%);
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));
+          mask:radial-gradient(farthest-side,transparent calc(100% - 4px),#000 calc(100% - 3px));
+  animation:gira 2.8s linear infinite}
+.lk-trazos{position:absolute;inset:16px;border-radius:50%;border:1px dashed rgba(255,255,255,.16);animation:gira 40s linear infinite reverse}
+.lk-orbita{position:absolute;inset:0;animation:gira 7s linear infinite}
+.lk-orbita::before{content:"";position:absolute;top:-4px;left:50%;width:8px;height:8px;margin-left:-4px;border-radius:50%;
+  background:#fff;box-shadow:0 0 12px 3px rgba(0,176,240,.9)}
+.lk-orbita.o2{inset:16px;animation-duration:11s;animation-direction:reverse}
+.lk-orbita.o2::before{width:5px;height:5px;margin-left:-2.5px;top:-2.5px;background:#7FD8F8}
+@keyframes gira{to{transform:rotate(360deg)}}
+.lk-cifras{position:absolute;inset:30px 30px 44px;border-radius:50%;overflow:hidden;display:flex;justify-content:center;align-items:center;gap:4px;
+  -webkit-mask:linear-gradient(transparent,#000 32%,#000 68%,transparent);mask:linear-gradient(transparent,#000 32%,#000 68%,transparent)}
+.lk-col{height:96px;overflow:hidden;filter:blur(4.5px)}
+.lk-col i{display:block;font-style:normal;font-family:var(--display);font-size:88px;line-height:96px;color:#7FD8F8;text-shadow:0 0 24px rgba(0,176,240,.9);animation:rueda 1.6s linear infinite}
+.lk-col:nth-child(2) i{animation-duration:1.1s;color:#fff}
+@keyframes rueda{to{transform:translateY(-50%)}}
+.lk-ic{position:absolute;left:50%;bottom:-8px;width:60px;height:60px;margin-left:-30px;border-radius:18px;display:grid;place-items:center;
+  background:rgba(20,20,20,.72);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  animation:late 2.4s ease-out infinite;transition:background .4s,box-shadow .4s}
+@keyframes late{0%{box-shadow:0 0 0 0 rgba(0,176,240,.55)}70%{box-shadow:0 0 0 22px rgba(0,176,240,0)}100%{box-shadow:0 0 0 0 rgba(0,176,240,0)}}
+.lk-ic svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;overflow:visible;
+  transform-origin:50% 90%;animation:tiembla 4.5s ease-in-out infinite}
+@keyframes tiembla{0%,82%,100%{transform:rotate(0)}85%{transform:rotate(-9deg)}88%{transform:rotate(8deg)}91%{transform:rotate(-5deg)}94%{transform:rotate(3deg)}}
+.lk-ic .grillete{transform-box:fill-box;transform-origin:100% 100%;transition:transform .55s cubic-bezier(.34,1.56,.64,1)}
+.lock.abierto .lk-ic{background:var(--cian);border-color:var(--cian);animation:none;box-shadow:0 0 50px rgba(0,176,240,.8)}
+.lock.abierto .lk-ic svg{animation:none}
+.lock.abierto .grillete{transform:translateY(-5px) rotate(28deg)}
+.lock.abierto .lk-cifras{opacity:0;transition:opacity .4s}
+.lock.abierto .lk-halo{animation-duration:.7s}
+.lock h3{font-family:var(--display);font-weight:400;font-size:26px;color:#fff;line-height:1.2}
+.lock h3 em{font-style:italic;background:linear-gradient(100deg,#00B0F0 20%,#E8FAFF 45%,#00B0F0 70%);background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:brillo 3s linear infinite}
+@keyframes brillo{from{background-position:120% 0}to{background-position:-100% 0}}
+.lock p{color:#A3A3A3;font-size:14.5px;margin-top:6px}
+.lock .unlock{border-top-color:rgba(255,255,255,.1)}
+.lock .unlock li{color:#E5E5E5;border-bottom-color:rgba(255,255,255,.08)}
+
+/* ═══ CTA: AGENDAR SESIÓN ═══ */
+.cta2{display:grid;grid-template-columns:1.25fr 1fr;overflow:hidden;padding:0}
+@media(max-width:820px){.cta2{grid-template-columns:1fr}}
+.cta-txt{padding:clamp(28px,4.4vw,52px)}
+.cta-txt h3{font-size:clamp(30px,3.6vw,44px);line-height:1.1;margin:16px 0 22px;max-width:20ch}
+.cta-chips{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.cta-chip{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;border:1px solid;font-size:16px;font-weight:500;color:var(--tinta)}
+.cta-chip i{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.cta-chip span{flex:1}
+.cta-chip b{font-weight:700;font-variant-numeric:tabular-nums}
+.cta-txt>p{font-size:16px;line-height:1.6;max-width:52ch}
+.cta-lista{list-style:none;margin-top:22px;display:grid;gap:12px}
+.cta-lista li{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--tinta)}
+.cta-lista li::before{content:"";flex-shrink:0;width:22px;height:22px;border-radius:6px;margin-top:1px;
+  background:var(--cianluz) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4L18 8' fill='none' stroke='%230089BD' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
+.cta-precio{background:var(--oscuro);color:#D4D4D4;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.cta-precio::before{content:"";position:absolute;right:-30%;top:-40%;width:90%;height:90%;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,176,240,.22),transparent 65%);pointer-events:none}
+.cta-precio>*{position:relative}
+.cta-precio .lab{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#A3A3A3;font-weight:600}
+.cta-precio .monto{display:flex;align-items:baseline;gap:10px;margin:12px 0 4px}
+.cta-precio .monto b{font-family:var(--display);font-weight:400;font-size:clamp(56px,6vw,72px);color:#fff;line-height:1}
+.cta-precio .monto span{font-size:15px;color:#A3A3A3;font-weight:500}
+.cta-precio .dur{font-size:15px;color:#E5E5E5;padding-bottom:22px;margin-bottom:24px;border-bottom:1px solid rgba(255,255,255,.1)}
+.cta-precio .btn{justify-content:center}
+.cta-precio .fine{font-size:13px;color:#8A8A8A;margin-top:14px;line-height:1.5}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+<header class="topbar">
+  <div class="wordmark">
+    <img src="data:image/png;base64,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" alt="Flint Consulting" width="92" height="34">
+    <small>Value Growth Score</small>
+  </div>
+  <div class="rail" id="rail" aria-hidden="true"></div>
+  <div class="paso-txt" id="paso-txt" aria-live="polite">Diagnóstico</div>
+</header>
+
+<!-- ═══ INTRO ═══ -->
+<section class="panel on" id="p-intro">
+  <div class="skew">
+    <div class="glass pad hero-dark">
+      <div class="eyebrow">Flint Consulting · Diagnósticos</div>
+      <h1>Value Growth <em>Score</em></h1>
+      <p class="lede">Cuánto vale tu empresa hoy, qué la está frenando y cuánto más podría valer. Cuarenta y nueve preguntas, ocho componentes de valor y una estimación con múltiplos de tu industria.</p>
+      <div class="pillrow">
+        <span class="pill hi">Nadie paga por el tamaño. Pagan por lo predecible.</span>
+        <span class="pill">Sin costo</span>
+        <span class="pill">Informe por correo</span>
+      </div>
+      <div class="intro-meta">
+        <div><div class="n num">49</div><div class="t">Preguntas</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sect-title">Los ocho componentes que revisa un comprador</div>
+  <div class="rejilla" id="rejilla"></div>
+
+  <div class="nav fija" style="margin-top:28px">
+    <span class="nav-hint" style="text-align:left">Contestas de cinco en cinco y puedes regresar antes de terminar.</span>
+    <button class="btn main" id="empezar">Comenzar diagnóstico <span class="arr" aria-hidden="true">→</span></button>
+  </div>
+</section>
+
+<div id="paneles"></div>
+
+<!-- ═══ MURO DEL LEAD ═══ -->
+<section class="panel" id="p-gate">
+  <div class="skew">
+    <div class="glass pad">
+      <div class="gate">
+        <div class="lock sub-glass" id="lock">
+          <div class="lk-escena" aria-hidden="true">
+            <div class="lk-pista"></div><div class="lk-trazos"></div><div class="lk-halo"></div>
+            <div class="lk-orbita"></div><div class="lk-orbita o2"></div>
+            <div class="lk-cifras"><div class="lk-col"></div><div class="lk-col"></div></div>
+            <div class="lk-ic"><svg viewBox="0 0 24 24"><path class="grillete" d="M8 11V7.5a4 4 0 0 1 8 0V11"/><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M12 15v2.2"/></svg></div>
+          </div>
+          <h3>Tu calificación <em>ya está lista</em></h3>
+          <p>Déjanos tus datos y la desbloqueamos en este momento.</p>
+          <ul class="unlock">
+            <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Estimación de valor con múltiplos de tu industria</li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Score por cada uno de los ocho componentes</li>
+            <li><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Tus tres prioridades y tus tres fortalezas</li>
+          </ul>
+        </div>
+
+        <form class="gate-form" id="gform" novalidate>
+          <div class="eyebrow">Último paso</div>
+          <h2>¿A nombre de quién va el <em>informe</em>?</h2>
+          <p class="lede">Lo usamos para prepararlo y enviártelo. Nada más.</p>
+          <div class="gform">
+            <div class="campo" data-f="nombre"><label for="g-nombre">Nombre</label><input type="text" id="g-nombre" autocomplete="name" placeholder="Tu nombre"><div class="err">Escribe tu nombre</div></div>
+            <div class="campo" data-f="empresa"><label for="g-empresa">Empresa</label><input type="text" id="g-empresa" autocomplete="organization" placeholder="Nombre de tu empresa"><div class="err">Escribe el nombre de tu empresa</div></div>
+            <div class="campo" data-f="emp"><label for="g-emp">Número de empleados</label>
+              <select id="g-emp" required>
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option>1 a 10</option>
+                <option>11 a 25</option>
+                <option>26 a 50</option>
+                <option>51 a 100</option>
+                <option>101 a 250</option>
+                <option>251 a 500</option>
+                <option>Más de 500</option>
+              </select>
+              <div class="err">Selecciona el número de empleados</div></div>
+            <div class="campo" data-f="correo"><label for="g-correo">Correo</label><input type="email" id="g-correo" autocomplete="email" placeholder="nombre@empresa.com"><div class="err">Escribe un correo válido</div></div>
+          </div>
+          <label class="hp" aria-hidden="true">No llenar<input type="checkbox" id="g-bot" tabindex="-1"></label>
+          <label class="priv" id="priv"><input type="checkbox" id="g-ok"><span>He leído y acepto el aviso de privacidad de Flint Consulting.</span></label>
+          <p class="gnota">Recibirás tu informe por correo. Sin spam y sin llamadas no solicitadas.</p>
+          <div class="gmsg" id="gmsg" role="alert"></div>
+          <div class="nav fija" style="margin-top:24px">
+            <button type="button" class="btn back" data-atras><span aria-hidden="true">←</span><span class="lbl">Regresar</span></button>
+            <button type="submit" class="btn main" id="ver"><span class="t">Desbloquear mi resultado</span> <span class="arr" aria-hidden="true">→</span></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESULTADO ═══ -->
+<section class="panel" id="p-res">
+  <div class="skew rin">
+    <div class="glass pad hero-dark reporte">
+      <div class="hero">
+        <div>
+          <div class="eyebrow" id="r-eyebrow">Tu diagnóstico</div>
+          <h2 id="r-tit"></h2>
+          <p class="lede" id="r-msg"></p>
+          <span class="band-chip" id="r-chip"><i></i><span></span></span>
+        </div>
+        <div class="aro">
+          <svg viewBox="0 0 214 214" role="img" aria-labelledby="aro-t">
+            <title id="aro-t">Calificación Value Growth</title>
+            <defs><linearGradient id="aro-g" x1="0" y1="0" x2="1" y2="1">
+              <stop id="aro-s1" offset="0" stop-color="#00AEEF"/><stop id="aro-s2" offset="1" stop-color="#BFE9FA"/>
+            </linearGradient></defs>
+            <g class="rejilla" id="aro-rejilla"></g>
+            <circle cx="107" cy="107" r="94" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="10"></circle>
+            <circle id="aro-pulso" cx="107" cy="107" r="94" fill="none" stroke="#00B0F0" stroke-width="10" opacity="0"></circle>
+            <circle id="aro-arc" cx="107" cy="107" r="94" fill="none" stroke="url(#aro-g)" stroke-width="10"
+                    stroke-linecap="round" stroke-dasharray="590.6" stroke-dashoffset="590.6"></circle>
+            <circle id="aro-punta" cx="201" cy="107" r="6.5" fill="#fff" stroke="#00B0F0" stroke-width="3" opacity="0"></circle>
+          </svg>
+          <div class="cen"><b id="r-score">0</b><span id="r-de">de 100</span></div>
+        </div>
+      </div>
+      <div class="rep-comp">
+        <div class="rep-head">
+          <div class="eyebrow">Score por componente</div>
+          <h3>Los ocho componentes de tu <em>valor</em></h3>
+          <p>Tu calificación de Value Growth se compone de estos ocho componentes clave.</p>
+          <ul class="leyenda">
+            <li><i style="background:#FF1F3D"></i>Prioridad<span>0 a 30</span></li>
+            <li><i style="background:#FFB400"></i>Atención<span>31 a 69</span></li>
+            <li><i style="background:#12B76A"></i>Fortaleza<span>70 a 100</span></li>
+          </ul>
+        </div>
+        <div class="radar-box"><svg class="radar" id="radar" viewBox="-84 -24 648 506" role="img" aria-label="Perfil de valor por componente"></svg></div>
+      </div>
+      <div class="anillos" id="r-pilares"></div>
+    </div>
+  </div>
+
+  <div class="glass pad rin" style="animation-delay:.2s">
+    <h3 class="card-t">Estimación de <em>valor</em></h3>
+    <p class="card-s">Calculada sobre el promedio de tu EBITDA de los últimos tres ejercicios, con un múltiplo de transacciones privadas del tamaño de tu empresa, ajustado por tu industria.</p>
+    <div class="grid2">
+      <div class="vc sub-glass"><div class="lab">Valor estimado hoy</div><div class="big" id="v-hoy"></div><div class="nt" id="v-hoy-nt"></div></div>
+      <div class="vc sub-glass hi"><div class="lab">Si subes tus dos componentes más débiles</div><div class="big" id="v-pot"></div><div class="nt" id="v-pot-nt"></div></div>
+    </div>
+    <div class="escala" id="v-escala">
+      <div class="pista"><div class="tramo" id="e-tramo"></div><div class="tick" id="e-tick"></div><div class="aguja" id="e-aguja"></div></div>
+      <div class="marcas"><span>Bajo del rango<b id="e-q1"></b></span>
+        <span style="text-align:center">Mediana<b id="e-med"></b></span>
+        <span style="text-align:right">Alto<b id="e-q3"></b></span></div>
+    </div>
+    <p class="legal">Es un valor indicativo, no una valuación. Una valuación formal considera tu deuda, tu capital de trabajo, tus contratos y tus proyecciones, y puede arrojar un número distinto. Sirve para ubicarte, no para negociar.</p>
+  </div>
+
+  <div class="rin" style="animation-delay:.6s;margin-top:18px">
+    <div class="grid2">
+      <div class="glass ins prio">
+        <div class="ins-tag">Tus tres prioridades</div>
+        <h4>Donde está el valor que hoy no estás capturando</h4>
+        <ul id="r-prio"></ul>
+      </div>
+      <div class="glass ins fort">
+        <div class="ins-tag">Tus tres fortalezas</div>
+        <h4>Lo que ya tienes construido y conviene proteger</h4>
+        <ul id="r-fort"></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="skew rin" style="animation-delay:.78s;margin-top:18px">
+    <div class="glass cta2">
+      <div class="cta-txt">
+        <div class="eyebrow">Tus prioridades</div>
+        <h3 id="cta-tit"></h3>
+        <div class="cta-chips" id="cta-chips"></div>
+        <p>En 60 minutos te decimos cómo resolver cada una.</p>
+      </div>
+      <div class="cta-precio">
+        <span class="lab">Sesión con un especialista de Flint</span>
+        <div class="monto"><b>$200</b><span>USD</span></div>
+        <div class="dur">60 minutos</div>
+        <a class="btn main" id="cta-btn" href="https://buy.stripe.com/aFa3cv9sPaZYh0Lf4mfYY0r" target="_blank" rel="noopener">Quiero resolver mis prioridades <span class="arr" aria-hidden="true">→</span></a>
+        <p class="fine">Al confirmar el pago se abre el calendario para que elijas el horario que te acomode.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Flint Consulting® · Value Growth Score · Estimación indicativa basada en múltiplos de industria</span>
+    <button class="btn-text" id="reiniciar">↻ Contestar de nuevo</button>
+  </div>
+</section>
+
+</div>
+
+<script id="vg-data" type="application/json">{"partes": [{"titulo": "Tu negocio", "corto": "Negocio", "preguntas": [{"n": 1, "id": 1, "stem": "En una frase, ¿cómo describirías tu negocio a una persona que recién conoces? (Es decir, ¿a qué se dedica tu empresa?)", "nota": null, "instr": null, "comp": "Contexto", "tipo": "abierta"}, {"n": 2, "id": 2, "stem": "¿Cómo está tu industria hoy?", "nota": null, "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) En declive", "b) Creciendo al ritmo de la economía", "c) Creciendo un poco más rápido que la economía", "d) Creciendo mucho más rápido que la economía", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 25], "w": 0.11}]}, {"titulo": "Tus clientes", "corto": "Clientes", "preguntas": [{"n": 3, "id": 3, "stem": "¿Qué tan fácil es para tus clientes conseguir con otro proveedor lo que tú vendes?", "nota": null, "instr": null, "comp": "Diferenciación y Elasticidad", "tipo": "opciones", "opciones": ["a) Es un producto o servicio común: lo pueden conseguir con muchos proveedores.", "b) Lo pueden conseguir con algunos proveedores.", "c) Es un producto o servicio de nicho: les costaría encontrar otro proveedor.", "d) Somos los únicos que lo ofrecemos.", "e) No estoy seguro"], "pts": [0, 25, 75, 100, 25], "w": 0.24}, {"n": 4, "id": 4, "stem": "¿Qué participación de mercado tienes?", "nota": null, "instr": null, "comp": "Diferenciación y Elasticidad", "tipo": "opciones", "opciones": ["a) Más del 40% del mercado (posición dominante)", "b) 15 a 40% del mercado (jugador relevante)", "c) 5 a 15% del mercado", "d) 1 a 5% del mercado", "e) No estoy seguro"], "pts": [100, 75, 50, 25, 25], "w": 0.23}, {"n": 5, "id": 5, "stem": "¿Cuál de las siguientes opciones describe mejor tu relación personal con los clientes de tu empresa?", "nota": null, "instr": null, "comp": "Keyman Risk", "tipo": "opciones", "opciones": ["a) Conozco a cada uno de mis clientes por su nombre y esperan que me involucre personalmente cuando compran en mi empresa", "b) Conozco a la mayoría de mis clientes por su nombre y, por lo general, quieren tratar conmigo en lugar de con uno de mis empleados", "c) Conozco a algunos de mis clientes por su nombre y algunos de ellos prefieren tratar conmigo en lugar de con uno de mis empleados", "d) No conozco personalmente a mis clientes y rara vez me involucro en el servicio a un cliente individual", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 25], "w": 0.32}, {"n": 6, "id": 6, "stem": "¿Cuál de las siguientes opciones describe mejor el nivel típico de personalización que ofreces a tus clientes?", "nota": null, "instr": null, "comp": "Diferenciación y Elasticidad", "tipo": "opciones", "opciones": ["a) Ofrecemos una solución personalizada completa para satisfacer las necesidades únicas de cada cliente al que servimos.", "b) Tenemos un conjunto básico de productos, metodologías y servicios, pero a menudo los personalizamos mucho para los clientes.", "c) Tenemos un conjunto estándar de productos, servicios y metodologías que modificamos ligeramente para algunos clientes.", "d) No personalizamos nuestros productos, servicios o metodologías para clientes individuales.", "e) No estoy seguro"], "pts": [100, 75, 50, 0, 25], "w": 0.33}, {"n": 7, "id": 7, "stem": "Por favor, estima el porcentaje de tus clientes que están MUY SATISFECHOS con los servicios/productos que ofrece tu empresa:", "nota": null, "instr": null, "comp": "Satisfacción del Cliente", "tipo": "opciones", "opciones": ["a) Menos del 25% de nuestros clientes están \"muy satisfechos\"", "b) Entre el 25% y el 50% de nuestros clientes están \"muy satisfechos\"", "c) Entre 51% y 75% de nuestros clientes están \"muy satisfechos\"", "d) Más del 75% de nuestros clientes están \"muy satisfechos\"", "e) No estoy seguro, no medimos la satisfacción del cliente"], "pts": [10, 25, 50, 100, 15], "w": 0.7}, {"n": 8, "id": 8, "stem": "¿Con qué frecuencia tus clientes recomiendan tu empresa con sus amigos y colegas?", "nota": null, "instr": null, "comp": "Satisfacción del Cliente", "tipo": "opciones", "opciones": ["a) Siempre", "b) A veces", "c) Raramente", "d) Nunca", "e) No estoy seguro"], "pts": [100, 50, 30, 0, 25], "w": 0.25}, {"n": 9, "id": 9, "stem": "En los últimos 12 meses, ¿qué proporción de tus clientes se quejó por escrito?", "nota": "Cuenta correos, cartas o mensajes por el formulario de tu sitio web.", "instr": null, "comp": "Satisfacción del Cliente", "tipo": "opciones", "opciones": ["a) Ninguno", "b) Menos del 1%", "c) Entre 1% y 5%", "d) Entre 5% y 10%", "e) Más del 10%", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 5, 25], "w": 0.05}, {"n": 10, "id": 10, "stem": "¿Cómo se comporta tu utilidad cada que obtienes un cliente nuevo?", "nota": null, "instr": null, "comp": "Diferenciación y Elasticidad", "tipo": "opciones", "opciones": ["a) Baja.", "b) Se mantiene más o menos igual.", "c) Mejora poco.", "d) Mejora bastante.", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 25], "w": 0.2}, {"n": 11, "id": 11, "stem": "¿En qué momento te pagan normalmente tus clientes?", "nota": "Piensa en cuándo entra el dinero, no en cuándo emites la factura.", "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Nos pagan todo después de entregar.", "b) Un anticipo al inicio y el resto al entregar.", "c) Nos pagan en parcialidades a lo largo de la entrega.", "d) Nos pagan todo por adelantado, al momento de la compra.", "e) No estoy seguro"], "pts": [20, 50, 75, 100, 25], "w": 0.22}, {"n": 12, "id": 12, "stem": "¿Qué porcentaje de tus ventas totales representó tu cliente más grande el año pasado?", "nota": null, "instr": null, "comp": "Radar de Dependencia", "tipo": "opciones", "opciones": ["a) 1 a 15%", "b) 16 a 25%", "c) 26 a 50%", "d) 51% o más", "e) No estoy seguro"], "pts": [100, 75, 50, 0, 25], "w": 0.2}, {"n": 13, "id": 13, "stem": "Si perdieras a tu cliente más grande, tu negocio:", "nota": null, "instr": null, "comp": "Radar de Dependencia", "tipo": "opciones", "opciones": ["a) Prácticamente no se afectaría.", "b) Se afectaría poco y seguiría operando.", "c) Se afectaría bastante, pero seguiría operando.", "d) No sobreviviría.", "e) No estoy seguro"], "pts": [100, 75, 50, 0, 25], "w": 0.58}, {"n": 14, "id": 14, "stem": "¿Qué porcentaje de tus ventas es recurrente?", "nota": "Es recurrente el ingreso que se renueva sin una nueva decisión de compra: suscripciones, igualas, contratos de mantenimiento o rentas mensuales, donde el cliente tiene que cancelar para dejar de pagar. No cuenta el cliente frecuente que decide cada compra.", "instr": null, "comp": "Ingresos Recurrentes", "tipo": "opciones", "opciones": ["a) Ninguno", "b) 1 a 25%", "c) 26 a 50%", "d) 51 a 75%", "e) 76 a 100%", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.75}]}, {"titulo": "Tu personal", "corto": "Personal", "preguntas": [{"n": 15, "id": 15, "stem": "¿Qué porcentaje de tus ventas atiendes personalmente tú o tus socios?", "nota": "Nos referimos a las ventas en las que tú o un socio están directamente involucrados con el cliente.", "instr": null, "comp": "Keyman Risk", "tipo": "opciones", "opciones": ["a) Ninguno", "b) 1 a 25%", "c) 26 a 50%", "d) 51 a 75%", "e) 76 a 100%", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 0, 25], "w": 0.1}, {"n": 16, "id": 16, "stem": "Piensa en la persona que más contribuye a cada una de las siguientes áreas de tu negocio. ¿Qué tan fácil o difícil sería reemplazarlos?", "nota": "Para la sección I) y II) si esta persona eres tú, selecciona IMPOSIBLE.", "instr": null, "comp": "Radar de Dependencia", "tipo": "subs", "subs": [{"label": "I) Ventas y mercadotecnia:", "opciones": ["a) Muy fácil", "b) Fácil", "c) Difícil", "d) Muy difícil", "e) Imposible", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 0, 25], "w": 0.08}, {"label": "II) Diseño y entrega de productos/servicios:", "opciones": ["a) Muy fácil", "b) Fácil", "c) Difícil", "d) Muy difícil", "e) Imposible", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 0, 25], "w": 0.07}, {"label": "III) Proveedor externo. ¿Qué tan fácil o difícil sería reemplazar a su proveedor más importante?", "opciones": ["a) Muy fácil", "b) Fácil", "c) Difícil", "d) Muy difícil", "e) Imposible", "f) No estoy seguro"], "pts": [100, 75, 50, 25, 0, 25], "w": 0.07}]}]}, {"titulo": "Pensemos en el futuro", "corto": "Futuro", "preguntas": [{"n": 17, "id": 17, "stem": "¿Qué esperas que pase con tus ventas en los próximos 12 meses?", "nota": null, "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Que disminuyan", "b) Que se mantengan igual", "c) Que aumenten hasta 10%", "d) Que aumenten entre 11% y 20%", "e) Que aumenten entre 21% y 30%", "f) Que aumenten más de 30%", "g) No estoy seguro"], "pts": [0, 25, 50, 75, 90, 100, 25], "w": 0.24}, {"n": 18, "id": 18, "stem": "¿Cuánto más le podrías vender a tus clientes actuales?", "nota": null, "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Prácticamente nada: ya les vendemos todo lo que nos pueden comprar.", "b) 1-2 productos o servicios adicionales de nuestro portafolio actual.", "c) 3-5 productos o servicios adicionales de nuestro portafolio actual.", "d) +5 productos o servicios adicionales de nuestro portafolio actual.", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 25], "w": 0.15}, {"n": 19, "id": 19, "stem": "Si tus clientes te contratan 5 veces el volumen que vendes hoy, atenderlo sería:", "nota": "Piensa en tu capacidad real de abastecerlo: inventario, producción, personal y capacidad de servicio.", "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Imposible", "b) Muy difícil", "c) Difícil", "d) Fácil", "e) Muy fácil", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.23}, {"n": 20, "id": 20, "stem": "Abrir tu negocio en otra ciudad o región sería:", "nota": null, "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Imposible", "b) Muy difícil", "c) Difícil", "d) Fácil", "e) Muy fácil", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.21}, {"n": 21, "id": 21, "stem": "Si tuvieras que ausentarte tres meses sin poder trabajar, tu negocio:", "nota": null, "instr": null, "comp": "Keyman Risk", "tipo": "opciones", "opciones": ["a) Prácticamente no se afectaría.", "b) Se afectaría poco y seguiría operando.", "c) Se afectaría bastante, pero seguiría operando.", "d) No sobreviviría.", "e) No estoy seguro"], "pts": [100, 75, 50, 0, 25], "w": 0.31}, {"n": 22, "id": 22, "stem": "Si pudieras lograr solo UNA de las siguientes metas en los próximos 12 meses, ¿cuál sería?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Aumentar mis ventas.", "b) Aumentar mi utilidad.", "c) Ganar reconocimiento en mi industria."], "pts": null, "w": null, "extra": [1, 0, 0]}, {"n": 23, "id": 23, "stem": "¿A quién acudirías para pedir asesoría sobre cómo aumentar el valor de tu empresa? Marca todas las que apliquen.", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["Contador", "Banquero de Inversión", "Broker en compraventa de empresas", "Coach de negocios", "Consultor de negocios", "Familiar o amigo cercano", "Asesor de plan de salida o sucesión", "Otro empresario", "Asesor de inversiones", "Abogado", "Especialista en fusiones y adquisiciones", "Nadie", "Otro"], "pts": null, "w": null, "multi": true}, {"n": 24, "id": 24, "stem": "¿Cuál de estas se parece más a tu idea de riqueza?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Tener suficiente dinero para hacer lo que quieras, cuando quieras.", "b) Tener al menos 10 millones de dólares en activos invertidos.", "c) Tener ahorrado lo suficiente para cubrir tus gastos por el resto de tu vida."], "pts": null, "w": null}, {"n": 25, "id": 25, "stem": "¿Cuál es tu mayor preocupación al pensar en vender tu negocio?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) No obtener el valor que creo que vale mi negocio.", "b) No tener nada que hacer en la jubilación.", "c) Decepcionar a mis empleados.", "d) Que nadie pueda manejar las cosas tan bien como yo.", "e) Que el legado que construí no continúe, o cambie a algo distinto de lo que yo quería."], "pts": null, "w": null}, {"n": 26, "id": 26, "stem": "¿Cuál de las siguientes opciones describe mejor tu objetivo a largo plazo para tu negocio? Planeo:", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Vender mi negocio a un tercero.", "b) Hacer la transición de mi negocio a mis hijos.", "c) Hacer la transición de mi negocio a la próxima generación de gerentes.", "d) Cerrar mi negocio.", "e) Otro"], "pts": null, "w": null}, {"n": 27, "id": 27, "stem": "¿Cuál de las siguientes opciones describe mejor lo que buscas en un asesor?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Experiencia con empresas de rápido crecimiento.", "b) Experiencia en mi sector.", "c) Experiencia con empresas de mi región."], "pts": null, "w": null}]}, {"titulo": "Datos y cifras", "corto": "Cifras", "preguntas": [{"n": 28, "id": 28, "stem": "¿Cuál de las siguientes opciones describe mejor a tu equipo directivo?", "nota": null, "instr": null, "comp": "Keyman Risk", "tipo": "opciones", "opciones": ["a) No tenemos equipo directivo.", "b) Hay dos o tres personas de alto nivel que funcionan como líderes, pero sin roles definidos.", "c) Tenemos gerentes a cargo de la parte comercial y de la operación.", "d) Tenemos un equipo directivo con un esquema de compensación de largo plazo que los mantiene en la empresa.", "e) No estoy seguro"], "pts": [0, 25, 75, 100, 25], "w": 0.27}, {"n": 29, "id": 29, "stem": "En tu último ejercicio completo, ¿cuál fue tu margen operativo?", "nota": "Margen operativo = utilidad de operación ÷ ventas. La utilidad de operación es lo que queda después del costo de ventas y los gastos de operación, antes de intereses e impuestos.", "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Tuvimos pérdidas", "b) 0 a 10%", "c) 11 a 20%", "d) Más del 20%", "e) No estoy seguro"], "pts": [0, 25, 50, 100, 0], "w": 0.26}, {"n": 30, "id": 30, "stem": "¿Cuánta deuda con costo financiero (intereses) tiene tu empresa hoy?", "nota": "Incluye créditos bancarios, arrendamientos financieros y préstamos de socios. No incluyas lo que le debes a proveedores.", "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) No tenemos deuda.", "b) Menos de un año de utilidad para pagar la deuda.", "c) Entre uno y dos años de utilidad para pagar la deuda.", "d) Entre dos y tres años de utilidad para pagar la deuda.", "e) Más de tres años de utilidad para pagar la deuda.", "f) No estoy seguro"], "pts": [100, 80, 55, 30, 0, 0], "w": 0.09}, {"n": 31, "id": 31, "stem": "Comparando tu último ejercicio con el anterior, tus ventas:", "nota": null, "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Disminuyeron", "b) Se mantuvieron igual", "c) Aumentaron hasta en un 10%", "d) Aumentaron entre un 11 y un 20%", "e) Aumentaron en un 21-30%", "f) Aumentaron más del 30%", "g) No estoy seguro"], "pts": [20, 25, 50, 75, 90, 100, 25], "w": 0.33}, {"n": 32, "id": 32, "stem": "¿Cómo se generan hoy los estados financieros de tu empresa?", "nota": null, "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Le damos todo a nuestro contador (estados de cuenta, facturas, recibos) y él genera los registros. No hay proceso interno ni revisión.", "b) El contador (interno o externo) registra la información periódicamente, pero solo con fines fiscales. Revisamos los estados financieros de vez en cuando, sin calendario fijo.", "c) Tenemos cierre mensual con calendario definido y entregamos los estados financieros a la dirección con regularidad, pero no los comparamos contra presupuesto.", "d) Cerramos en los primeros 10-15 días del mes siguiente, comparamos contra presupuesto y la dirección usa la información para decidir.", "e) Cierre ágil (menos de una semana), reportes gerenciales y KPIs, y un CFO (interno o fraccional) que traduce los números en decisiones estratégicas."], "pts": [0, 25, 60, 85, 100], "w": 0.17}, {"n": 33, "id": 33, "stem": "¿Cuál es tu margen de utilidad bruto típico?", "nota": "Margen bruto = (ventas − costo de ventas) ÷ ventas. El costo de ventas es lo que te cuesta producir o entregar lo que vendes: materia prima, mano de obra directa y costos de producción. No incluye renta, administración, ventas ni marketing.", "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Menos del 40%", "b) 40 a 60%", "c) 61 a 80%", "d) Más del 80%", "e) No estoy seguro"], "pts": [0, 50, 75, 100, 0], "w": 0.17}, {"n": 34, "id": 34, "stem": "¿Cuál describe mejor tu situación de efectivo?", "nota": null, "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Necesitamos más efectivo del que generamos, por lo que regularmente buscamos capital o crédito.", "b) Necesitamos más efectivo del que generamos, por lo que ocasionalmente buscamos capital o crédito.", "c) Generamos efectivo de sobra y lo reinvertimos o lo dejamos en la empresa como reserva.", "d) Generamos efectivo de sobra y lo repartimos a los accionistas de forma regular.", "e) No estoy seguro"], "pts": [0, 25, 75, 100, 0], "w": 0.13}, {"n": 35, "id": 35, "stem": "¿Cuántas personas conocen o han buscado tus servicios a través de estos medios?", "nota": "Cuenta personas con una relación activa con tus canales propios (suscriptores de newsletter y seguidores en redes sociales). No cuentes bases de datos o listas de correos que no representen suscriptores activos. Si una persona te sigue en varios canales, cuéntala una sola vez.", "instr": null, "comp": "Potencial de Crecimiento", "tipo": "opciones", "opciones": ["a) Ninguno", "b) 1 a 999", "c) 1,000 a 9,999", "d) 10,000 a 99,999", "e) 100,000 o más", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.06}, {"n": 36, "id": 36, "stem": "¿Cuáles fueron tus ventas en cada uno de los últimos tres ejercicios? Anótalas en dólares.", "nota": null, "instr": null, "comp": "Desempeño Financiero", "tipo": "numerica", "campos": ["Ventas del año pasado", "Ventas de hace 2 años", "Ventas de hace 3 años"], "rol": "ventas"}, {"n": 37, "id": 37, "stem": "¿Cuál fue tu EBITDA en cada uno de los últimos tres ejercicios? Anótalo en dólares, no en porcentaje.", "nota": "EBITDA = utilidad de operación + depreciación + amortización. No uses la utilidad neta ni la utilidad antes de impuestos.", "instr": null, "comp": "Desempeño Financiero", "tipo": "numerica", "campos": ["EBITDA del año pasado", "EBITDA de hace 2 años", "EBITDA de hace 3 años"], "rol": "ebitda"}, {"n": 38, "id": 44, "stem": "¿Qué tan separadas están las finanzas del negocio de las finanzas personales de los socios?", "nota": null, "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Usamos las mismas cuentas y no separamos los gastos personales de los del negocio.", "b) Las cuentas están mezcladas, pero identificamos qué gastos son personales.", "c) Tenemos cuentas separadas, aunque algunos gastos personales todavía pasan por la empresa.", "d) Están totalmente separadas: los socios reciben sueldo y dividendos, y ningún gasto personal pasa por la empresa.", "e) No estoy seguro"], "pts": [0, 35, 70, 100, 0], "w": 0.09}, {"n": 39, "id": 41, "stem": "¿La empresa cuenta con información financiera auditada?", "nota": "Auditada significa que un despacho externo revisó y dictaminó tus estados financieros. La declaración anual por sí sola no cuenta.", "instr": null, "comp": "Desempeño Financiero", "tipo": "opciones", "opciones": ["a) Sí", "b) No"], "pts": [100, 0], "w": 0.05}, {"n": 40, "id": 42, "stem": "¿Cuándo les pagas a tus proveedores?", "nota": "Piensa en tus principales proveedores y gastos fijos: en cuánto tiempo les pagas después de que te facturan.", "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Al contado o por adelantado.", "b) A 30 días.", "c) A 60 días o más.", "d) Varía, depende del proveedor.", "e) No estoy seguro"], "pts": [0, 50, 100, 50, 25], "w": 0.15}, {"n": 41, "id": 43, "stem": "¿Cuánto de tus ganancias reinviertes en equipo, tecnología o instalaciones?", "nota": "Piensa en compras como maquinaria, equipo de cómputo, remodelación de oficina o vehículos: lo que compras para que el negocio siga operando o crezca, no los gastos del día a día.", "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Casi nada, el negocio casi no requiere estas compras.", "b) Una parte pequeña: menos de 1 de cada 6 pesos que gano (menos del 15%).", "c) Una parte considerable: entre 1 de cada 6 y 1 de cada 3 pesos (15% a 33%).", "d) Una parte muy grande: más de 1 de cada 3 pesos (más del 33%). El negocio requiere inversión constante para mantenerse.", "e) No estoy seguro"], "pts": [100, 75, 40, 0, 25], "w": 0.15}, {"n": 42, "id": 45, "stem": "¿Qué tan seguido usas préstamos, líneas de crédito o tarjetas para que la empresa opere?", "nota": "No nos referimos a un crédito que pediste una vez para crecer, sino a si necesitas apoyo de un banco o de una financiera de forma regular para pagar nómina, proveedores o gastos del mes.", "instr": null, "comp": "Generación de Flujos", "tipo": "opciones", "opciones": ["a) Nunca, el negocio se sostiene con lo que genera.", "b) Rara vez, solo en meses difíciles o por una emergencia.", "c) Seguido, es parte normal de cómo operamos cada mes.", "d) Siempre, sin ese apoyo no podríamos operar.", "e) No estoy seguro"], "pts": [100, 65, 25, 0, 25], "w": 0.15}, {"n": 43, "id": 46, "stem": "¿Qué porcentaje de tus ingresos proviene de clientes con más de 3 años de antigüedad contigo?", "nota": "Cuenta a los clientes que te siguen comprando desde hace más de tres años, aunque no tengan contrato ni suscripción.", "instr": null, "comp": "Ingresos Recurrentes", "tipo": "opciones", "opciones": ["a) Ninguno", "b) 1 a 25%", "c) 26 a 50%", "d) 51 a 75%", "e) 76 a 100%", "f) No estoy seguro"], "pts": [0, 25, 50, 75, 100, 25], "w": 0.25}]}, {"titulo": "Vender tu negocio", "corto": "Vender", "preguntas": [{"n": 44, "id": 38, "stem": "¿Has recibido una oferta por escrito (carta de intención, expresión de interés) para comprar tu negocio en el último año?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Sí", "b) No"], "pts": null, "w": null, "extra": [1, 0]}, {"n": 45, "id": 39, "stem": "¿Qué múltiplo de tu EBITDA representó esa oferta?", "nota": "Calcula el múltiplo con el dinero o las acciones que te ofrecían al cierre. No incluyas lo que estuviera condicionado a resultados futuros, como un earn out o un contrato de consultoría. Si contestaste “No” en la pregunta anterior, elige “0 veces EBITDA”.", "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) 0 veces EBITDA", "b) 1 vez EBITDA", "c) 2 veces EBITDA", "d) 3 veces EBITDA", "e) 4 veces EBITDA", "f) 5 veces EBITDA", "g) 6 veces EBITDA", "h) 7 veces EBITDA", "i) 8 o más veces EBITDA", "j) No estoy seguro"], "pts": null, "w": null, "extra": [0, 0, 0, 0.25, 0.5, 0.75, 1, 1, 1.5, 0]}, {"n": 46, "id": 40, "stem": "¿Cuál de las siguientes opciones describe mejor tu industria?", "nota": "Si tu empresa es un corporativo o una controladora, elige la industria de su negocio operativo principal.", "instr": null, "comp": "Contexto", "tipo": "opciones", "opciones": ["a) Agricultura, cría de animales, aprovechamiento forestal, pesca y caza (SCIAN 11)", "b) Minería, petróleo y gas (SCIAN 21)", "c) Energía eléctrica, agua y gas (SCIAN 22)", "d) Construcción (SCIAN 23)", "e) Industrias manufactureras (SCIAN 31-33)", "f) Comercio al por menor especializado (SCIAN 46)", "g) Comercio al por mayor (SCIAN 43)", "h) Comercio al por menor en general (SCIAN 46)", "i) Transporte de carga y pasajeros: marítimo, terrestre, ferroviario, aéreo y por ducto (SCIAN 48)", "j) Correos, mensajería y almacenamiento (SCIAN 49)", "k) Información en medios masivos: prensa, radio, televisión y telecomunicaciones (SCIAN 51)", "l) Servicios financieros y de seguros (SCIAN 52)", "m) Servicios inmobiliarios y de alquiler (SCIAN 53)", "n) Servicios profesionales, científicos y técnicos (SCIAN 54)", "o) Servicios de apoyo a los negocios y manejo de residuos (SCIAN 56)", "p) Servicios educativos (SCIAN 61)", "q) Servicios de salud y asistencia social (SCIAN 62)", "r) Servicios de esparcimiento, culturales y deportivos (SCIAN 71)", "s) Servicios de alojamiento temporal y de alimentos y bebidas (SCIAN 72)", "t) Otros servicios excepto actividades gubernamentales (SCIAN 81)", "u) Actividades legislativas y gubernamentales (SCIAN 93)"], "pts": null, "w": null, "industria": true}, {"n": 47, "id": 47, "stem": "¿En qué año comenzó tu negocio?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "abierta"}, {"n": 48, "id": 48, "stem": "¿Cuántos años planeas continuar operando tu negocio?", "nota": null, "instr": null, "comp": "Contexto", "tipo": "abierta"}, {"n": 49, "id": 49, "stem": "Por último, indica tu año de nacimiento.", "nota": "Lo usamos solo para ubicar en qué etapa estás respecto a tus planes de salida del negocio.", "instr": null, "comp": "Contexto", "tipo": "abierta"}]}], "componentes": [{"nombre": "Desempeño Financiero", "def": "Tu historial de ingresos y ganancias, junto con el profesionalismo de tus registros.", "peso": 20, "acc": "Ordenar el cierre mensual y llevar tus estados financieros a nivel dictaminado.", "for": "Tus números aguantan una revisión, úsalos como argumento de precio.", "derivada": {"w": 0.04, "pts": [0, 25, 50, 75, 100], "cortes": [-0.3, -0.1, 0.1, 0.3]}}, {"nombre": "Potencial de Crecimiento", "def": "Tu probabilidad de crecer en el futuro, y a qué ritmo.", "peso": 15, "acc": "Documentar de dónde va a salir el crecimiento de los próximos tres años.", "for": "Tu historia de crecimiento es vendible, sostenla con un plan escrito."}, {"nombre": "Radar de Dependencia", "def": "Qué tan dependiente es tu empresa de un solo cliente, empleado o proveedor.", "peso": 8, "acc": "Bajar la concentración de clientes y documentar quién puede reemplazar a quién.", "for": "No dependes de una sola pieza, eso baja el riesgo que percibe un comprador."}, {"nombre": "Generación de Flujos", "def": "Si tu operación genera el efectivo que necesita para funcionar, o depende de crédito para sostenerse.", "peso": 12, "acc": "Cobrar antes: anticipos, parcialidades y una política de crédito real.", "for": "Tu ciclo de cobro financia la operación, es una ventaja concreta."}, {"nombre": "Ingresos Recurrentes", "def": "Qué parte de tus ventas se repite sin que tengas que volver a venderla.", "peso": 12, "acc": "Convertir parte de tus ventas en igualas o contratos con renovación automática.", "for": "El ingreso recurrente es lo que más múltiplo te da, protégelo."}, {"nombre": "Diferenciación y Elasticidad", "def": "Qué tan diferenciada está tu empresa de su competencia.", "peso": 10, "acc": "Definir qué te hace difícil de reemplazar y dejar de competir por precio.", "for": "Tienes poder de precio, no lo regales en descuentos."}, {"nombre": "Satisfacción del Cliente", "def": "La probabilidad de que tus clientes vuelvan y te recomienden.", "peso": 8, "acc": "Empezar a medir satisfacción y recompra con un método fijo, no por percepción.", "for": "Tus clientes regresan y te recomiendan, eso pesa en la valuación."}, {"nombre": "Keyman Risk", "def": "Cómo se comportaría tu negocio si no pudieras estar presente.", "peso": 15, "acc": "Sacarte de la operación diaria: delegar ventas y la relación con clientes clave.", "for": "El negocio camina sin ti, eso es exactamente lo que un comprador paga."}], "industrias": [{"n": "a) Agricultura, cría de animales, aprovechamiento forestal, pesca y caza (SCIAN 11)", "rel": 0.7765, "margen": 0.0862, "nota": ""}, {"n": "b) Minería, petróleo y gas (SCIAN 21)", "rel": 0.8905, "margen": 0.1315, "nota": ""}, {"n": "c) Energía eléctrica, agua y gas (SCIAN 22)", "rel": 0.6751, "margen": 0.2244, "nota": ""}, {"n": "d) Construcción (SCIAN 23)", "rel": 0.7973, "margen": 0.0577, "nota": ""}, {"n": "e) Industrias manufactureras (SCIAN 31-33)", "rel": 1.0995, "margen": 0.1088, "nota": ""}, {"n": "f) Comercio al por menor especializado (SCIAN 46)", "rel": 1.1276, "margen": 0.072, "nota": ""}, {"n": "g) Comercio al por mayor (SCIAN 43)", "rel": 0.7167, "margen": 0.0419, "nota": ""}, {"n": "h) Comercio al por menor en general (SCIAN 46)", "rel": 1.0932, "margen": 0.0806, "nota": ""}, {"n": "i) Transporte de carga y pasajeros: marítimo, terrestre, ferroviario, aéreo y por ducto (SCIAN 48)", "rel": 0.7303, "margen": 0.1055, "nota": ""}, {"n": "j) Correos, mensajería y almacenamiento (SCIAN 49)", "rel": 0.5403, "margen": 0.1658, "nota": ""}, {"n": "k) Información en medios masivos: prensa, radio, televisión y telecomunicaciones (SCIAN 51)", "rel": 1.1982, "margen": 0.1105, "nota": ""}, {"n": "l) Servicios financieros y de seguros (SCIAN 52)", "rel": 0, "margen": 0.0843, "nota": "Las entidades financieras no se valúan por múltiplos de EBITDA, sino por múltiplos de capital contable y de utilidad. Tu calificación de los ocho componentes sí aplica; el valor lo revisamos contigo en la sesión."}, {"n": "m) Servicios inmobiliarios y de alquiler (SCIAN 53)", "rel": 1.2398, "margen": 0.4324, "nota": ""}, {"n": "n) Servicios profesionales, científicos y técnicos (SCIAN 54)", "rel": 1.3041, "margen": 0.0615, "nota": ""}, {"n": "o) Servicios de apoyo a los negocios y manejo de residuos (SCIAN 56)", "rel": 1.1005, "margen": 0.1791, "nota": ""}, {"n": "p) Servicios educativos (SCIAN 61)", "rel": 0.6154, "margen": 0.2535, "nota": ""}, {"n": "q) Servicios de salud y asistencia social (SCIAN 62)", "rel": 0.8172, "margen": 0.0412, "nota": ""}, {"n": "r) Servicios de esparcimiento, culturales y deportivos (SCIAN 71)", "rel": 1.0977, "margen": 0.1686, "nota": ""}, {"n": "s) Servicios de alojamiento temporal y de alimentos y bebidas (SCIAN 72)", "rel": 1.0, "margen": 0.2098, "nota": ""}, {"n": "t) Otros servicios excepto actividades gubernamentales (SCIAN 81)", "rel": 1.3041, "margen": 0.0615, "nota": ""}, {"n": "u) Actividades legislativas y gubernamentales (SCIAN 93)", "rel": 0, "margen": 0, "nota": "Este diagnóstico no estima el valor de entidades gubernamentales. Tu calificación de los ocho componentes sí aplica."}], "bandas": [[50000, 500000, 2, 4], [500000, 1000000, 3, 5], [1000000, 2000000, 4, 6], [2000000, 4000000, 5, 7], [4000000, 7000000, 6, 8]], "piso": 50000, "techo": 7000000}</script>
+<script>
+(function(){
+"use strict";
+/* ====== ENVÍO DEL LEAD · WEB3FORMS ======
+   Misma Access Key del Diagnóstico de Madurez Financiera: los correos llegan
+   a connect@flintconsulting.mx. El resultado sólo se muestra si el envío
+   se confirma. */
+var WEB3FORMS_ACCESS_KEY='37a22a38-2817-4df5-89a1-053920267cea';
+
+var D=JSON.parse(document.getElementById('vg-data').textContent);
+var P=D.partes, COMP=D.componentes, IND=D.industrias;
+var R={},NUM={},actual=-1,enviado=false;
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function letra(t){var m=t.match(/^([a-z])\)\s*(.*)$/);return m?[m[1],m[2]]:[null,t];}
+function q(s){return document.querySelector(s);}
+function pad2(n){return (n<10?'0':'')+n;}
+
+/* dentro de un iframe: la barra inferior no puede ser fija, y avisamos la altura al padre */
+var EMB=false;try{EMB=window.self!==window.top;}catch(e){EMB=true;}
+if(EMB) document.documentElement.classList.add('embedded');
+function altura(){if(!EMB)return;try{parent.postMessage({flintDiagnosticoHeight:document.documentElement.scrollHeight},'*');}catch(e){}}
+if(EMB&&window.ResizeObserver) new ResizeObserver(altura).observe(document.body);
+
+var CHECK='<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+var BROTE='<svg viewBox="0 0 24 24"><path d="M12 21v-9"/><path d="M12 12c0-4 3-7 8-7 0 4-3 7-8 7z"/><path d="M12 14c0-3-2.5-5.5-7-5.5 0 3 2.5 5.5 7 5.5z"/></svg>';
+var GRAD=[['#00AEEF','#062435'],['#5FD0F7','#07324A'],['#00AEEF','#1B2A33'],['#BFE9FA','#0A5C80'],['#0A5C80','#00AEEF'],['#00AEEF','#3A3A3A']];
+/* intro: ocho componentes, sin revelar pesos */
+q('#rejilla').innerHTML=COMP.map(function(c,i){
+  return '<div class="celda sub-glass"><div class="k">'+pad2(i+1)+'</div><h3>'+esc(c.nombre)+'</h3><p>'+esc(c.def)+'</p></div>';}).join('');
+
+/* preguntas de cinco en cinco, con el encabezado de su sección */
+function opsHtml(key,opciones,multi){
+  return '<div class="ops">'+opciones.map(function(o,oi){var l=letra(o);
+    return '<button type="button" class="op" data-k="'+key+'" data-i="'+oi+'"'+(multi?' data-multi="1" aria-pressed="false"':'')+
+      '><span class="mk">'+(multi||!l[0]?CHECK:esc(l[0]))+'</span><span class="txt">'+esc(l[1])+'</span></button>';
+  }).join('')+'</div>';
+}
+function qHtml(x,j){
+  var h='<div class="q" data-q="'+x.n+'" style="--i:'+j+'"><div class="q-top"><span class="q-num">'+pad2(x.n)+'</span><div style="flex:1">'+
+     '<p class="q-text">'+esc(x.stem)+'</p>';
+  if(x.nota)  h+='<p class="nota">'+esc(x.nota)+'</p>';
+  if(x.instr) h+='<p class="instr">'+esc(x.instr)+'</p>';
+  h+='</div></div><div class="q-body">';
+  if(x.tipo==='opciones'){
+    h+=opsHtml(x.n,x.opciones,x.multi);
+  } else if(x.tipo==='subs'){
+    x.subs.forEach(function(sb,bi){ h+='<p class="subtit">'+esc(sb.label)+'</p>'+opsHtml(x.n+'-'+bi,sb.opciones,false); });
+  } else if(x.tipo==='numerica'){
+    h+='<div class="campos">'+x.campos.map(function(c,ci){
+      return '<div class="campo"><label for="n'+x.n+'-'+ci+'">'+esc(c)+' (USD)</label><div class="pesos"><span class="sig">$</span>'+
+      '<input type="text" inputmode="decimal" id="n'+x.n+'-'+ci+'" data-num="'+x.rol+'-'+ci+'" placeholder="Ej. 430,000"></div></div>';
+    }).join('')+'</div><p class="moneda">En dólares, no en pesos. Si tu contabilidad está en pesos, conviértelas con el tipo de cambio de cierre de cada ejercicio.</p>';
+  } else {
+    h+='<textarea data-txt="'+x.n+'" aria-label="Respuesta a la pregunta '+x.n+'" placeholder="Escribe tu respuesta"></textarea>';
+  }
+  return h+'</div></div>';
+}
+var POR=5, QL=[], PAG=0;
+P.forEach(function(p,pi){p.preguntas.forEach(function(x,xi){QL.push({x:x,pi:pi,xi:xi});});});
+var NPG=Math.ceil(QL.length/POR), TOTQ=QL.length;
+(function(){
+  var h='<section class="panel" id="p-q"><div class="skew"><div class="glass pad">';
+  for(var k=0;k<NPG;k++){
+    var items=QL.slice(k*POR,(k+1)*POR);
+    h+='<div class="pagina" data-pg="'+k+'">';
+    items.forEach(function(it,j){ h+=qHtml(it.x,j); });
+    h+='</div>';
+  }
+  h+='</div></div><div class="nav fija"><button class="btn back" data-atras><span aria-hidden="true">←</span><span class="lbl">Regresar</span></button>'+
+     '<span class="nav-hint" data-faltan></span>'+
+     '<button class="btn main" data-sig><span class="t">Siguiente</span> <span class="arr" aria-hidden="true">→</span></button></div></section>';
+  q('#paneles').innerHTML=h;
+})();
+
+/* riel: un segmento por sección (se llena según lo contestado) + datos */
+q('#rail').innerHTML=P.map(function(){return '<div class="rail-seg"><i></i></div>';}).join('')+'<div class="rail-seg"><i></i></div>';
+var SEGS=document.querySelectorAll('.rail-seg i');
+function riel(estado,fracs,resp){
+  SEGS.forEach(function(s,k){
+    var w=0;
+    if(estado===0) w=k<P.length?Math.round((fracs[k]||0)*100):0;
+    else if(estado>0) w=(k<P.length||estado===2)?100:0;
+    s.style.width=w+'%';
+  });
+  var t=q('#paso-txt');
+  if(estado<0) t.textContent='Diagnóstico';
+  else if(estado===0) t.innerHTML='<b>'+resp+'</b> / '+TOTQ;
+  else if(estado===1) t.textContent='Tus datos';
+  else t.textContent='Resultado';
+}
+function subir(){
+  window.scrollTo(0,0);
+  if(EMB){try{parent.postMessage({flintScrollTop:true},'*');}catch(e){}}
+  setTimeout(altura,50);
+}
+function mostrar(id){
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});
+  document.getElementById(id).classList.add('on');
+  subir();
+}
+
+/* pendientes: bloquea avance */
+function falta(x){
+  if(x.tipo==='opciones') return !x.multi&&!R[x.n];
+  if(x.tipo==='subs') return x.subs.some(function(sb,bi){return !R[x.n+'-'+bi];});
+  if(x.tipo==='numerica') return x.campos.some(function(c,ci){return NUM[x.rol+'-'+ci]==null;});
+  return !(R['t'+x.n]&&R['t'+x.n].txt.trim());
+}
+function tieneMulti(n){for(var k in R){if(R[k]&&k.indexOf(n+'#')===0)return true;}return false;}
+function enPagina(){return QL.slice(PAG*POR,(PAG+1)*POR);}
+function pinta(){
+  var fracs=P.map(function(){return [0,0];}),resp=0;
+  QL.forEach(function(it){
+    var f=falta(it.x), ok=it.x.multi?tieneMulti(it.x.n):!f;
+    if(!it.x.multi){fracs[it.pi][1]++; if(!f)fracs[it.pi][0]++;}
+    if(!f) resp++;
+    var d=q('#p-q .q[data-q="'+it.x.n+'"]');
+    if(d){d.classList.toggle('ok',ok); if(!f) d.classList.remove('pend');}
+  });
+  var k=enPagina().filter(function(it){return falta(it.x);}).length;
+  var el=q('#p-q [data-faltan]'),b=q('#p-q [data-sig]'),ult=PAG===NPG-1;
+  if(el){el.innerHTML='Página '+(PAG+1)+' de '+NPG+' · '+(k?'Faltan <b>'+k+'</b>':'Completa');el.classList.toggle('done',!k);}
+  if(b){b.querySelector('.t').textContent=ult?'Ver mi resultado':'Siguiente';
+    b.classList.toggle('off',k>0);b.setAttribute('aria-disabled',k>0?'true':'false');}
+  riel(0,fracs.map(function(f){return f[1]?f[0]/f[1]:1;}),resp);
+}
+function marcaPend(){
+  var primero=null;
+  enPagina().forEach(function(it){
+    var d=q('#p-q .q[data-q="'+it.x.n+'"]'), malo=falta(it.x);
+    d.classList.toggle('pend',malo);
+    if(malo&&!primero) primero=d;
+  });
+  if(primero) primero.scrollIntoView({block:'center',behavior:'smooth'});
+}
+function pagina(k){
+  PAG=Math.max(0,Math.min(NPG-1,k));
+  document.querySelectorAll('#p-q .pagina').forEach(function(pg){pg.classList.toggle('on',+pg.dataset.pg===PAG);});
+  pinta();subir();
+}
+/* actual: -1 intro · 0 preguntas · 1 datos · 2 resultado */
+function irA(i){
+  actual=i;
+  if(i<0){mostrar('p-intro');riel(-1);return;}
+  if(i===0){mostrar('p-q');pagina(PAG);return;}
+  /* el score NO se calcula ni se pinta aquí: sólo después de enviar */
+  if(enviado){actual=2;mostrar('p-res');riel(2);}
+  else{mostrar('p-gate');riel(1);}
+}
+q('#empezar').addEventListener('click',function(){irA(0);});
+document.addEventListener('click',function(e){
+  var op=e.target.closest('.op');
+  if(op){
+    var k=op.dataset.k,i=+op.dataset.i;
+    if(op.dataset.multi){op.classList.toggle('sel');var on=op.classList.contains('sel');
+      op.setAttribute('aria-pressed',on);R[k+'#'+i]=on?{i:i}:null;}
+    else{op.parentNode.querySelectorAll('.op').forEach(function(o){o.classList.remove('sel');});
+         op.classList.add('sel');R[k]={i:i};}
+    if(actual===0)pinta();
+    return;
+  }
+  var s=e.target.closest('[data-sig]');
+  if(s){ if(s.classList.contains('off')){marcaPend();return;}
+    if(PAG<NPG-1) pagina(PAG+1); else irA(1); return;}
+  if(e.target.closest('[data-atras]')){
+    if(actual===0&&PAG>0) pagina(PAG-1);
+    else if(actual===1) irA(0);
+    else irA(-1);
+  }
+});
+document.addEventListener('input',function(e){
+  var t=e.target;
+  if(t.dataset&&t.dataset.num){
+    /* en México la coma separa miles y el punto decimales: "1.5" no debe guardarse como 15 */
+    var s=t.value.replace(/[^\d.,]/g,'').replace(/,/g,'');
+    var pp=s.split('.'); if(pp.length>2) s=pp[0]+'.'+pp.slice(1).join('');
+    var nn=parseFloat(s), ent=isFinite(nn)?Math.round(nn):null;
+    NUM[t.dataset.num]=ent;
+    /* no se reformatea mientras el usuario está escribiendo los decimales */
+    if(s===''){t.value='';}else if(!/\.\d*$/.test(s)){t.value=ent.toLocaleString('es-MX');}}
+  if(t.dataset&&t.dataset.txt) R['t'+t.dataset.txt]={txt:t.value};
+  if(actual===0)pinta();
+});
+/* al salir del campo se muestra exactamente la cifra que entendió el modelo */
+document.addEventListener('blur',function(e){
+  var t=e.target;
+  if(t&&t.dataset&&t.dataset.num){
+    var v=NUM[t.dataset.num];
+    t.value=(v==null||!isFinite(v))?'':v.toLocaleString('es-MX');
+  }
+},true);
+
+/* calculo */
+function industriaQ(){var qi=null;P.forEach(function(p){p.preguntas.forEach(function(x){if(x.industria)qi=x.n;});});return qi;}
+function industria(){var qi=industriaQ();return (qi!=null&&R[qi])?IND[R[qi].i]:null;}
+function calc(){
+  var acc={};
+  COMP.forEach(function(c){acc[c.nombre]={a:0,w:0};});
+  P.forEach(function(p){p.preguntas.forEach(function(x){
+    var t=acc[x.comp]; if(!t) return;
+    if(x.tipo==='opciones'&&x.w!=null&&x.pts){t.w+=x.w;var r=R[x.n];if(r)t.a+=x.pts[r.i]*x.w;}
+    else if(x.tipo==='subs'){x.subs.forEach(function(sb,bi){t.w+=sb.w;var r=R[x.n+'-'+bi];if(r)t.a+=sb.pts[r.i]*sb.w;});}
+  });});
+  /* componente derivado: margen EBITDA propio contra el margen típico de la industria */
+  COMP.forEach(function(c){
+    if(!c.derivada)return; var t=acc[c.nombre]; if(!t)return;
+    var d=c.derivada; t.w+=d.w;
+    var ind=industria();
+    var ve=prom('ventas'), eb=prom('ebitda');
+    if(ve&&eb&&ind&&ind.margen>0){
+      var dif=(eb/ve-ind.margen)/ind.margen, i=0;
+      while(i<d.cortes.length&&dif>d.cortes[i])i++;
+      t.a+=d.pts[i]*d.w;
+    }
+  });
+  var comps=COMP.map(function(c){var t=acc[c.nombre];
+    return {nombre:c.nombre,def:c.def,peso:c.peso,acc:c.acc,fort:c['for'],pct:t.w?t.a/t.w:0};});
+  var total=comps.reduce(function(s,c){return s+c.pct*c.peso/100;},0);
+  var ex=0;
+  P.forEach(function(p){p.preguntas.forEach(function(x){
+    if(x.extra){var r=R[x.n];if(r)ex+=x.extra[r.i]||0;}});});
+  total=Math.max(0,Math.min(100,total));
+  return {comps:comps,total:total,extra:ex};
+}
+function prom(rol){var v=[0,1,2].map(function(i){return NUM[rol+'-'+i];})
+  .filter(function(x){return typeof x==='number'&&x>0;});
+  return v.length?v.reduce(function(a,b){return a+b;},0)/v.length:null;}
+function mxn(n){if(n==null)return 'N/D';
+  if(n>=1e6)return '$'+(n/1e6).toLocaleString('es-MX',{maximumFractionDigits:1})+' M';
+  return '$'+Math.round(n).toLocaleString('es-MX');}
+
+/* semáforo: 0-30 rojo · 31-69 amarillo · 70-100 verde (sobre el número redondeado que se muestra)
+   [color, color claro, etiqueta, color de texto sobre blanco] */
+var SEMAFORO={fuerte:['#12B76A','#5EF0A6','Fortaleza','#067A45'],medio:['#FFB400','#FFD966','Atención','#A36F00'],debil:['#FF1F3D','#FF7A8A','Prioridad','#D10024']};
+function banda(p){p=Math.round(p);return p>=70?'fuerte':p>30?'medio':'debil';}
+
+var BTAM=D.bandas,PISO=D.piso,TECHO=D.techo;
+function banda_tam(eb){if(!eb)return null;
+  for(var i=0;i<BTAM.length;i++){if(eb>=BTAM[i][0]&&eb<=BTAM[i][1])return BTAM[i];}
+  return null;}
+function motivo(eb,ind,qi){
+  if(!eb) return 'Captura tus ventas y tu EBITDA para ver la estimación de valor.';
+  if(qi==null||!R[qi]) return 'Elige tu industria para ver la estimación de valor.';
+  if(ind&&ind.rel===0) return ind.nota||'';
+  if(eb<0) return 'Con EBITDA negativo este diagnóstico no estima valor por múltiplos. '+
+    'Tu calificación de los ocho componentes sí aplica y el valor lo revisamos contigo en la sesión.';
+  if(eb>TECHO) return 'Tu EBITDA está arriba del rango que estima este diagnóstico. A ese tamaño la '+
+    'valuación se hace con empresas comparables y no con bandas por tamaño. Tu calificación sí aplica '+
+    'y el valor lo revisamos contigo en la sesión.';
+  if(eb<PISO) return 'Tu EBITDA está abajo del rango que estima este diagnóstico. Tu calificación de '+
+    'los ocho componentes sí aplica y el valor lo revisamos contigo en la sesión.';
+  return null;}
+/* el escenario potencial sube los dos componentes más débiles al promedio de los otros seis */
+function potencial(c){
+  var v=c.comps.map(function(x){return x.pct;}).sort(function(a,b){return a-b;});
+  var prom6=v.slice(2).reduce(function(a,b){return a+b;},0)/(v.length-2);
+  var corte=v[1], usados=0;
+  return c.comps.reduce(function(s,x){
+    var p=x.pct; if(p<=corte&&usados<2&&p<prom6){p=prom6;usados++;}
+    return s+p*x.peso/100;},0);}
+
+var TIERS=[
+ {min:80,h:'Pocas empresas llegan <em>a este nivel</em>',
+  m:'Tu resultado no depende de una sola persona ni de un solo cliente, y eso es exactamente lo que un comprador paga. Lo que sigue es mantenerlo y elegir el momento.'},
+ {min:60,h:'Buena operación, <em>valor todavía descontado</em>',
+  m:'El negocio funciona. Lo que todavía no está resuelto es cuánto de ese resultado sigue en pie sin ti y sin tus relaciones actuales. Ahí es donde el comprador ajusta el precio.'},
+ {min:40,h:'La operación está resuelta, <em>pero aún hay trabajo por hacer</em>',
+  m:'La empresa genera resultados, pero buena parte de ellos depende de ti y de un número reducido de clientes o proveedores. Mientras eso no cambie, el precio lo refleja.'},
+ {min:0, h:'Hoy el negocio <em>depende de ti para existir</em>',
+  m:'La mayor parte del valor que ves en tus números desaparecería sin ti. Es el punto de partida más común, y el que más rápido mejora cuando se trabaja en orden.'}];
+
+/* valor: mismo cálculo del original (bandas por tamaño × industria), para pantalla y correo */
+function valor(c){
+  var qi=industriaQ(),eb=prom('ebitda'),vt=prom('ventas'),ind=industria();
+  var bnd=banda_tam(eb), noAplica=motivo(eb,ind,qi);
+  if(!noAplica&&bnd&&ind&&ind.rel>0){
+    var lo_m=bnd[2]*ind.rel, hi_m=bnd[3]*ind.rel;
+    function mult(s){return lo_m+(Math.max(0,Math.min(100,s))/100)*(hi_m-lo_m);}
+    var m0=mult(c.total), med_m=(lo_m+hi_m)/2;
+    return {ok:true,eb:eb,vt:vt,ind:ind,m0:m0,v0:eb*m0,lo:eb*lo_m,hi:eb*hi_m,med:eb*med_m,v8:eb*mult(potencial(c))};
+  }
+  return {ok:false,motivo:noAplica||'Necesitamos tu EBITDA de los últimos tres ejercicios y tu industria.'};
+}
+
+function radar(comps){
+  var svg=q('#radar'),cx=240,cy=226,Rr=168,n=comps.length,h='';
+  function pt(i,r){var a=-Math.PI/2+i*2*Math.PI/n;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];}
+  [.25,.5,.75,1].forEach(function(f){
+    h+='<polygon points="'+comps.map(function(_,i){return pt(i,Rr*f).join(',');}).join(' ')+'" fill="'+(f===1?'rgba(255,255,255,.025)':'none')+'" stroke="rgba(255,255,255,'+(f===1?.22:.09)+')" stroke-width="1"/>';});
+  comps.forEach(function(_,i){var p=pt(i,Rr);h+='<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0]+'" y2="'+p[1]+'" stroke="rgba(255,255,255,.09)"/>';});
+  var poly=comps.map(function(c,i){return pt(i,Rr*Math.max(.04,c.pct/100)).join(',');}).join(' ');
+  h+='<g class="poly"><polygon points="'+poly+'" fill="rgba(0,176,240,.26)" stroke="#33C6F7" stroke-width="2.5" stroke-linejoin="round" style="filter:drop-shadow(0 0 12px rgba(0,176,240,.55))"/>';
+  comps.forEach(function(c,i){var p=pt(i,Rr*Math.max(.04,c.pct/100));
+    h+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="6" fill="'+SEMAFORO[banda(c.pct)][0]+'" stroke="#111214" stroke-width="2.5"/>';});
+  h+='</g>';
+  /* etiqueta: número grande arriba y nombre debajo; abajo del radar se invierte para no chocar */
+  comps.forEach(function(c,i){
+    var p=pt(i,Rr+34),w=c.nombre.split(' '),mid=Math.ceil(w.length/2),l1=w.slice(0,mid).join(' '),l2=w.slice(mid).join(' ');
+    var anc=Math.abs(p[0]-cx)<10?'middle':(p[0]>cx?'start':'end');
+    var col=SEMAFORO[banda(c.pct)][1], abajo=p[1]>cy+Rr*.5, arriba=p[1]<cy-Rr*.5;
+    var alto=30+(l2?40:20), y0=arriba?p[1]-alto+18:abajo?p[1]+12:p[1]-alto/2+14;
+    h+='<text x="'+p[0]+'" y="'+(y0+10)+'" text-anchor="'+anc+'">'+
+       '<tspan class="v" x="'+p[0]+'" style="fill:'+col+'">'+Math.round(c.pct)+'</tspan>'+
+       '<tspan x="'+p[0]+'" dy="26">'+esc(l1)+'</tspan>'+(l2?'<tspan x="'+p[0]+'" dy="20">'+esc(l2)+'</tspan>':'')+'</text>';
+  });
+  svg.innerHTML=h;svg.classList.remove('on');
+  setTimeout(function(){svg.classList.add('on');},350);
+}
+
+/* un anillo por componente: el arco se llena y la cifra cuenta hasta el score */
+function anillos(comps){
+  var R0=44,C=2*Math.PI*R0;
+  q('#r-pilares').innerHTML=comps.map(function(x){
+    var bb=SEMAFORO[banda(x.pct)];
+    return '<div class="anillo"><div class="an-aro"><svg viewBox="0 0 104 104" aria-hidden="true">'+
+      '<circle cx="52" cy="52" r="'+R0+'" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="5"/>'+
+      '<circle class="arc" cx="52" cy="52" r="'+R0+'" fill="none" stroke="'+bb[0]+'" stroke-width="5" stroke-linecap="round" '+
+        'stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+C.toFixed(1)+'" data-o="'+(C*(1-Math.max(1.5,x.pct)/100)).toFixed(1)+'" '+
+        'style="filter:drop-shadow(0 0 6px '+bb[0]+'99)"/></svg>'+
+      '<b data-v="'+Math.round(x.pct)+'">0</b></div>'+
+      '<div class="an-nm">'+esc(x.nombre)+'</div>'+
+      '<div class="an-chip" style="color:'+bb[1]+'"><i></i>'+bb[2]+'</div>'+
+      '<p class="an-def">'+esc(x.def)+'</p></div>';
+  }).join('');
+  var items=document.querySelectorAll('#r-pilares .anillo');
+  setTimeout(function(){items.forEach(function(it,i){setTimeout(function(){
+    var arc=it.querySelector('.arc'),b=it.querySelector('b'),fin=+b.dataset.v,t0=null;
+    arc.style.strokeDashoffset=arc.dataset.o;
+    (function cuenta(ts){if(!ts)return requestAnimationFrame(cuenta);if(!t0)t0=ts;
+      var k=Math.min(1,(ts-t0)/1500);b.textContent=Math.round(fin*(1-Math.pow(1-k,4)));
+      if(k<1)requestAnimationFrame(cuenta);})();
+  },i*90);});},700);
+}
+
+function render(nombre,empresa){
+  var c=calc(),sc=Math.round(c.total),t=TIERS.find(function(x){return sc>=x.min;});
+  var b=SEMAFORO[banda(sc)];
+  q('#r-eyebrow').textContent='Tu diagnóstico'+(empresa?' · '+empresa:'');
+  q('#r-tit').innerHTML=t.h;
+  q('#r-msg').textContent=t.m;
+  var chip=q('#r-chip');chip.style.color=b[0];chip.querySelector('span').textContent=b[2];
+  q('#aro-s1').setAttribute('stop-color',b[0]);q('#aro-s2').setAttribute('stop-color',b[1]);
+  /* anillo: rejilla que crece desde el centro, trazo con brillo y un punto de luz en la punta */
+  var C=2*Math.PI*94, arc=q('#aro-arc'), punta=q('#aro-punta'), aro=q('.aro'), el=q('#r-score'), t0=null;
+  arc.setAttribute('stroke-dasharray',C.toFixed(1));arc.setAttribute('stroke-dashoffset',C.toFixed(1));
+  arc.style.filter='drop-shadow(0 0 7px '+b[0]+')';
+  punta.setAttribute('stroke',b[0]);punta.style.filter='drop-shadow(0 0 8px '+b[0]+')';punta.setAttribute('opacity','0');
+  q('#aro-pulso').setAttribute('stroke',b[0]);aro.style.setProperty('--brillo',b[0]);
+  aro.classList.remove('on','fin');aro.getBoundingClientRect();el.textContent='0';
+  setTimeout(function(){aro.classList.add('on');},80);
+  function cuenta(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/1900),e=1-Math.pow(1-k,4),val=sc*e,ang=2*Math.PI*val/100;
+    el.textContent=Math.round(val);
+    arc.setAttribute('stroke-dashoffset',(C*(1-val/100)).toFixed(2));
+    punta.setAttribute('cx',(107+94*Math.cos(ang)).toFixed(2));punta.setAttribute('cy',(107+94*Math.sin(ang)).toFixed(2));
+    punta.setAttribute('opacity',sc>0?'1':'0');
+    if(k<1)requestAnimationFrame(cuenta);else aro.classList.add('fin');}
+  setTimeout(function(){requestAnimationFrame(cuenta);},450);
+
+  /* valor */
+  var v=valor(c);
+  if(v.ok){
+    q('#v-escala').style.display='';
+    q('#v-hoy').textContent=mxn(v.v0);
+    q('#v-hoy-nt').textContent='EBITDA promedio de '+mxn(v.eb)+' × '+v.m0.toFixed(1)+'x'+
+      (v.vt?' · margen de '+(v.eb/v.vt*100).toFixed(1)+'%':'');
+    q('#v-pot').textContent=mxn(v.v8);
+    q('#v-pot-nt').textContent = v.v8>v.v0? ('Son '+mxn(v.v8-v.v0)+' más, sin vender una sola unidad extra.')
+                                        : 'Ya estás por encima de ese nivel.';
+    q('#e-q1').textContent=mxn(v.lo);q('#e-med').textContent=mxn(v.med);q('#e-q3').textContent=mxn(v.hi);
+    var pos=v.hi>v.lo?(v.v0-v.lo)/(v.hi-v.lo)*100:50, pm=v.hi>v.lo?(v.med-v.lo)/(v.hi-v.lo)*100:50;
+    q('#e-tramo').style.width='0';q('#e-aguja').style.left='0';
+    q('#e-tick').style.left='calc('+pm+'% - 1px)';
+    setTimeout(function(){q('#e-tramo').style.width=pos+'%';q('#e-aguja').style.left=pos+'%';},450);
+  }else{
+    q('#v-hoy').textContent='Sin estimación';
+    q('#v-hoy-nt').textContent=v.motivo;
+    q('#v-pot').textContent='N/D';q('#v-pot-nt').textContent='';
+    q('#v-escala').style.display='none';
+  }
+
+  radar(c.comps);
+
+  anillos(c.comps);
+
+  var ord=c.comps.slice().sort(function(a,b){return a.pct-b.pct;});
+  function li(a,k){return a.map(function(x){
+    return '<li><div><b>'+esc(x.nombre)+'</b> · '+esc(k==='p'?x.acc:x.fort)+
+      '<small>'+Math.round(x.pct)+' de 100</small></div></li>';}).join('');}
+  q('#r-prio').innerHTML=li(ord.slice(0,3),'p');
+  q('#r-fort').innerHTML=li(ord.slice(-3).reverse(),'f');
+
+  /* banner de agendar: las 3 prioridades y, si hay estimación, lo que podrían valer */
+  var pr=ord.slice(0,3), gana=v.ok?v.v8-v.v0:0;
+  q('#cta-tit').innerHTML = gana>0 ? 'Resolver tus prioridades podría sumar <em>'+mxn(gana)+'</em> al valor de tu empresa'
+    : banda(pr[0].pct)=='fuerte' ? 'Tus 3 áreas con <em>más margen de mejora</em>'
+    : 'Estas 3 áreas le están <em>quitando valor</em> a tu empresa';
+  q('#cta-chips').innerHTML=pr.map(function(x){var sb=SEMAFORO[banda(x.pct)];
+    return '<div class="cta-chip" style="background:'+sb[0]+'12;border-color:'+sb[0]+'55"><i style="background:'+sb[0]+';box-shadow:0 0 10px '+sb[0]+'"></i>'+
+      '<span>'+esc(x.nombre)+'</span><b style="color:'+sb[3]+'">'+Math.round(x.pct)+'</b></div>';}).join('');
+}
+
+/* ====== FORMULARIO DEL LEAD ====== */
+function respuestasTexto(){
+  var out=[];
+  P.forEach(function(p){
+    out.push(p.titulo.toUpperCase());
+    p.preguntas.forEach(function(x){
+      var r='Sin respuesta';
+      if(x.tipo==='opciones'){
+        if(x.multi){var s=x.opciones.filter(function(_,i){return R[x.n+'#'+i];});if(s.length)r=s.join(', ');}
+        else if(R[x.n]) r=x.opciones[R[x.n].i];
+      }else if(x.tipo==='subs'){
+        r=x.subs.map(function(sb,bi){var a=R[x.n+'-'+bi];return sb.label+' '+(a?sb.opciones[a.i]:'Sin respuesta');}).join(' | ');
+      }else if(x.tipo==='numerica'){
+        r=x.campos.map(function(c,ci){var v=NUM[x.rol+'-'+ci];return c+': '+(v!=null?mxn(v):'N/D');}).join(' | ');
+      }else if(R['t'+x.n]) r=R['t'+x.n].txt.trim()||r;
+      out.push(pad2(x.n)+' · '+x.stem+'\n   → '+r);
+    });
+  });
+  return out.join('\n');
+}
+function campoMal(f,malo){var c=q('.campo[data-f="'+f+'"]');if(c)c.classList.toggle('bad',malo);return malo;}
+['g-nombre','g-empresa','g-correo','g-emp'].forEach(function(id){
+  q('#'+id).addEventListener(id==='g-emp'?'change':'input',function(){this.closest('.campo').classList.remove('bad');q('#gmsg').classList.remove('on');});});
+q('#g-ok').addEventListener('change',function(){q('#priv').classList.remove('bad');});
+
+var STRIPE_URL='https://buy.stripe.com/aFa3cv9sPaZYh0Lf4mfYY0r';
+q('#gform').addEventListener('submit',function(e){
+  e.preventDefault();
+  var lead={nombre:q('#g-nombre').value.trim(),empresa:q('#g-empresa').value.trim(),
+            empleados:q('#g-emp').value,correo:q('#g-correo').value.trim(),ok:q('#g-ok').checked};
+  var mal=false;
+  mal=campoMal('nombre',!lead.nombre)||mal;
+  mal=campoMal('empresa',!lead.empresa)||mal;
+  mal=campoMal('emp',!lead.empleados)||mal;
+  mal=campoMal('correo',!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(lead.correo))||mal;
+  q('#priv').classList.toggle('bad',!lead.ok);
+  if(mal||!lead.ok){
+    var m=q('#gmsg');m.textContent='Necesitamos tu nombre, empresa, número de empleados, un correo válido y tu aceptación del aviso de privacidad para enviarte el informe.';m.classList.add('on');
+    return;
+  }
+  if(q('#g-bot').checked) return;
+
+  var btn=q('#ver'),lbl=btn.querySelector('.t'),arr=btn.querySelector('.arr');
+  btn.disabled=true;lbl.textContent='Enviando…';arr.innerHTML='<span class="spin"></span>';
+  q('#gmsg').classList.remove('on');
+
+  var c=calc(),sc=Math.round(c.total),t=TIERS.find(function(x){return sc>=x.min;}),v=valor(c);
+  var payload={
+    access_key:WEB3FORMS_ACCESS_KEY,
+    subject:'Nuevo Value Growth Score: '+lead.empresa+' ('+lead.nombre+')',
+    from_name:'Value Growth Score · Flint',
+    replyto:lead.correo,
+    'Nombre':lead.nombre,
+    'Empresa':lead.empresa,
+    'Número de empleados':lead.empleados,
+    'Correo electrónico':lead.correo,
+    'Acepta Aviso de Privacidad':'Sí',
+    'Value Growth Score':sc+' / 100',
+    'Nivel':t.h.replace(/<[^>]+>/g,''),
+    'Score por componente':'\n'+c.comps.map(function(x){return x.nombre+': '+Math.round(x.pct)+' / 100';}).join('\n'),
+    'Estimación de valor':v.ok?('Hoy: '+mxn(v.v0)+' ('+v.m0.toFixed(1)+'x EBITDA promedio de '+mxn(v.eb)+') · Subiendo los dos componentes más débiles: '+mxn(v.v8)+
+                            ' · Rango: '+mxn(v.lo)+' a '+mxn(v.hi)+' · '+v.ind.n):('Sin estimación: '+v.motivo),
+    'Respuestas':'\n'+respuestasTexto()
+  };
+  fetch('https://api.web3forms.com/submit',{method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if(!d||!d.success) throw new Error((d&&d.message)||'Envío rechazado');
+      enviado=true;
+      /* el correo del lead viaja a Stripe para cruzar el pago con su diagnóstico */
+      q('#cta-btn').href=STRIPE_URL+'?prefilled_email='+encodeURIComponent(lead.correo);
+      q('#lock').classList.add('abierto');
+      setTimeout(function(){
+        render(lead.nombre,lead.empresa);
+        actual=2;mostrar('p-res');riel(2);
+        q('#lock').classList.remove('abierto');
+      },matchMedia('(prefers-reduced-motion:reduce)').matches?0:1100);
+    })
+    .catch(function(err){
+      console.error('[Value Growth] Web3Forms:',err);
+      var m=q('#gmsg');m.textContent='No pudimos enviar tus datos. Revisa tu conexión e inténtalo de nuevo; tu resultado se desbloquea en cuanto se confirme el envío.';m.classList.add('on');
+    })
+    .then(function(){btn.disabled=false;lbl.textContent='Desbloquear mi resultado';arr.textContent='→';});
+});
+
+q('#reiniciar').addEventListener('click',function(){
+  R={};NUM={};enviado=false;PAG=0;
+  document.querySelectorAll('.op.sel').forEach(function(o){o.classList.remove('sel');});
+  document.querySelectorAll('.q').forEach(function(d){d.classList.remove('ok','pend');});
+  document.querySelectorAll('input[data-num],textarea').forEach(function(i){i.value='';});
+  irA(-1);
+});
+document.querySelectorAll('.lk-col').forEach(function(col){
+  var d=[];for(var i=0;i<10;i++)d.push(Math.floor(Math.random()*10));
+  col.innerHTML='<i>'+d.concat(d).join('<br>')+'</i>';});
+(function(){var g='';[30,52,74].forEach(function(r){g+='<circle cx="107" cy="107" r="'+r+'" fill="none" stroke="rgba(255,255,255,.09)"/>';});
+  for(var i=0;i<16;i++){var a=i*Math.PI/8;g+='<line x1="'+(107+20*Math.cos(a)).toFixed(1)+'" y1="'+(107+20*Math.sin(a)).toFixed(1)+'" x2="'+(107+82*Math.cos(a)).toFixed(1)+'" y2="'+(107+82*Math.sin(a)).toFixed(1)+'" stroke="rgba(255,255,255,'+(i%2?.04:.08)+')"/>';}
+  q('#aro-rejilla').innerHTML=g;})();
+riel(-1);
+requestAnimationFrame(function(){requestAnimationFrame(function(){q('#p-intro .skew').classList.add('is-active');});});
+})();
+
+/* ═══ Embebido: barra de progreso fija e inicio desde Webflow ═══ */
+(function(){
+  if(!EMB) return;
+  var vp=null;
+  function fijar(){
+    var bar=document.querySelector('.topbar'), zona=document.querySelector('.shell');
+    if(!vp||!bar||!zona) return;
+    bar.style.transform='';
+    var natural=bar.getBoundingClientRect().top+window.scrollY;
+    var objetivo=vp.offset-vp.top;
+    var limite=zona.getBoundingClientRect().bottom+window.scrollY-bar.offsetHeight;
+    var d=Math.max(0,Math.min(Math.max(objetivo,natural),limite)-natural);
+    bar.style.transform=d>0?'translateY('+d+'px)':'';
+    bar.classList.toggle('is-stuck',d>0);
+  }
+  window.addEventListener('message',function(e){
+    if(!e.data) return;
+    if(e.data.flintViewport){vp=e.data.flintViewport;fijar();}
+    if(e.data.flintStart){var b=document.getElementById('empezar');if(b&&document.getElementById('p-intro').classList.contains('on'))b.click();}
+  });
+})();
+</script>
+</body>
+</html>
