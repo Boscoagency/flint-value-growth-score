@@ -591,8 +591,8 @@ html.embedded .topbar{position:static}
           <p>Tu calificación de Value Growth se compone de estos ocho componentes clave.</p>
           <ul class="leyenda">
             <li><i style="background:#FF1F3D"></i>Prioridad<span>0 a 30</span></li>
-            <li><i style="background:#FFB400"></i>Atención<span>31 a 60</span></li>
-            <li><i style="background:#12B76A"></i>Fortaleza<span>61 a 100</span></li>
+            <li><i style="background:#FFB400"></i>Atención<span>31 a 69</span></li>
+            <li><i style="background:#12B76A"></i>Fortaleza<span>70 a 100</span></li>
           </ul>
         </div>
         <div class="radar-box"><svg class="radar" id="radar" viewBox="-84 -24 648 506" role="img" aria-label="Perfil de valor por componente"></svg></div>
@@ -890,10 +890,10 @@ function mxn(n){if(n==null)return 'N/D';
   if(n>=1e6)return '$'+(n/1e6).toLocaleString('es-MX',{maximumFractionDigits:1})+' M';
   return '$'+Math.round(n).toLocaleString('es-MX');}
 
-/* semáforo: 0-30 rojo · 31-60 amarillo · 61-100 verde
+/* semáforo: 0-30 rojo · 31-69 amarillo · 70-100 verde (sobre el número redondeado que se muestra)
    [color, color claro, etiqueta, color de texto sobre blanco] */
 var SEMAFORO={fuerte:['#12B76A','#5EF0A6','Fortaleza','#067A45'],medio:['#FFB400','#FFD966','Atención','#A36F00'],debil:['#FF1F3D','#FF7A8A','Prioridad','#D10024']};
-function banda(p){return p>60?'fuerte':p>30?'medio':'debil';}
+function banda(p){p=Math.round(p);return p>=70?'fuerte':p>30?'medio':'debil';}
 
 var BTAM=D.bandas,PISO=D.piso,TECHO=D.techo;
 function banda_tam(eb){if(!eb)return null;
@@ -1053,7 +1053,7 @@ function render(nombre,empresa){
   /* banner de agendar: las 3 prioridades y, si hay estimación, lo que podrían valer */
   var pr=ord.slice(0,3), gana=v.ok?v.v8-v.v0:0;
   q('#cta-tit').innerHTML = gana>0 ? 'Resolver tus prioridades podría sumar <em>'+mxn(gana)+'</em> al valor de tu empresa'
-    : pr[0].pct>60 ? 'Tus 3 áreas con <em>más margen de mejora</em>'
+    : banda(pr[0].pct)=='fuerte' ? 'Tus 3 áreas con <em>más margen de mejora</em>'
     : 'Estas 3 áreas le están <em>quitando valor</em> a tu empresa';
   q('#cta-chips').innerHTML=pr.map(function(x){var sb=SEMAFORO[banda(x.pct)];
     return '<div class="cta-chip" style="background:'+sb[0]+'12;border-color:'+sb[0]+'55"><i style="background:'+sb[0]+';box-shadow:0 0 10px '+sb[0]+'"></i>'+
