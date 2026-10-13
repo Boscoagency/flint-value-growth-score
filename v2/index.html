@@ -122,6 +122,15 @@ h1 em,h2 em,h3 em,h4 em{font-style:italic;color:var(--cian)}
 .celda .k{width:40px;height:40px;border-radius:8px;background:var(--cian);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:600}
 .celda h3{font-family:var(--ui);font-size:19px;font-weight:500;color:var(--tinta);margin:18px 0 8px;line-height:1.25;letter-spacing:-.01em}
 .celda p{font-size:15px;color:var(--texto);line-height:1.55}
+/* Componentes de la intro en renglones compactos */
+#rejilla{display:block;border-top:1px solid var(--linea)}
+#rejilla .celda{display:grid;grid-template-columns:32px minmax(180px,250px) 1fr;column-gap:20px;align-items:center;padding:14px 4px;border:0;border-bottom:1px solid var(--linea);border-radius:0;box-shadow:none;background:none}
+#rejilla .celda:hover{transform:none;box-shadow:none;background:var(--niebla)}
+#rejilla .celda .k{width:30px;height:30px;border-radius:6px;font-size:12px}
+#rejilla .celda h3{margin:0;font-size:16px}
+#rejilla .celda p{margin:0;font-size:14.5px}
+@media(max-width:640px){#rejilla .celda{grid-template-columns:30px 1fr;row-gap:4px;column-gap:14px}#rejilla .celda p{grid-column:2}}
+html.embedded #p-intro .sect-title{margin-top:28px}
 .pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
 @media(max-width:760px){.pasos{grid-template-columns:1fr}}
 .paso{padding:28px 28px 28px 0;display:block;border:0;border-radius:0}
