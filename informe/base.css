@@ -98,7 +98,7 @@ html,body{width:1280px;font-family:var(--ui);color:var(--tinta);
 .pa-afir .n{font-size:16px;font-weight:500}
 .pa-afir .c{font-size:13px;color:var(--tenue);margin-top:4px;font-weight:300}
 .pa-ader{position:relative;overflow:hidden}
-.pa-ader img{width:100%;height:100%;object-fit:cover;object-position:52% 16%;display:block}
+.pa-ader{background:url(assets/jorge.jpg) 52% 16%/cover no-repeat}
 
 /* ---------- 3 · tablero ---------- */
 .pa-tab{padding:40px 64px 44px}
