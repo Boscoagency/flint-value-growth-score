@@ -1,0 +1,209 @@
+/* Value Growth · hoja de estilos del informe
+   Tipografías de Flint: Bebas Neue para titulares, Roboto para el cuerpo.
+   Colores de la marca y semáforo 0-30-70. */
+
+@font-face{font-family:'Bebas Neue';src:url('assets/bebas.woff2') format('woff2');font-weight:400;font-display:block}
+@font-face{font-family:'Roboto';src:url('assets/roboto-300.woff2') format('woff2');font-weight:300;font-display:block}
+@font-face{font-family:'Roboto';src:url('assets/roboto-400.woff2') format('woff2');font-weight:400;font-display:block}
+@font-face{font-family:'Roboto';src:url('assets/roboto-500.woff2') format('woff2');font-weight:500;font-display:block}
+@font-face{font-family:'Roboto';src:url('assets/roboto-700.woff2') format('woff2');font-weight:700;font-display:block}
+@font-face{font-family:'Roboto';src:url('assets/roboto-900.woff2') format('woff2');font-weight:900;font-display:block}
+
+:root{
+  --tinta:#0D0D0D; --papel:#FFFFFF; --niebla:#F5F6F8; --cianluz:#EAF7FD;
+  --linea:#E2E7EB; --lineaf:#C3CDD4; --grafito:#4F5A63; --tenue:#8593A0;
+  --cian:#0EB2ED; --ciantxt:#0E7FA8;
+  /* el semáforo de la marca */
+  --rojo:#EC0011; --amar:#FFBE31; --verde:#16AF57;
+  /* sobre blanco el ámbar y el verde vivos no alcanzan contraste para texto */
+  --rojotx:#D81B24; --amartx:#9A6D00; --verdetx:#147F42;
+  --oscuro:#0A0A0A; --oscurotxt:#C9D2D8;
+  --display:'Bebas Neue',Impact,sans-serif;
+  --ui:'Roboto',Arial,sans-serif;
+}
+
+@page{ size:13.333in 7.5in; margin:0 }
+
+/* CRÍTICO: sin esto el navegador tira los fondos al imprimir a PDF y el
+   informe sale en blanco. Probado: con esta línea el fondo se imprime aunque
+   el usuario no palomee "Gráficos de fondo" en el diálogo de impresión. */
+*{box-sizing:border-box;margin:0;padding:0;
+  -webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+html,body{width:1280px;font-family:var(--ui);color:var(--tinta);
+  -webkit-font-smoothing:antialiased}
+.hoja{width:1280px;height:720px;position:relative;overflow:hidden;
+  background:var(--papel);page-break-after:always;break-after:page}
+.hoja:last-child{page-break-after:auto;break-after:auto}
+
+/* El difuminado de las propuestas de Flint. Base azul marino muy oscura más
+   un realce azul que entra desde la esquina inferior izquierda. Los tonos
+   están muestreados de la propuesta: #0B1632 en la luz, #060910 en la sombra. */
+.grad{background:
+  linear-gradient(225deg, rgba(6,9,16,0) 40%, rgba(20,80,158,.62) 100%),
+  linear-gradient(155deg, #0B1632 0%, #070C1C 52%, #060910 100%)}
+
+.disp{font-family:var(--display);font-weight:400;letter-spacing:.012em;line-height:.9}
+.eyebrow{font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;
+  font-weight:700;color:var(--tenue);margin-bottom:10px}
+.logo{height:52px;width:auto;flex:0 0 auto;align-self:flex-start;object-fit:contain}
+
+/* --c es el color del trazo o del relleno, --ct el del texto. El semáforo
+   nunca va solo de color: siempre lleva su número y su etiqueta escrita. */
+.verde{--c:var(--verde);--ct:var(--verdetx)}
+.amar {--c:var(--amar); --ct:var(--amartx)}
+.rojo {--c:var(--rojo); --ct:var(--rojotx)}
+.oscura .verde,.grad .verde{--ct:var(--verde)}
+.oscura .amar ,.grad .amar {--ct:var(--amar)}
+.oscura .rojo ,.grad .rojo {--ct:var(--rojo)}
+
+.pt{font-family:var(--display);line-height:.85;color:var(--ct)}
+.etq{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--ct)}
+.barra{height:8px;border-radius:4px;background:var(--linea);overflow:hidden}
+.barra i{display:block;height:100%;border-radius:4px;background:var(--c)}
+
+.marca{position:absolute;left:64px;top:38px;height:44px;width:auto}
+.marca.alta{top:33px;right:72px;left:auto;height:52px}
+.marca.der{left:auto;right:64px}
+.sello{position:absolute;right:26px;bottom:18px;font-size:9px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--tenue);font-weight:700}
+.oscura .sello,.grad .sello{color:#5E6E7A}
+
+/* ---------- 1 · portada ---------- */
+.pa-cover{display:grid;grid-template-columns:1fr 600px;height:100%}
+.pa-izq{padding:56px 0 48px 64px;display:flex;flex-direction:column;justify-content:space-between}
+.pa-tit{font-size:118px;color:var(--tinta);margin-top:26px}
+.pa-tit em{font-style:normal;color:var(--ciantxt)}
+.pa-sub{font-size:17px;color:var(--grafito);max-width:430px;line-height:1.6;
+  margin-top:20px;font-weight:300}
+.pa-meta{font-size:14.5px;line-height:1.75;color:var(--grafito);font-weight:300}
+.pa-meta b{font-weight:500;color:var(--tinta)}
+.pa-der{position:relative;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:4px}
+.pa-de{font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;
+  font-weight:700;color:#9DB0BD;margin-bottom:18px}
+.pa-leyenda{display:flex;gap:26px;margin-top:26px}
+.pa-leyenda .lg{display:flex;align-items:center;gap:8px;font-size:11px;
+  font-weight:700;letter-spacing:.08em;color:#9DB0BD}
+.pa-leyenda i{width:9px;height:9px;border-radius:50%;display:block}
+
+/* ---------- 2 · tu asesor ---------- */
+.pa-ase{display:grid;grid-template-columns:1fr 470px;height:100%}
+.pa-aizq{padding:54px 54px 48px 64px;display:flex;flex-direction:column}
+.pa-acpo{margin-top:34px;max-width:600px}
+.pa-atit{font-size:52px;color:var(--tinta);margin-top:14px}
+.pa-arol{font-size:14px;letter-spacing:.02em;color:var(--ciantxt);font-weight:500;margin-top:12px}
+.pa-acpo p{font-size:15px;line-height:1.76;color:var(--grafito);font-weight:300;margin-top:15px}
+.pa-afir{margin-top:auto;border-top:1px solid var(--linea);padding-top:19px}
+.pa-afir .n{font-size:16px;font-weight:500}
+.pa-afir .c{font-size:13px;color:var(--tenue);margin-top:4px;font-weight:300}
+.pa-ader{position:relative;overflow:hidden}
+.pa-ader img{width:100%;height:100%;object-fit:cover;object-position:52% 16%;display:block}
+
+/* ---------- 3 · tablero ---------- */
+.pa-tab{padding:40px 64px 44px}
+.pa-tab .eyebrow{color:#8FA0AC}
+.pa-tabtit{font-size:44px;color:#fff;margin-bottom:26px}
+.pa-rejilla{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+  grid-auto-rows:266px}
+.pa-card{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.10);
+  border-radius:12px;padding:22px 20px 20px;display:flex;flex-direction:column}
+.pa-card .nm{font-size:16px;font-weight:500;color:#fff;line-height:1.3}
+.pa-card .de{font-size:12.5px;line-height:1.55;color:#93A3AF;font-weight:300;margin-top:10px}
+.pa-card .num{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between}
+.pa-card .num .v{font-family:var(--display);font-size:54px;line-height:.8;color:var(--c)}
+.pa-card .num .e{font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  font-weight:700;color:var(--ct);padding-bottom:5px}
+.pa-card .bar{height:7px;border-radius:4px;background:rgba(255,255,255,.14);
+  overflow:hidden;margin-top:14px}
+.pa-card .bar i{display:block;height:100%;border-radius:4px;background:var(--c)}
+.pa-card .pe{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:700;color:#7C8C99;margin-top:9px}
+
+/* ---------- 4 · estimación de valor ---------- */
+.pa-val{padding:117px 64px 44px;display:flex;flex-direction:column;height:100%}
+.pa-vrule{flex:0 0 1px;height:1px;background:var(--tinta);margin:10px 0 0}
+.pa-vdos{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:26px}
+.pa-vcol{padding-right:46px}
+.pa-vcol+.pa-vcol{padding:0 0 0 46px;border-left:1px solid var(--linea)}
+.pa-vlab{font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  font-weight:700;color:var(--tenue)}
+.pa-vbig{display:flex;align-items:baseline;gap:6px;margin-top:12px}
+.pa-vbig .u{font-family:var(--display);font-size:34px;color:var(--c)}
+.pa-vbig .n{font-family:var(--display);font-size:76px;line-height:.85;color:var(--tinta)}
+.pa-vbig .m{font-family:var(--display);font-size:30px;color:var(--tinta)}
+.pa-vnt{font-size:14px;line-height:1.72;color:var(--grafito);font-weight:300;margin-top:16px}
+.pa-camp{margin-top:auto}
+
+/* ---------- 5 a 12 · una hoja por componente ---------- */
+.pa-det{display:grid;grid-template-columns:600px 1fr;height:100%}
+.pa-dizq{color:#fff;padding:52px 56px 44px;display:flex;flex-direction:column;
+  position:relative}
+.pa-dizq::after{content:'';position:absolute;right:0;top:0;bottom:0;width:1px;
+  background:rgba(255,255,255,.10)}
+.pa-dizq .eyebrow{color:#8FA0AC}
+.pa-dnum{font-family:var(--display);font-size:233px;line-height:.82;color:var(--c);
+  margin-top:6px}
+/* el bloque del centro queda centrado entre el logo y el pie */
+.pa-dmid{margin:auto 0}
+.pa-detq{font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:700;color:var(--ct);margin-top:22px}
+.pa-dbar{height:9px;border-radius:5px;background:rgba(255,255,255,.14);
+  overflow:hidden;margin-top:16px}
+.pa-dbar i{display:block;height:100%;border-radius:5px;background:var(--c)}
+.pa-descala{display:flex;justify-content:space-between;font-size:11px;
+  color:#7C8C99;font-weight:500;margin-top:8px}
+.pa-dpie{margin-top:auto;font-size:12.5px;color:#93A3AF;font-weight:300;line-height:1.6}
+.pa-dpie b{display:block;color:#fff;font-weight:500;margin-top:3px}
+.pa-dder{padding:144px 56px 44px;display:flex;flex-direction:column}
+.pa-dtit{font-size:66px;color:var(--tinta)}
+.pa-ddef{font-size:15px;color:var(--grafito);font-weight:300;margin-top:12px;line-height:1.6}
+.pa-bloque{margin-top:22px}
+.pa-bloque .k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:700;color:var(--ciantxt);display:flex;align-items:center;gap:10px}
+.pa-bloque .k i{width:22px;height:2px;background:var(--ciantxt);display:block}
+.pa-bloque p{font-size:14.5px;line-height:1.74;color:var(--grafito);
+  font-weight:300;margin-top:9px}
+.pa-caja{margin-top:30px;background:var(--cianluz);border-left:4px solid var(--cian);
+  padding:18px 22px}
+.pa-caja .k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:700;color:var(--ciantxt)}
+.pa-caja p{font-size:15px;line-height:1.6;color:var(--tinta);margin-top:7px;font-weight:400}
+
+/* ---------- 13 · aviso ---------- */
+.pa-av{padding:58px 64px 44px;display:flex;flex-direction:column;height:100%}
+.pa-avtit{font-size:48px;color:var(--tinta);margin-top:4px}
+.pa-avrule{height:1px;background:var(--tinta);margin-top:22px}
+.pa-avcols{display:grid;grid-template-columns:1fr 1fr;gap:46px;margin-top:26px}
+.pa-avcols p{font-size:14px;line-height:1.72;color:var(--grafito);font-weight:300;margin-bottom:14px}
+.pa-avpie{margin-top:auto;border-top:1px solid var(--linea);padding-top:18px}
+.pa-avpie .k{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--tenue);font-weight:700}
+.pa-avpie .v{font-size:16px;font-weight:500;margin-top:7px}
+.pa-avpie .f{font-size:12.5px;color:var(--tenue);margin-top:3px;font-weight:300}
+
+/* ---------- 14 · contraportada ---------- */
+.cf{color:#fff}
+.cf-logo{position:absolute;left:66px;top:48px;height:62px;width:auto}
+.cf-r1{position:absolute;left:300px;right:0;top:80px;height:1px;background:rgba(255,255,255,.17)}
+.cf-r2{position:absolute;left:66px;right:0;bottom:92px;height:1px;background:rgba(255,255,255,.17)}
+.cf-mapa{position:absolute;right:-118px;top:-72px;height:864px;width:auto}
+/* título, párrafo y leyenda en una sola columna, para que el hueco sea parejo */
+.cf-col{position:absolute;left:66px;top:152px;width:672px;
+  display:flex;flex-direction:column;gap:40px}
+.cf-tit{font-size:56px;color:#fff}
+.cf-txt{width:556px;font-size:15.5px;line-height:1.74;font-weight:300;color:#C6D4DE}
+.cf-txt b{font-weight:700;color:#fff}
+.cf-fila{display:flex;gap:17px;align-items:flex-start;margin-bottom:22px}
+.cf-fila:last-child{margin-bottom:0}
+.cf-pt{width:17px;height:17px;border-radius:50%;flex:0 0 auto;margin-top:2px;position:relative}
+.cf-pt::after{content:'';position:absolute;inset:-7px;border-radius:50%}
+.cf-pt.of{background:#00B0F0}
+.cf-pt.of::after{background:rgba(0,176,240,.498)}
+.cf-pt.pc{background:#002060}
+.cf-pt.pc::after{background:rgba(0,32,96,.498)}
+.cf-fila .t{font-size:14.5px;font-weight:700;color:#fff;margin-bottom:4px}
+.cf-fila .l{font-size:12.5px;line-height:1.5;font-weight:300;color:#9FB2BF}
+.cf-contacto{position:absolute;left:66px;bottom:42px;display:flex;gap:34px;align-items:center}
+.cf-contacto .l{display:flex;align-items:center;gap:10px;font-size:13px;color:#EAF2F7}
+.cf-contacto .ic{width:17px;height:17px;flex:0 0 auto}

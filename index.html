@@ -235,6 +235,24 @@ html.embedded #p-intro>.skew:first-child{display:none}
 .btn.back:hover{background:var(--niebla)}
 .btn-text{background:none;border:0;color:var(--texto);cursor:pointer;font-size:14px;font-weight:500;padding:8px 0;border-bottom:1px solid transparent}
 .btn-text:hover{color:var(--tinta);border-bottom-color:var(--tinta)}
+.download-dock{position:sticky;top:86px;z-index:90;display:flex;align-items:center;gap:12px;width:max-content;
+  max-width:calc(100vw - 48px);margin:-4px 0 18px auto;padding:10px 10px 10px 18px;
+  border-radius:16px;background:rgba(17,18,20,.92);border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 20px 45px rgba(0,0,0,.22);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.download-dock .copy{display:grid;gap:1px;color:#fff;min-width:0}
+.download-dock .copy b{font-size:13px;font-weight:600;line-height:1.2;color:#fff}
+.download-dock .copy span{font-size:12px;color:#A3A3A3;white-space:nowrap}
+.download-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 20px;
+  border:0;border-radius:12px;background:var(--cian);color:#fff;cursor:pointer;font-size:15px;font-weight:700;
+  box-shadow:0 12px 28px rgba(0,176,240,.34);transition:transform .2s var(--ease),background .2s var(--ease),box-shadow .2s var(--ease)}
+.download-btn:hover{background:#009FDA;transform:translateY(-1px);box-shadow:0 16px 34px rgba(0,176,240,.42)}
+.download-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.download-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+@media(max-width:720px){
+  .download-dock{top:74px;width:100%;max-width:none;margin:0 0 16px;padding:10px 10px 10px 14px}
+  .download-dock .copy span{display:none}
+  .download-btn{flex:1;padding:0 14px}
+}
 .spin{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
@@ -395,6 +413,7 @@ html.embedded #p-intro>.skew:first-child{display:none}
 
 .foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:34px;padding-top:22px;
   border-top:1px solid var(--linea);font-size:13px;color:var(--tenue)}
+.foot-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
 
 
 /* ═══ PÁGINAS DE CINCO PREGUNTAS ═══ */
@@ -578,6 +597,16 @@ html.embedded #p-intro>.skew:first-child{display:none}
 
 <!-- ═══ RESULTADO ═══ -->
 <section class="panel" id="p-res">
+  <div class="download-dock" aria-label="Descargar informe">
+    <div class="copy">
+      <b>Informe listo</b>
+      <span>PDF con tus 14 páginas</span>
+    </div>
+    <button class="download-btn" type="button" data-download-informe>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
+      Descargar PDF
+    </button>
+  </div>
   <div class="skew rin">
     <div class="glass pad hero-dark reporte">
       <div class="hero">
@@ -663,15 +692,18 @@ html.embedded #p-intro>.skew:first-child{display:none}
         <span class="lab">Sesión con un especialista de Flint</span>
         <div class="monto"><b>$200</b><span>USD</span></div>
         <div class="dur">60 minutos</div>
-        <a class="btn main" id="cta-btn" href="https://buy.stripe.com/aFa3cv9sPaZYh0Lf4mfYY0r" target="_blank" rel="noopener">Quiero resolver mis prioridades <span class="arr" aria-hidden="true">→</span></a>
-        <p class="fine">Al confirmar el pago se abre el calendario para que elijas el horario que te acomode.</p>
+        <a class="btn main" id="cta-btn" href="https://bookings.cloud.microsoft/book/FLINTCONSULTING1@flintconsulting.mx/?ismsaljsauthenabled" target="_blank" rel="noopener">Agendar llamada <span class="arr" aria-hidden="true">→</span></a>
+        <p class="fine">Después del pago, usa este enlace para elegir el horario que te acomode.</p>
       </div>
     </div>
   </div>
 
   <div class="foot">
     <span>Flint Consulting® · Value Growth Score · Estimación indicativa basada en múltiplos de industria</span>
-    <button class="btn-text" id="reiniciar">↻ Contestar de nuevo</button>
+    <div class="foot-actions">
+      <button class="btn-text" type="button" data-download-informe>Descargar informe PDF</button>
+      <button class="btn-text" id="reiniciar">↻ Contestar de nuevo</button>
+    </div>
   </div>
 </section>
 
@@ -962,6 +994,61 @@ function valor(c){
   return {ok:false,motivo:noAplica||'Necesitamos tu EBITDA de los últimos tres ejercicios y tu industria.'};
 }
 
+function usdPlano(n){
+  return n==null||!isFinite(n)?'N/D':Math.round(n).toLocaleString('en-US');
+}
+function usdMillones(n){
+  return n==null||!isFinite(n)?'N/D':(n/1e6).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function fechaInforme(){
+  return new Date().toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'});
+}
+function datosInforme(lead,c,v){
+  var total=Math.round(c.total),pot=Math.round(potencial(c)),ind=industria();
+  var vg={
+    empresa:lead.empresa,
+    contacto:lead.nombre,
+    asesor:'Jorge De la Rosa',
+    fecha:fechaInforme(),
+    industria:ind?ind.n.replace(/^[a-z]\)\s*/i,''):'Industria no especificada',
+    total:total,
+    potencial:pot,
+    comps:c.comps.map(function(x){return {n:x.nombre,p:Math.round(x.pct)};}),
+    maqueta:false
+  };
+  if(v.ok){
+    vg.valorAplica=true;
+    vg.ebitda=usdPlano(v.eb);
+    vg.valor=usdMillones(v.v0);
+    vg.valorPot=usdMillones(v.v8);
+    vg.rangoBajo=usdMillones(v.lo);
+    vg.rangoAlto=usdMillones(v.hi);
+    vg.multiplo=v.m0.toFixed(1)+'x';
+    vg.multiploPot=(v.v8/v.eb).toFixed(1)+'x';
+  }else{
+    vg.valorAplica=false;
+    vg.ebitda=usdPlano(prom('ebitda'));
+    vg.valor='N/D';
+    vg.valorPot='N/D';
+    vg.rangoBajo='N/D';
+    vg.rangoAlto='N/D';
+    vg.multiplo='N/D';
+    vg.multiploPot='N/D';
+    vg.motivoValor=v.motivo;
+  }
+  return vg;
+}
+function urlInforme(vg,imprimir){
+  var url=new URL('informe/informe.html',location.href);
+  if(imprimir) url.search='print=1';
+  url.hash=btoa(unescape(encodeURIComponent(JSON.stringify(vg))));
+  return url.href;
+}
+function abrirInforme(vg,imprimir){
+  var w=window.open(urlInforme(vg,imprimir),'_blank');
+  if(!w) alert('Permite las ventanas emergentes para abrir tu informe.');
+}
+
 function radar(comps){
   var svg=q('#radar'),cx=240,cy=226,Rr=168,n=comps.length,h='';
   function pt(i,r){var a=-Math.PI/2+i*2*Math.PI/n;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];}
@@ -1104,7 +1191,8 @@ function campoMal(f,malo){var c=q('.campo[data-f="'+f+'"]');if(c)c.classList.tog
   q('#'+id).addEventListener(id==='g-emp'?'change':'input',function(){this.closest('.campo').classList.remove('bad');q('#gmsg').classList.remove('on');});});
 q('#g-ok').addEventListener('change',function(){q('#priv').classList.remove('bad');});
 
-var STRIPE_URL='https://buy.stripe.com/aFa3cv9sPaZYh0Lf4mfYY0r';
+var BOOKING_URL='https://bookings.cloud.microsoft/book/FLINTCONSULTING1@flintconsulting.mx/?ismsaljsauthenabled';
+var ultimoInforme=null;
 q('#gform').addEventListener('submit',function(e){
   e.preventDefault();
   var lead={nombre:q('#g-nombre').value.trim(),empresa:q('#g-empresa').value.trim(),
@@ -1126,6 +1214,7 @@ q('#gform').addEventListener('submit',function(e){
   q('#gmsg').classList.remove('on');
 
   var c=calc(),sc=Math.round(c.total),t=TIERS.find(function(x){return sc>=x.min;}),v=valor(c);
+  var informe=datosInforme(lead,c,v),informeUrl=urlInforme(informe,false);
   var payload={
     access_key:WEB3FORMS_ACCESS_KEY,
     subject:'Nuevo Value Growth Score: '+lead.empresa+' ('+lead.nombre+')',
@@ -1138,19 +1227,23 @@ q('#gform').addEventListener('submit',function(e){
     'Acepta Aviso de Privacidad':'Sí',
     'Value Growth Score':sc+' / 100',
     'Nivel':t.h.replace(/<[^>]+>/g,''),
+    'Informe listo para PDF':informeUrl,
     'Score por componente':'\n'+c.comps.map(function(x){return x.nombre+': '+Math.round(x.pct)+' / 100';}).join('\n'),
     'Estimación de valor':v.ok?('Hoy: '+mxn(v.v0)+' ('+v.m0.toFixed(1)+'x EBITDA promedio de '+mxn(v.eb)+') · Subiendo los dos componentes más débiles: '+mxn(v.v8)+
                             ' · Rango: '+mxn(v.lo)+' a '+mxn(v.hi)+' · '+v.ind.n):('Sin estimación: '+v.motivo),
     'Respuestas':'\n'+respuestasTexto()
   };
-  fetch('https://api.web3forms.com/submit',{method:'POST',
+  var envio = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+    ? Promise.resolve({success:true,local:true})
+    : fetch('https://api.web3forms.com/submit',{method:'POST',
       headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
     .then(function(r){return r.json();})
+  envio
     .then(function(d){
       if(!d||!d.success) throw new Error((d&&d.message)||'Envío rechazado');
       enviado=true;
-      /* el correo del lead viaja a Stripe para cruzar el pago con su diagnóstico */
-      q('#cta-btn').href=STRIPE_URL+'?prefilled_email='+encodeURIComponent(lead.correo);
+      ultimoInforme=informe;
+      q('#cta-btn').href=BOOKING_URL;
       q('#lock').classList.add('abierto');
       setTimeout(function(){
         render(lead.nombre,lead.empresa);
@@ -1165,8 +1258,14 @@ q('#gform').addEventListener('submit',function(e){
     .then(function(){btn.disabled=false;lbl.textContent='Desbloquear mi resultado';arr.textContent='→';});
 });
 
+document.querySelectorAll('[data-download-informe]').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    if(ultimoInforme) abrirInforme(ultimoInforme,true);
+  });
+});
+
 q('#reiniciar').addEventListener('click',function(){
-  R={};NUM={};enviado=false;PAG=0;
+  R={};NUM={};enviado=false;ultimoInforme=null;PAG=0;
   document.querySelectorAll('.op.sel').forEach(function(o){o.classList.remove('sel');});
   document.querySelectorAll('.q').forEach(function(d){d.classList.remove('ok','pend');});
   document.querySelectorAll('input[data-num],textarea').forEach(function(i){i.value='';});
