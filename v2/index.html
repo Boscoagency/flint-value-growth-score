@@ -1175,7 +1175,7 @@ requestAnimationFrame(function(){requestAnimationFrame(function(){q('#p-intro .s
 
 /* ═══ Embebido: barra de progreso fija e inicio desde Webflow ═══ */
 (function(){
-  if(!EMB) return;
+  if(!document.documentElement.classList.contains("embedded")) return;
   var vp=null;
   function fijar(){
     var bar=document.querySelector('.topbar'), zona=document.querySelector('.shell');
