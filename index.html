@@ -644,7 +644,7 @@ html.embedded .topbar{position:static}
         <span class="lab">Sesión con un especialista de Flint</span>
         <div class="monto"><b>$200</b><span>USD</span></div>
         <div class="dur">60 minutos</div>
-        <a class="btn main" id="cta-btn" href="#">Quiero resolver mis prioridades <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn main" id="cta-btn" href="https://buy.stripe.com/aFa3cv9sPaZYh0Lf4mfYY0r" target="_blank" rel="noopener">Quiero resolver mis prioridades <span class="arr" aria-hidden="true">→</span></a>
         <p class="fine">Al confirmar el pago se abre el calendario para que elijas el horario que te acomode.</p>
       </div>
     </div>
@@ -1085,6 +1085,7 @@ function campoMal(f,malo){var c=q('.campo[data-f="'+f+'"]');if(c)c.classList.tog
   q('#'+id).addEventListener(id==='g-emp'?'change':'input',function(){this.closest('.campo').classList.remove('bad');q('#gmsg').classList.remove('on');});});
 q('#g-ok').addEventListener('change',function(){q('#priv').classList.remove('bad');});
 
+var STRIPE_URL='https://buy.stripe.com/aFa3cv9sPaZYh0Lf4mfYY0r';
 q('#gform').addEventListener('submit',function(e){
   e.preventDefault();
   var lead={nombre:q('#g-nombre').value.trim(),empresa:q('#g-empresa').value.trim(),
@@ -1129,6 +1130,8 @@ q('#gform').addEventListener('submit',function(e){
     .then(function(d){
       if(!d||!d.success) throw new Error((d&&d.message)||'Envío rechazado');
       enviado=true;
+      /* el correo del lead viaja a Stripe para cruzar el pago con su diagnóstico */
+      q('#cta-btn').href=STRIPE_URL+'?prefilled_email='+encodeURIComponent(lead.correo);
       q('#lock').classList.add('abierto');
       setTimeout(function(){
         render(lead.nombre,lead.empresa);
