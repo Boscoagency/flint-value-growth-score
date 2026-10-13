@@ -284,12 +284,49 @@
   ['#s1','#s2','#s3','#s4','#s13'].forEach(function(s){ q(s).textContent = SELLO; });
 
   /* con ?print=1 el navegador abre solo el diálogo de guardar como PDF */
+  /* El PDF se arma aquí mismo, hoja por hoja, en 1280×720 horizontal.
+     No se usa window.print(): en Windows (Edge, "Microsoft Print to PDF",
+     impresoras reales, Firefox) el diálogo ignora @page y voltea el informe
+     a carta vertical. Si las librerías no cargan, queda print() de respaldo. */
+  function cargar(src){ return new Promise(function(ok,mal){
+    var s=document.createElement('script'); s.src=src; s.onload=ok; s.onerror=mal; document.head.appendChild(s); }); }
+  function avisar(t){
+    var a=document.getElementById('pdf-aviso');
+    if(!a){ a=document.createElement('div'); a.id='pdf-aviso';
+      a.style.cssText='position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;'+
+        'background:rgba(10,10,10,.82);color:#fff;font:500 18px/1.4 Roboto,Arial,sans-serif;text-align:center;padding:24px';
+      document.body.appendChild(a); }
+    a.textContent=t; a.style.display=t?'flex':'none';
+  }
+  function generarPDF(){
+    avisar('Generando tu informe en PDF…');
+    Promise.all([
+      cargar('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'),
+      cargar('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')
+    ]).then(function(){
+      var hojas=[].slice.call(document.querySelectorAll('.hoja'));
+      var pdf=new window.jspdf.jsPDF({orientation:'landscape',unit:'px',format:[1280,720],hotfixes:['px_scaling'],compress:true});
+      var i=0;
+      function sig(){
+        if(i>=hojas.length){
+          var nom='Value Growth Score'+(D.empresa?' - '+String(D.empresa).replace(/[\\/:*?"<>|]/g,''):'')+'.pdf';
+          pdf.save(nom); avisar(''); return;
+        }
+        avisar('Generando tu informe en PDF… '+(i+1)+' de '+hojas.length);
+        window.html2canvas(hojas[i],{scale:2,width:1280,height:720,backgroundColor:null,useCORS:true,logging:false,
+          windowWidth:1280,scrollX:0,scrollY:-window.scrollY}).then(function(c){
+          if(i>0) pdf.addPage([1280,720],'landscape');
+          pdf.addImage(c.toDataURL('image/jpeg',0.92),'JPEG',0,0,1280,720,undefined,'FAST');
+          i++; sig();
+        }).catch(respaldo);
+      }
+      sig();
+    }).catch(respaldo);
+  }
+  function respaldo(){ avisar(''); window.print(); }
   if (/[?&]print=1/.test(location.search)) {
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(function(){ setTimeout(function(){ window.print(); }, 250); });
-    } else {
-      window.addEventListener('load', function(){ setTimeout(function(){ window.print(); }, 500); });
-    }
+    var listo = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+    window.addEventListener('load', function(){ listo.then(function(){ setTimeout(generarPDF, 300); }); });
   }
 })();
 </script>
