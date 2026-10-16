@@ -12,7 +12,7 @@ window.VG = {
   industria: 'Servicios profesionales, científicos y técnicos',
 
   total:     57,       // calificación general, 0 a 100
-  potencial: 64,       // calificación si suben sus dos componentes más débiles
+  potencial: 80,       // calificación del escenario: llegar a 80
 
   ebitda:    '430,000',   // promedio de los últimos tres ejercicios, en dólares
   valor:     '1.76',      // valor estimado hoy, en millones de dólares

@@ -102,7 +102,11 @@ h2{font-size:clamp(30px,3.8vw,48px);line-height:1.12}
 h1 em,h2 em,h3 em,h4 em{font-style:italic;color:var(--cian)}
 .lede{font-size:clamp(16px,1.5vw,18px);line-height:1.6;color:var(--texto);max-width:62ch}
 
-.pillrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.frase{font-family:var(--display);font-style:italic;font-size:clamp(19px,2vw,23px);line-height:1.35;
+  color:#fff;margin-top:26px;max-width:28ch}
+.pillrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin-top:20px}
+.dato{display:inline-flex;align-items:center;gap:9px;font-size:13.5px;color:rgba(255,255,255,.72)}
+.dato::before{content:"";width:5px;height:5px;border-radius:99px;background:var(--cian);flex:none}
 .pill{display:inline-flex;align-items:center;padding:8px 16px;border-radius:99px;font-size:13.5px;font-weight:500;
   background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff}
 .pill.hi{background:var(--cian);border-color:var(--cian);color:#fff}
@@ -311,6 +315,7 @@ html.embedded #p-intro>.skew:first-child{display:none}
 .aro .cen span{font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-top:8px;color:#A3A3A3}
 
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid2.solo{grid-template-columns:1fr}
 @media(max-width:760px){.grid2{grid-template-columns:1fr}}
 .card-t{font-size:clamp(28px,3.2vw,38px);margin-bottom:6px}
 .card-s{font-size:16px;color:var(--texto);margin-bottom:26px;max-width:62ch}
@@ -518,13 +523,11 @@ html.embedded #p-intro>.skew:first-child{display:none}
       <div class="eyebrow">Flint Consulting · Diagnósticos</div>
       <h1>Value Growth <em>Score</em></h1>
       <p class="lede">Cuánto vale tu empresa hoy, qué la está frenando y cuánto más podría valer. Cuarenta y nueve preguntas, ocho componentes de valor y una estimación con múltiplos de tu industria.</p>
+      <p class="frase">Nadie paga por el tamaño. Pagan por lo predecible.</p>
       <div class="pillrow">
-        <span class="pill hi">Nadie paga por el tamaño. Pagan por lo predecible.</span>
-        <span class="pill">Sin costo</span>
-        <span class="pill">Resultado descargable en PDF</span>
-      </div>
-      <div class="intro-meta">
-        <div><div class="n num">49</div><div class="t">Preguntas</div></div>
+        <span class="dato">Sin costo</span>
+        <span class="dato">49 preguntas · 30 minutos</span>
+        <span class="dato">Resultado descargable en PDF</span>
       </div>
     </div>
   </div>
@@ -532,8 +535,7 @@ html.embedded #p-intro>.skew:first-child{display:none}
   <div class="sect-title">Los ocho componentes que revisa un comprador</div>
   <div class="rejilla" id="rejilla"></div>
 
-  <div class="nav fija" style="margin-top:28px">
-    <span class="nav-hint" style="text-align:left">Contestas de cinco en cinco y puedes regresar antes de terminar.</span>
+  <div class="nav fija" style="margin-top:28px;justify-content:flex-end">
     <button class="btn main" id="empezar">Comenzar diagnóstico <span class="arr" aria-hidden="true">→</span></button>
   </div>
 </section>
@@ -653,9 +655,9 @@ html.embedded #p-intro>.skew:first-child{display:none}
   <div class="glass pad rin" style="animation-delay:.2s">
     <h3 class="card-t">Estimación de <em>valor</em></h3>
     <p class="card-s">Calculada sobre el promedio de tu EBITDA de los últimos tres ejercicios, con un múltiplo de transacciones privadas del tamaño de tu empresa, ajustado por tu industria.</p>
-    <div class="grid2">
+    <div class="grid2" id="v-grid">
       <div class="vc sub-glass"><div class="lab">Valor estimado hoy</div><div class="big" id="v-hoy"></div><div class="nt" id="v-hoy-nt"></div></div>
-      <div class="vc sub-glass hi"><div class="lab">Si subes tus dos componentes más débiles</div><div class="big" id="v-pot"></div><div class="nt" id="v-pot-nt"></div></div>
+      <div class="vc sub-glass hi" id="v-pot-card"><div class="lab">Si tu calificación llegara a 80</div><div class="big" id="v-pot"></div><div class="nt" id="v-pot-nt"></div></div>
     </div>
     <div class="escala" id="v-escala">
       <div class="pista"><div class="tramo" id="e-tramo"></div><div class="tick" id="e-tick"></div><div class="aguja" id="e-aguja"></div></div>
@@ -687,14 +689,14 @@ html.embedded #p-intro>.skew:first-child{display:none}
         <div class="eyebrow">Tus prioridades</div>
         <h3 id="cta-tit"></h3>
         <div class="cta-chips" id="cta-chips"></div>
-        <p>En 60 minutos te decimos cómo resolver cada una.</p>
+        <p>Una sesión de 60 minutos con un especialista de Flint. Sales con el orden en que conviene atacarlas, qué mueve el valor primero y qué puede esperar.</p>
       </div>
       <div class="cta-precio">
         <span class="lab">Sesión con un especialista de Flint</span>
         <div class="monto"><b>$200</b><span>USD</span></div>
         <div class="dur">60 minutos</div>
-        <a class="btn main" id="cta-btn" href="https://buy.stripe.com/aFa3cv9sPaZYh0Lf4mfYY0r" target="_blank" rel="noopener">Agendar llamada <span class="arr" aria-hidden="true">→</span></a>
-        <p class="fine">Después del pago, usa este enlace para elegir el horario que te acomode.</p>
+        <a class="btn main" id="cta-btn" href="https://buy.stripe.com/aFa3cv9sPaZYh0Lf4mfYY0r" target="_blank" rel="noopener">Pagar y agendar mi sesión <span class="arr" aria-hidden="true">→</span></a>
+        <p class="fine">Pagas y en la misma pantalla eliges el horario que te acomode.</p>
       </div>
     </div>
   </div>
@@ -976,14 +978,9 @@ function motivo(eb,ind,qi){
   if(eb<PISO) return 'Tu EBITDA está abajo del rango que estima este diagnóstico. Tu calificación de '+
     'los ocho componentes sí aplica y el valor lo revisamos contigo en la sesión.';
   return null;}
-/* el escenario potencial sube los dos componentes más débiles al promedio de los otros seis */
-function potencial(c){
-  var v=c.comps.map(function(x){return x.pct;}).sort(function(a,b){return a-b;});
-  var prom6=v.slice(2).reduce(function(a,b){return a+b;},0)/(v.length-2);
-  var corte=v[1], usados=0;
-  return c.comps.reduce(function(s,x){
-    var p=x.pct; if(p<=corte&&usados<2&&p<prom6){p=prom6;usados++;}
-    return s+p*x.peso/100;},0);}
+/* el escenario potencial es que la calificación general llegue a META */
+var META=80;
+function potencial(c){return Math.max(META,c.total);}
 
 var TIERS=[
  {min:80,h:'Pocas empresas llegan <em>a este nivel</em>',
@@ -1139,6 +1136,9 @@ function render(nombre,empresa){
 
   /* valor */
   var v=valor(c);
+  var yaArriba=c.total>=META;             /* pendiente: qué ve quien ya sale con 80 o más */
+  q('#v-pot-card').style.display=yaArriba?'none':'';
+  q('#v-grid').classList.toggle('solo',yaArriba);
   if(v.ok){
     q('#v-escala').style.display='';
     q('#v-hoy').textContent=mxn(v.v0);
@@ -1241,9 +1241,9 @@ q('#gform').addEventListener('submit',function(e){
     'Acepta Aviso de Privacidad':'Sí',
     'Value Growth Score':sc+' / 100',
     'Nivel':t.h.replace(/<[^>]+>/g,''),
-    'Informe listo para PDF':informeUrl,
+    'Ver el informe de este cliente':informeUrl,
     'Score por componente':'\n'+c.comps.map(function(x){return x.nombre+': '+Math.round(x.pct)+' / 100';}).join('\n'),
-    'Estimación de valor':v.ok?('Hoy: '+mxn(v.v0)+' ('+v.m0.toFixed(1)+'x EBITDA promedio de '+mxn(v.eb)+') · Subiendo los dos componentes más débiles: '+mxn(v.v8)+
+    'Estimación de valor':v.ok?('Hoy: '+mxn(v.v0)+' ('+v.m0.toFixed(1)+'x EBITDA promedio de '+mxn(v.eb)+') · Si su calificación llegara a 80: '+mxn(v.v8)+
                             ' · Rango: '+mxn(v.lo)+' a '+mxn(v.hi)+' · '+v.ind.n):('Sin estimación: '+v.motivo),
     'Respuestas':'\n'+respuestasTexto()
   };
