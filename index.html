@@ -618,7 +618,7 @@ body{background:transparent}
       <p class="frase">Nadie paga por el tamaño. Pagan por lo predecible.</p>
       <div class="pillrow">
         <span class="dato">Sin costo</span>
-        <span class="dato">49 preguntas · 30 minutos</span>
+        <span class="dato">49 preguntas · 20 minutos</span>
         <span class="dato">Resultado descargable en PDF</span>
       </div>
     </div>
@@ -905,7 +905,7 @@ function riel(estado,fracs,resp){
   var t=q('#paso-txt'), raiz=document.documentElement;
   if(estado<0){ t.textContent='Diagnóstico'; raiz.style.setProperty('--avance','.06'); }
   else if(estado===0){
-    var falta=Math.max(1,Math.round((TOTQ-resp)*0.55));
+    var falta=Math.max(1,Math.round((TOTQ-resp)*0.42));
     t.innerHTML='<b>'+resp+'</b> / '+TOTQ+' <em>· faltan '+falta+' min</em>';
     raiz.style.setProperty('--avance',(resp/TOTQ).toFixed(3));
   }
