@@ -1260,16 +1260,20 @@ function render(nombre,empresa){
   anillos(c.comps);
 
   var ord=c.comps.slice().sort(function(a,b){return a.pct-b.pct;});
+  /* las prioridades no son las calificaciones más bajas, sino las que más valor están costando:
+     lo que le falta al componente para 100, por el peso que ese componente tiene en el score */
+  function cuesta(x){return (100-x.pct)*x.peso;}
+  var ordp=c.comps.slice().sort(function(a,b){return cuesta(b)-cuesta(a)||a.pct-b.pct;});
   function li(a,k){return a.map(function(x){
     return '<li><div><b>'+esc(x.nombre)+'</b> · '+esc(k==='p'?x.acc:x.fort)+
       '<small>'+Math.round(x.pct)+' de 100</small></div></li>';}).join('');}
-  q('#r-prio').innerHTML=li(ord.slice(0,3),'p');
+  q('#r-prio').innerHTML=li(ordp.slice(0,3),'p');
   q('#r-fort').innerHTML=li(ord.slice(-3).reverse(),'f');
 
   /* banner de agendar: las 3 prioridades y, si hay estimación, lo que podrían valer */
-  var pr=ord.slice(0,3), gana=v.ok?v.v8-v.v0:0;
+  var pr=ordp.slice(0,3), gana=v.ok?v.v8-v.v0:0;
   q('#cta-tit').innerHTML = gana>0 ? 'Resolver tus prioridades podría sumar <em>'+mxn(gana)+'</em> al valor de tu empresa'
-    : banda(pr[0].pct)=='fuerte' ? 'Tus 3 áreas con <em>más margen de mejora</em>'
+    : pr.every(function(x){return banda(x.pct)=='fuerte';}) ? 'Tus 3 áreas con <em>más margen de mejora</em>'
     : 'Estas 3 áreas le están <em>quitando valor</em> a tu empresa';
   q('#cta-chips').innerHTML=pr.map(function(x){var sb=SEMAFORO[banda(x.pct)];
     return '<div class="cta-chip" style="background:'+sb[0]+'12;border-color:'+sb[0]+'55"><i style="background:'+sb[0]+';box-shadow:0 0 10px '+sb[0]+'"></i>'+
@@ -1339,7 +1343,7 @@ q('#gform').addEventListener('submit',function(e){
     'Nivel':t.h.replace(/<[^>]+>/g,''),
     'Ver el informe de este cliente':informeUrl,
     'Score por componente':'\n'+c.comps.map(function(x){return x.nombre+': '+Math.round(x.pct)+' / 100';}).join('\n'),
-    'Estimación de valor':v.ok?('Hoy: '+mxn(v.v0)+' ('+v.m0.toFixed(1)+'x EBITDA promedio de '+mxn(v.eb)+') · Si su calificación llegara a 80: '+mxn(v.v8)+
+    'Estimación de valor':v.ok?('Hoy: '+mxn(v.v0)+' ('+v.m0.toFixed(1)+'x EBITDA promedio de '+mxn(v.eb)+') · Si tu calificación llegara a 80: '+mxn(v.v8)+
                             ' · Rango: '+mxn(v.lo)+' a '+mxn(v.hi)+' · '+v.ind.n):('Sin estimación: '+v.motivo),
     'Respuestas':'\n'+respuestasTexto()
   };
