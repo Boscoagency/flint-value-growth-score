@@ -11,7 +11,7 @@
 <title>Value Growth Score · Flint Consulting</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap">
 <style>
 /* ═══════════════════════════════════════════════════════════
    FLINT · VALUE GROWTH SCORE
@@ -480,31 +480,65 @@ html.embedded #p-intro>.skew:first-child{display:none}
 .lock .unlock li{color:#E5E5E5;border-bottom-color:rgba(255,255,255,.08)}
 
 /* ═══ CTA: AGENDAR SESIÓN ═══ */
-.cta2{display:grid;grid-template-columns:1.25fr 1fr;overflow:hidden;padding:0}
-@media(max-width:820px){.cta2{grid-template-columns:1fr}}
-.cta-txt{padding:clamp(28px,4.4vw,52px)}
-.cta-txt h3{font-size:clamp(30px,3.6vw,44px);line-height:1.1;margin:16px 0 22px;max-width:20ch}
-.cta-chips{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
-.cta-chip{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;border:1px solid;font-size:16px;font-weight:500;color:var(--tinta)}
-.cta-chip i{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.cta-chip span{flex:1}
-.cta-chip b{font-weight:700;font-variant-numeric:tabular-nums}
-.cta-txt>p{font-size:16px;line-height:1.6;max-width:52ch}
-.cta-lista{list-style:none;margin-top:22px;display:grid;gap:12px}
-.cta-lista li{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--tinta)}
-.cta-lista li::before{content:"";flex-shrink:0;width:22px;height:22px;border-radius:6px;margin-top:1px;
-  background:var(--cianluz) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4L18 8' fill='none' stroke='%230089BD' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
-.cta-precio{background:var(--oscuro);color:#D4D4D4;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
-.cta-precio::before{content:"";position:absolute;right:-30%;top:-40%;width:90%;height:90%;border-radius:50%;
-  background:radial-gradient(circle,rgba(0,176,240,.22),transparent 65%);pointer-events:none}
-.cta-precio>*{position:relative}
-.cta-precio .lab{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#A3A3A3;font-weight:600}
-.cta-precio .monto{display:flex;align-items:baseline;gap:10px;margin:12px 0 4px}
-.cta-precio .monto b{font-family:var(--display);font-weight:400;font-size:clamp(56px,6vw,72px);color:#fff;line-height:1}
-.cta-precio .monto span{font-size:15px;color:#A3A3A3;font-weight:500}
-.cta-precio .dur{font-size:15px;color:#E5E5E5;padding-bottom:22px;margin-bottom:24px;border-bottom:1px solid rgba(255,255,255,.1)}
-.cta-precio .btn{justify-content:center}
-.cta-precio .fine{font-size:13px;color:#8A8A8A;margin-top:14px;line-height:1.5}
+/* ═══ Bloque de cierre (opción 2, con contexto) ═══
+   Todo va bajo .vg-cierre para no chocar con las clases de la página. */
+.vg-cierre{--vc-hilo:rgba(255,255,255,.10);--vc-hilo2:rgba(255,255,255,.18);--vc-texto:rgba(223,235,245,.70);--vc-tenue:rgba(255,255,255,.40);--vc-ink:#00151E;
+  position:relative;overflow:hidden;color:#fff;border:1px solid var(--linea);border-radius:var(--r);
+  background:radial-gradient(900px 520px at 88% 8%,rgba(0,174,239,.13),transparent 62%),radial-gradient(700px 600px at 4% 100%,rgba(0,174,239,.06),transparent 60%),linear-gradient(168deg,#0B1118 0%,#05080C 58%,#030507 100%)}
+.vg-cierre::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,transparent 0%,rgba(0,174,239,.55) 22%,rgba(255,255,255,.30) 50%,rgba(0,174,239,.35) 74%,transparent 100%)}
+.vg-cierre .vg-in{padding:clamp(48px,6vw,72px) clamp(20px,4.6vw,52px);display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:clamp(40px,5vw,64px);align-items:center}
+.vg-cierre .vg-ojo{font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;color:var(--cian);display:flex;align-items:center;gap:14px}
+.vg-cierre .vg-ojo::after{content:'';flex:1;height:1px;background:var(--vc-hilo)}
+.vg-cierre .vg-tit{font-family:var(--display);font-weight:400;font-size:clamp(35px,4.6vw,54px);line-height:1.04;letter-spacing:-.016em;margin-top:26px;color:#fff;text-wrap:balance}
+.vg-cierre .vg-tit em{font-style:italic;color:var(--cian)}
+.vg-cierre .vg-sub{font-size:17px;line-height:1.64;color:var(--vc-texto);font-weight:300;max-width:620px;margin-top:24px}
+.vg-cierre .vg-sub b{font-weight:500;color:#fff}
+.vg-cierre .pr{margin-top:32px;padding-top:24px;border-top:1px solid var(--vc-hilo)}
+.vg-cierre .pr-k{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;color:var(--vc-tenue);margin-bottom:20px}
+.vg-cierre .pr-f{margin-bottom:19px}
+.vg-cierre .pr-f:last-child{margin-bottom:0}
+.vg-cierre .pr-top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:9px}
+.vg-cierre .pr-top .nm{display:flex;align-items:center;gap:12px;font-size:15.5px;color:rgba(255,255,255,.90)}
+.vg-cierre .pr-top .v{font-size:13px;font-weight:500;color:var(--vc-tenue);letter-spacing:.02em;white-space:nowrap}
+.vg-cierre .pr-top .v b{font-family:var(--display);font-size:20px;font-weight:400;color:rgba(255,255,255,.88);margin-right:3px;font-variant-numeric:lining-nums tabular-nums}
+.vg-cierre .pr-bar{height:4px;border-radius:3px;background:rgba(255,255,255,.09);position:relative;overflow:hidden}
+.vg-cierre .pr-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:3px;display:block}
+.vg-cierre .pr-bar u{position:absolute;top:-3px;bottom:-3px;width:1px;background:rgba(255,255,255,.45)}
+.vg-cierre .pt{width:7px;height:7px;border-radius:50%;flex:0 0 auto;display:inline-block}
+.vg-cierre .vg-caja{border:1px solid var(--vc-hilo2);border-radius:18px;padding:30px;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.012))}
+.vg-cierre .fl{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:13px 0}
+.vg-cierre .fl+.fl{border-top:1px solid var(--vc-hilo)}
+.vg-cierre .fl .k{font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;font-weight:600;color:var(--vc-tenue);max-width:136px;line-height:1.5}
+.vg-cierre .fl .n{font-family:var(--display);font-size:31px;line-height:1;letter-spacing:-.01em;display:flex;align-items:baseline;justify-content:flex-end;color:rgba(255,255,255,.72);font-variant-numeric:lining-nums tabular-nums}
+.vg-cierre .fl .n i{font-family:var(--ui);font-style:normal;font-weight:500;font-size:.46em;margin-right:4px;opacity:.7;letter-spacing:0}
+.vg-cierre .fl .n small{font-family:var(--ui);font-size:11.5px;font-weight:500;letter-spacing:.08em;color:var(--vc-tenue);margin-left:7px}
+.vg-cierre .fl-alta{align-items:flex-end}
+.vg-cierre .fl-alta .n{font-size:44px;color:var(--cian)}
+.vg-cierre .fl-dif{white-space:nowrap;font-size:12.5px;font-weight:500;color:var(--cian);letter-spacing:.01em;margin-top:9px;text-align:right}
+.vg-cierre .fl-dif span{color:var(--vc-tenue);font-weight:400}
+.vg-cierre .fl-precio .n{color:rgba(255,255,255,.90);font-size:38px}
+.vg-cierre .vg-base{margin-top:15px;font-size:12.5px;line-height:1.6;color:var(--vc-tenue);font-weight:300}
+.vg-cierre .vg-razon{margin-top:12px;font-size:13px;line-height:1.6;color:var(--vc-texto);font-weight:300}
+.vg-cierre .vg-razon b{font-weight:500;color:#fff}
+.vg-cierre .vg-lista{margin-top:22px;padding-top:20px;border-top:1px solid var(--vc-hilo)}
+.vg-cierre .vg-li{display:flex;gap:13px;align-items:flex-start;margin-bottom:12px;font-size:14.5px;line-height:1.55;color:var(--vc-texto);font-weight:300}
+.vg-cierre .vg-li:last-child{margin-bottom:0}
+.vg-cierre .vg-li svg{flex:0 0 auto;width:15px;height:15px;margin-top:3px}
+.vg-cierre .vg-li b{font-weight:500;color:#fff}
+.vg-cierre .vg-btn{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:24px;background:var(--cian);color:var(--vc-ink);font-size:16.5px;font-weight:600;
+  padding:19px 24px;border-radius:12px;text-decoration:none;box-shadow:0 14px 34px -14px rgba(0,174,239,.72);transition:transform .18s ease,box-shadow .18s ease}
+.vg-cierre .vg-btn:hover{transform:translateY(-1px);box-shadow:0 18px 40px -14px rgba(0,174,239,.88)}
+.vg-cierre .vg-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+.vg-cierre .vg-btn svg{width:17px;height:17px}
+.vg-cierre .vg-letra{margin-top:13px;font-size:12.5px;line-height:1.6;color:var(--vc-tenue);font-weight:300;text-align:center}
+/* Compromiso comercial pendiente del visto bueno de Jorge: el <p class="vg-garantia"> va comentado en el HTML. */
+.vg-cierre .vg-garantia{margin-top:16px;padding-top:15px;border-top:1px solid var(--vc-hilo);font-size:13px;line-height:1.6;color:var(--vc-texto);font-weight:300;text-align:center}
+.vg-cierre .vg-garantia b{font-weight:500;color:#fff}
+@media (max-width:1000px){.vg-cierre .vg-in{grid-template-columns:1fr}.vg-cierre .vg-caja{max-width:480px}}
+@media (max-width:620px){.vg-cierre .vg-sub{font-size:16px;margin-top:20px}.vg-cierre .vg-tit{margin-top:20px}.vg-cierre .vg-caja{padding:24px 20px}
+  .vg-cierre .fl-alta .n{font-size:36px}.vg-cierre .fl .n{font-size:27px}.vg-cierre .fl-precio .n{font-size:32px}.vg-cierre .pr-top .nm{font-size:15px}
+  .vg-cierre .fl .k{max-width:112px}.vg-cierre .vg-btn{font-size:16px;padding:18px 20px;white-space:nowrap}}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
@@ -776,21 +810,39 @@ body{background:transparent}
   </div>
 
   <div class="skew rin" style="animation-delay:.78s;margin-top:18px">
-    <div class="glass cta2">
-      <div class="cta-txt">
-        <div class="eyebrow">Tus prioridades</div>
-        <h3 id="cta-tit"></h3>
-        <div class="cta-chips" id="cta-chips"></div>
-        <p>Una sesión de 60 minutos con un especialista de Flint. Sales con el orden en que conviene atacarlas, qué mueve el valor primero y qué puede esperar.</p>
+    <section class="vg-cierre" aria-labelledby="vg-tit">
+      <div class="vg-in">
+        <div>
+          <div class="vg-ojo">Hasta aquí llega el diagnóstico</div>
+          <h2 class="vg-tit" id="vg-tit"></h2>
+          <p class="vg-sub" id="vg-sub"></p>
+          <div class="pr">
+            <div class="pr-k" id="vg-pr-k">Lo que te separa de 80</div>
+            <div id="vg-pr"></div>
+          </div>
+        </div>
+        <div class="vg-caja">
+          <div id="vg-cifras"></div>
+          <p class="vg-base" id="vg-base">Estimado con múltiplos de transacciones privadas del tamaño de tu empresa, ajustados por tu industria, sobre tu EBITDA promedio de tres años.</p>
+          <p class="vg-razon">Una hora con <b>el socio que firma tu informe</b>. No con un ejecutivo de cuenta.</p>
+          <div class="vg-lista">
+            <div class="vg-li"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="#00AEEF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div><b>Por dónde empezar</b>, con el orden que más mueve tu múltiplo.</div></div>
+            <div class="vg-li"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="#00AEEF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div><b>Qué cuesta cada palanca</b>, en dinero y en meses.</div></div>
+            <div class="vg-li"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke="#00AEEF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <div><b>Un plan por escrito</b>: qué, quién y para cuándo.</div></div>
+          </div>
+          <a class="vg-btn" id="cta-btn" href="https://buy.stripe.com/aFa3cv9sPaZYh0Lf4mfYY0r" target="_blank" rel="noopener">Pagar y agendar mi sesión
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <p class="vg-letra">Primero el pago, enseguida eliges el horario.<br>60 minutos, en línea o en nuestras oficinas.</p>
+          <!-- PENDIENTE DE APROBAR CON JORGE. Es un compromiso comercial, no texto.
+          <p class="vg-garantia">Si al terminar la hora no sabes exactamente qué hacer
+            primero, <b>te devolvemos los 200 dólares</b>.</p>
+          -->
+        </div>
       </div>
-      <div class="cta-precio">
-        <span class="lab">Sesión con un especialista de Flint</span>
-        <div class="monto"><b>$200</b><span>USD</span></div>
-        <div class="dur">60 minutos</div>
-        <a class="btn main" id="cta-btn" href="https://buy.stripe.com/aFa3cv9sPaZYh0Lf4mfYY0r" target="_blank" rel="noopener">Pagar y agendar mi sesión <span class="arr" aria-hidden="true">→</span></a>
-        <p class="fine">Pagas y en la misma pantalla eliges el horario que te acomode.</p>
-      </div>
-    </div>
+    </section>
   </div>
 
   <div class="download-dock" aria-label="Descargar informe">
@@ -1110,6 +1162,16 @@ function usdMillones(n){
 function fechaInforme(){
   return new Date().toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'});
 }
+/* cifras del cierre, redondeadas a miles para que la pantalla y el informe sumen igual:
+   valor de hoy + diferencia = valor en 80, al dólar */
+function cierre(c,v){
+  var total=Math.round(c.total),pot=Math.round(potencial(c)),meta=pot>total,r={total:total,pot:pot,meta:meta,brecha:false};
+  if(v.ok){
+    r.v0=Math.round(v.v0/1000)*1000; r.v8=Math.round(v.v8/1000)*1000; r.dif=Math.max(0,r.v8-r.v0);
+    r.difPct=r.v0>0?Math.round(r.dif/r.v0*100):0; r.brecha=meta&&r.dif>0;
+  }
+  return r;
+}
 function datosInforme(lead,c,v){
   var total=Math.round(c.total),pot=Math.round(potencial(c)),ind=industria();
   var vg={
@@ -1126,16 +1188,17 @@ function datosInforme(lead,c,v){
   if(v.ok){
     vg.valorAplica=true;
     vg.ebitda=usdPlano(v.eb);
-    vg.valor=usdMillones(v.v0);
-    vg.valorPot=usdMillones(v.v8);
+    var cz=cierre(c,v);
+    vg.valor=usdMillones(cz.v0);
+    vg.valorPot=usdMillones(cz.v8);
     vg.rangoBajo=usdMillones(v.lo);
     vg.rangoAlto=usdMillones(v.hi);
     vg.multiplo=v.m0.toFixed(1)+'x';
     vg.multiploPot=(v.v8/v.eb).toFixed(1)+'x';
     /* diferencia exacta para la hoja de cierre; sin esto el informe la saca
        de los millones redondeados y queda aproximada */
-    vg.dif=Math.max(0,Math.round(v.v8-v.v0));
-    vg.difPct=v.v0>0?Math.max(0,Math.round((v.v8-v.v0)/v.v0*100)):0;
+    vg.dif=cz.dif;
+    vg.difPct=cz.difPct;
   }else{
     vg.valorAplica=false;
     vg.ebitda=usdPlano(prom('ebitda'));
@@ -1274,14 +1337,51 @@ function render(nombre,empresa){
   q('#r-prio').innerHTML=li(ordp.slice(0,3),'p');
   q('#r-fort').innerHTML=li(ord.slice(-3).reverse(),'f');
 
-  /* banner de agendar: las 3 prioridades y, si hay estimación, lo que podrían valer */
-  var pr=ordp.slice(0,3), gana=v.ok?v.v8-v.v0:0;
-  q('#cta-tit').innerHTML = gana>0 ? 'Resolver tus prioridades podría sumar <em>'+mxn(gana)+'</em> al valor de tu empresa'
-    : pr.every(function(x){return banda(x.pct)=='fuerte';}) ? 'Tus 3 áreas con <em>más margen de mejora</em>'
-    : 'Estas 3 áreas le están <em>quitando valor</em> a tu empresa';
-  q('#cta-chips').innerHTML=pr.map(function(x){var sb=SEMAFORO[banda(x.pct)];
-    return '<div class="cta-chip" style="background:'+sb[0]+'12;border-color:'+sb[0]+'55"><i style="background:'+sb[0]+';box-shadow:0 0 10px '+sb[0]+'"></i>'+
-      '<span>'+esc(x.nombre)+'</span><b style="color:'+sb[3]+'">'+Math.round(x.pct)+'</b></div>';}).join('');
+  /* bloque de cierre: mismas tres situaciones que la hoja de cierre del informe */
+  var pr=ordp.slice(0,3), cz=cierre(c,v);
+  function mill(n){return (Math.round(n/1e4)/100).toFixed(2);}
+  function usdTxt(n){return n>=1e6?mill(n)+' millones de dólares':Math.round(n/1000)+' mil dólares';}
+  function corto(n){return n>=1e6?mill(n)+' millones':Math.round(n/1000)+' mil';}
+  function miles(n){return Math.round(n).toLocaleString('en-US');}
+  var PRECIO='<div class="fl fl-precio"><div class="k">Lo que cuesta sentarte a verlo</div><div class="n"><i>$</i>200<small>USD</small></div></div>';
+  if(cz.brecha){
+    q('#vg-tit').innerHTML='Esos <span data-vg="dif-texto">'+usdTxt(cz.dif)+'</span><br>ya los construiste.<br><em>Falta que se vean.</em>';
+    q('#vg-sub').innerHTML='Tu calificación es <b data-vg="score">'+cz.total+'</b>. Hoy tu empresa vale alrededor de '+
+      '<b data-vg="valor-hoy">'+usdTxt(cz.v0)+'</b>, sobre un EBITDA promedio de <b data-vg="ebitda">'+corto(v.eb)+'</b> de los últimos tres ejercicios. '+
+      'Si tu calificación llegara a '+cz.pot+', ese valor subiría a <b data-vg="valor-80">'+corto(cz.v8)+'</b>: un '+
+      '<b data-vg="dif-pct">'+cz.difPct+'%</b> más, con las mismas ventas y el mismo EBITDA.';
+    q('#vg-cifras').innerHTML=
+      '<div class="fl"><div class="k">Tu valor hoy</div><div class="n"><i>$</i><span data-vg="valor-hoy-n">'+miles(cz.v0)+'</span></div></div>'+
+      '<div class="fl fl-alta"><div class="k">Si tu calificación llegara a '+cz.pot+'</div><div>'+
+        '<div class="n"><i>$</i><span data-vg="valor-80-n">'+miles(cz.v8)+'</span></div>'+
+        '<div class="fl-dif"><span data-vg="dif-n">+'+miles(cz.dif)+'</span> USD <span>·</span> <span data-vg="dif-pct2">'+cz.difPct+'%</span> más</div></div></div>'+PRECIO;
+  }else if(cz.meta){
+    /* abajo de 80 pero sin valor en dólares: se habla de la calificación, no de dinero */
+    q('#vg-tit').innerHTML='Tu calificación<br>puede llegar a '+cz.pot+'.<br><em>El valor lo vemos juntos.</em>';
+    q('#vg-sub').innerHTML='Tu calificación es <b data-vg="score">'+cz.total+'</b>. Con los datos que capturaste este diagnóstico no estima tu valor en dólares, '+
+      'pero los ocho componentes sí aplican: subir de '+cz.total+' a '+cz.pot+' es lo que mueve el múltiplo que un comprador está dispuesto a pagar. '+
+      'En la sesión revisamos el valor con tus números.';
+    q('#vg-cifras').innerHTML=
+      '<div class="fl"><div class="k">Tu calificación hoy</div><div class="n"><span data-vg="score-n">'+cz.total+'</span><small>/100</small></div></div>'+
+      '<div class="fl fl-alta"><div class="k">La meta</div><div class="n">'+cz.pot+'<small>/100</small></div></div>'+PRECIO;
+  }else{
+    /* ya está en 80 o arriba: no hay brecha que enseñarle */
+    q('#vg-tit').innerHTML='Ya estás donde<br>pocos llegan.<br><em>Ahora toca probarlo.</em>';
+    q('#vg-sub').innerHTML='Tu calificación es <b data-vg="score">'+cz.total+'</b>, arriba del nivel en el que la mayoría de las empresas se quedan. '+
+      'Lo que sigue no es subir calificación, es preparar la empresa para que resista la revisión de un comprador sin que el precio se mueva.';
+    q('#vg-cifras').innerHTML=(v.ok
+      ? '<div class="fl fl-alta"><div class="k">Tu valor estimado hoy</div><div class="n"><i>$</i><span data-vg="valor-hoy-n">'+miles(cz.v0)+'</span></div></div>'
+      : '<div class="fl fl-alta"><div class="k">Tu calificación</div><div class="n"><span data-vg="score-n">'+cz.total+'</span><small>/100</small></div></div>')+PRECIO;
+  }
+  q('#vg-base').style.display=v.ok?'':'none';
+  /* las tres prioridades con la marca de la meta; si ya pasó 80, contra 100 y sin marca */
+  var ref=cz.meta?cz.pot:100;
+  q('#vg-pr-k').textContent=cz.meta?'Lo que te separa de '+cz.pot:'Donde queda más por apretar';
+  q('#vg-pr').innerHTML=pr.map(function(x,i){var p=Math.round(x.pct),col=SEMAFORO[banda(x.pct)][0];
+    return '<div class="pr-f"><div class="pr-top"><div class="nm"><i class="pt" style="background:'+col+'"></i><span data-vg="p'+(i+1)+'-nombre">'+esc(x.nombre)+'</span></div>'+
+      '<div class="v"><b data-vg="p'+(i+1)+'-valor">'+p+'</b>de '+ref+'</div></div>'+
+      '<div class="pr-bar"><i data-vg="p'+(i+1)+'-barra" style="width:'+Math.max(2,p)+'%;background:'+col+'"></i>'+(cz.meta?'<u style="left:'+ref+'%"></u>':'')+'</div></div>';
+  }).join('');
 }
 
 /* ====== FORMULARIO DEL LEAD ====== */
