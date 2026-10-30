@@ -98,7 +98,7 @@ html,body{width:1280px;font-family:var(--ui);color:var(--tinta);
 .pa-afir .n{font-size:16px;font-weight:500}
 .pa-afir .c{font-size:13px;color:var(--tenue);margin-top:4px;font-weight:300}
 .pa-ader{position:relative;overflow:hidden}
-.pa-ader{background:url(assets/jorge.jpg) 52% 16%/cover no-repeat}
+.pa-ader img{width:100%;height:100%;object-fit:cover;object-position:52% 16%;display:block}
 
 /* ---------- 3 · tablero ---------- */
 .pa-tab{padding:40px 64px 44px}
@@ -207,3 +207,57 @@ html,body{width:1280px;font-family:var(--ui);color:var(--tinta);
 .cf-contacto{position:absolute;left:66px;bottom:42px;display:flex;gap:34px;align-items:center}
 .cf-contacto .l{display:flex;align-items:center;gap:10px;font-size:13px;color:#EAF2F7}
 .cf-contacto .ic{width:17px;height:17px;flex:0 0 auto}
+
+/* ---------- 14 · hoja de cierre (pago y llamada) ---------- */
+.pa-cie{display:grid;grid-template-columns:1fr 470px;height:100%}
+.pa-cizq{padding:54px 50px 46px 64px;display:flex;flex-direction:column}
+.pa-ctit{font-size:60px;color:var(--tinta);margin-top:16px;line-height:.92}
+.pa-ctit em{font-style:normal;color:var(--ciantxt)}
+.pa-csub{font-size:17px;line-height:1.7;color:var(--grafito);font-weight:300;
+  margin-top:18px;max-width:600px}
+.pa-csub b{font-weight:500;color:var(--tinta)}
+.pa-cpr{margin-top:auto;padding-top:22px;border-top:1px solid var(--linea)}
+.pa-cpr .k{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;
+  font-weight:700;color:var(--tenue);margin-bottom:15px}
+.pa-cf{margin-bottom:13px}
+.pa-cf:last-child{margin-bottom:0}
+.pa-cftop{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:6px}
+.pa-cftop .nm{display:flex;align-items:center;gap:11px;font-size:15.5px;
+  font-weight:400;color:var(--tinta)}
+.pa-cftop .nm i{width:7px;height:7px;border-radius:50%;flex:0 0 auto;background:var(--c)}
+.pa-cftop .vv{font-size:12.5px;font-weight:500;color:var(--tenue)}
+.pa-cftop .vv b{font-family:var(--display);font-size:20px;font-weight:400;
+  color:var(--tinta);margin-right:3px}
+.pa-cbar{height:4px;border-radius:3px;background:var(--linea);position:relative;overflow:hidden}
+.pa-cbar i{position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:var(--c);display:block}
+.pa-cbar u{position:absolute;top:-3px;bottom:-3px;width:1px;background:var(--lineaf)}
+
+.pa-cder{padding:54px 44px 46px;display:flex;flex-direction:column;color:#fff}
+.pa-cder .eyebrow{color:#8FA0AC}
+.pa-cfila{display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding:12px 0}
+.pa-cfila+.pa-cfila{border-top:1px solid rgba(255,255,255,.12)}
+.pa-cfila .k{font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:700;color:#8FA0AC;max-width:152px;line-height:1.5}
+.pa-cfila .n{font-family:var(--display);font-size:34px;line-height:1;color:#C9D7E0;
+  display:flex;align-items:baseline}
+.pa-cfila .n i{font-family:var(--ui);font-style:normal;font-weight:500;
+  font-size:.46em;margin-right:4px;opacity:.7}
+.pa-cfila .n small{font-family:var(--ui);font-size:11.5px;font-weight:500;
+  letter-spacing:.08em;color:#8FA0AC;margin-left:6px}
+.pa-calta{align-items:flex-end}
+.pa-calta .n{font-size:47px;color:var(--cian)}
+.pa-cdif{font-size:12.5px;font-weight:500;color:var(--cian);margin-top:7px;text-align:right}
+.pa-cdif span{color:#8FA0AC;font-weight:400}
+.pa-cprecio .n{font-size:38px;color:#fff}
+.pa-cmet{margin-top:13px;font-size:12px;line-height:1.6;color:#8FA0AC;font-weight:300}
+.pa-cinc{margin-top:16px;padding-top:15px;border-top:1px solid rgba(255,255,255,.12)}
+.pa-cli{display:flex;gap:11px;align-items:flex-start;margin-bottom:10px;
+  font-size:14px;line-height:1.5;color:#C6D4DE;font-weight:300}
+.pa-cli:last-child{margin-bottom:0}
+.pa-cli i{flex:0 0 auto;width:14px;height:2px;background:var(--cian);margin-top:8px;display:block}
+.pa-cli b{font-weight:500;color:#fff}
+.pa-cpie{margin-top:auto;padding-top:18px;display:flex;align-items:center;gap:16px}
+.pa-cqr{width:96px;height:96px;flex:0 0 auto;display:block}
+.pa-ccta{font-size:17.5px;font-weight:700;color:var(--cian);line-height:1.3}
+.pa-ccta span{display:block;font-size:12.5px;font-weight:300;color:#8FA0AC;
+  margin-top:6px;line-height:1.55}

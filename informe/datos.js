@@ -12,15 +12,20 @@ window.VG = {
   industria: 'Servicios profesionales, científicos y técnicos',
 
   total:     57,       // calificación general, 0 a 100
-  potencial: 80,       // calificación del escenario: llegar a 80
+  potencial: 80,       // calificación del escenario: llegar a 80 (o la actual si ya es mayor)
 
   ebitda:    '430,000',   // promedio de los últimos tres ejercicios, en dólares
   valor:     '1.76',      // valor estimado hoy, en millones de dólares
-  valorPot:  '1.84',      // valor en el escenario potencial
+  valorPot:  '2.01',      // valor en el escenario potencial
   rangoBajo: '1.12',      // piso de la banda
   rangoAlto: '2.24',      // techo de la banda
   multiplo:    '4.1x',
-  multiploPot: '4.3x',
+  multiploPot: '4.7x',
+
+  /* Opcionales. Si la página los manda, la hoja de cierre los usa tal cual;
+     si no, los calcula de los millones redondeados, que es aproximado. */
+  dif:    257000,     // diferencia en dólares entre el valor de hoy y el de 80
+  difPct: 15,         // esa misma diferencia en porcentaje
 
   /* Los ocho componentes, en el orden canónico. 'p' es la calificación de
      cada uno, de 0 a 100. El nombre tiene que coincidir con textos.js. */

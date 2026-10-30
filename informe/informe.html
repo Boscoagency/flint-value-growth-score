@@ -51,7 +51,7 @@
       <div class="c">+52 81 1351 8242 · flintconsulting.mx</div>
     </div>
   </div>
-  <div class="pa-ader" role="img" aria-label="Jorge De la Rosa"></div>
+  <div class="pa-ader"><img src="assets/jorge.jpg" alt="Jorge De la Rosa"></div>
 </div><div class="sello" id="s2"></div></section>
 
 <!-- 3 · TABLERO -->
@@ -77,7 +77,7 @@
         <p class="pa-vnt" id="v-hoy-nt"></p>
       </div>
       <div class="pa-vcol">
-        <div class="pa-vlab">Si subes tus dos componentes más débiles</div>
+        <div class="pa-vlab" id="v-pot-lab">Si tu calificación llegara a 80</div>
         <div class="pa-vbig" style="--c:var(--verdetx)">
           <span class="u">USD $</span><span class="n" id="v-pot" style="color:var(--verdetx)"></span><span class="m" style="color:var(--verdetx)">M</span>
         </div>
@@ -125,7 +125,40 @@
   </div>
 <div class="sello" id="s13"></div></section>
 
-<!-- 14 · CONTRAPORTADA -->
+<!-- 14 · CIERRE (pago y llamada) -->
+<section class="hoja"><div class="pa-cie">
+  <div class="pa-cizq">
+    <img class="logo" src="assets/logo_negro.png" alt="Flint Consulting" style="height:44px">
+    <div style="margin-top:34px">
+      <div class="eyebrow">Hasta aquí llega el diagnóstico</div>
+      <h2 class="disp pa-ctit" id="c-tit"></h2>
+      <p class="pa-csub" id="c-sub"></p>
+    </div>
+    <div class="pa-cpr" id="c-prio"></div>
+  </div>
+  <div class="pa-cder grad">
+    <div class="eyebrow">Tu siguiente paso</div>
+    <div id="c-cifras" style="margin-top:14px"></div>
+    <p class="pa-cmet">Estimado con múltiplos de transacciones privadas del tamaño de tu
+      empresa, ajustados por tu industria, sobre tu EBITDA promedio de tres ejercicios.</p>
+    <div class="pa-cinc">
+      <div class="pa-cli"><i></i><div><b>Por dónde empezar</b>, con el orden que más
+        mueve tu múltiplo.</div></div>
+      <div class="pa-cli"><i></i><div><b>Qué cuesta cada palanca</b>, en dinero y en
+        meses.</div></div>
+      <div class="pa-cli"><i></i><div><b>Un plan por escrito</b>: qué, quién y para
+        cuándo.</div></div>
+    </div>
+    <div class="pa-cpie">
+      <img class="pa-cqr" src="assets/qr_pago.svg" alt="">
+      <div class="pa-ccta">Escanea para pagar y agendar
+        <span>Primero el pago, enseguida eliges el horario. Una hora con el socio que
+          firma tu informe.</span></div>
+    </div>
+  </div>
+</div><div class="sello" id="s14"></div></section>
+
+<!-- 15 · CONTRAPORTADA -->
 <section class="hoja grad cf">
   <img class="cf-mapa" src="assets/mapa.svg" alt="">
   <img class="cf-logo" src="assets/logo_blanco.png" alt="Flint Consulting">
@@ -227,28 +260,27 @@
   /* ---- 4 · estimación de valor ---- */
   q('#v-hoy').textContent = D.valor;
   q('#v-pot').textContent = D.valorPot;
-  if (D.valorAplica === false) {
-    q('#v-hoy').parentNode.innerHTML = '<span class="n" style="font-size:78px">Sin estimación</span>';
-    q('#v-pot').parentNode.innerHTML = '<span class="n" style="font-size:78px;color:var(--verdetx)">Revisión</span>';
-    q('#v-hoy-nt').textContent = D.motivoValor || 'Con estos datos no aplica una estimación por múltiplos.';
-    q('#v-pot-nt').textContent = 'Tu calificación sí aplica. El valor se revisa contigo en una sesión.';
-    q('#a-campana').innerHTML = '<div style="padding:62px 54px;border:1px solid #D8DEE2;' +
-      'border-radius:24px;font-size:28px;line-height:1.25;color:#1f2a33">' +
-      esc(D.motivoValor || 'La estimación de valor no aplica con estos datos.') + '</div>';
-  } else {
-    q('#v-hoy-nt').textContent = 'Sobre el promedio de tu EBITDA de los últimos tres ' +
-      'ejercicios, USD $' + D.ebitda + ', con un múltiplo de ' + D.multiplo +
-      ' de transacciones privadas del tamaño de tu empresa, ajustado por tu industria.';
+  q('#v-hoy-nt').textContent = 'Sobre el promedio de tu EBITDA de los últimos tres ' +
+    'ejercicios, USD $' + D.ebitda + ', con un múltiplo de ' + D.multiplo +
+    ' de transacciones privadas del tamaño de tu empresa, ajustado por tu industria.';
+  /* Si el cliente ya está en 80 o más, no hay escenario de mejora que mostrar:
+     la etiqueta y la nota cambian, igual que en la pantalla del diagnóstico. */
+  if (D.potencial > D.total) {
     q('#v-pot-nt').textContent = 'Tu calificación pasaría de ' + D.total + ' a ' + D.potencial +
       ', y el múltiplo de ' + D.multiplo + ' a ' + D.multiploPot + ', sin vender una sola unidad extra.';
-    var lo = parseFloat(D.rangoBajo), hi = parseFloat(D.rangoAlto), v0 = parseFloat(D.valor),
-        pos = Math.min(1, Math.max(0, (v0 - lo) / (hi - lo)));
-    q('#a-campana').innerHTML = campana({ w:1152, h:322, pos:pos, modo:'claro',
-      punto:'USD $' + D.valor + ' M',
-      izq:'PISO DE LA BANDA · USD $' + D.rangoBajo + ' M',
-      centro:'RANGO DE VALOR PARA TU TAMAÑO E INDUSTRIA',
-      der:'USD $' + D.rangoAlto + ' M · TECHO DE LA BANDA' });
+  } else {
+    q('#v-pot-lab').textContent = 'Tu calificación ya está en ese nivel';
+    q('#v-pot-nt').textContent = 'Ya estás por encima de 80, así que aquí no hay un escenario de ' +
+      'mejora que mostrarte. Lo que sigue no es subir calificación, es preparar la empresa para ' +
+      'el proceso que tengas en mente.';
   }
+  var lo = parseFloat(D.rangoBajo), hi = parseFloat(D.rangoAlto), v0 = parseFloat(D.valor),
+      pos = Math.min(1, Math.max(0, (v0 - lo) / (hi - lo)));
+  q('#a-campana').innerHTML = campana({ w:1152, h:322, pos:pos, modo:'claro',
+    punto:'USD $' + D.valor + ' M',
+    izq:'PISO DE LA BANDA · USD $' + D.rangoBajo + ' M',
+    centro:'RANGO DE VALOR PARA TU TAMAÑO E INDUSTRIA',
+    der:'USD $' + D.rangoAlto + ' M · TECHO DE LA BANDA' });
 
   /* ---- 5 a 12 · una hoja por componente ---- */
   q('#a-detalles').innerHTML = comps.map(function(c, i){
@@ -281,52 +313,98 @@
   q('#a-asesor').textContent = D.asesor + ' · Flint Consulting® · Valuación';
   q('#a-fecha').textContent = D.fecha;
 
-  ['#s1','#s2','#s3','#s4','#s13'].forEach(function(s){ q(s).textContent = SELLO; });
+  /* ---- 14 · cierre ----
+     Las tres prioridades no son las calificaciones más bajas: son las que más
+     valor están costando, o sea lo que le falta al componente para 100 por el
+     peso que ese componente tiene en la calificación general. */
+  var v0 = parseFloat(D.valor), v8 = parseFloat(D.valorPot);
+  /* meta: el cliente todavía no llega al escenario. hayBrecha: además hay valor
+     en dólares para enseñarle. Sin EBITDA válido (N/D) hay meta pero no brecha. */
+  var meta = D.potencial > D.total;
+  var hayBrecha = meta && isFinite(v0) && isFinite(v8) && v8 > v0;
+  /* Si la página manda la diferencia exacta se usa esa. Si no, se saca de los
+     millones redondeados, que es aproximado, y por eso se dice "alrededor de". */
+  var difUSD = D.dif || (hayBrecha ? Math.round((v8 - v0) * 100) * 10000 : 0);
+  var difPct = D.difPct || (hayBrecha ? Math.round((v8 - v0) / v0 * 100) : 0);
+  var milesTxt = function (n) {
+    return n >= 1000000 ? (n / 1000000).toFixed(2) + ' millones de dólares'
+                        : Math.round(n / 1000) + ' mil dólares';
+  };
+  var miles = function (n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ','); };
+
+  if (hayBrecha) {
+    q('#c-tit').innerHTML = 'Esos ' + milesTxt(difUSD) + '<br>ya los construiste.<br>' +
+      '<em>Falta que se vean.</em>';
+    q('#c-sub').innerHTML = 'Tu calificación es <b>' + D.total + '</b>. Hoy tu empresa ' +
+      'vale alrededor de <b>USD $' + D.valor + ' millones</b>, sobre un EBITDA promedio ' +
+      'de <b>USD $' + D.ebitda + '</b> de los últimos tres ejercicios. Si tu calificación ' +
+      'llegara a ' + D.potencial + ', ese valor subiría a <b>USD $' + D.valorPot +
+      ' millones</b>: un <b>' + difPct + '%</b> más, con las mismas ventas y el mismo EBITDA.';
+    q('#c-cifras').innerHTML =
+      '<div class="pa-cfila"><div class="k">Tu valor hoy</div>' +
+        '<div class="n"><i>$</i>' + D.valor + '<small>M</small></div></div>' +
+      '<div class="pa-cfila pa-calta"><div class="k">Si tu calificación llegara a ' +
+        D.potencial + '</div><div><div class="n"><i>$</i>' + D.valorPot +
+        '<small>M</small></div><div class="pa-cdif">+' + miles(difUSD) + ' USD ' +
+        '<span>·</span> ' + difPct + '% más</div></div></div>' +
+      '<div class="pa-cfila pa-cprecio"><div class="k">Lo que cuesta sentarte a verlo</div>' +
+        '<div class="n"><i>$</i>200<small>USD</small></div></div>';
+  } else if (meta) {
+    /* Abajo de la meta pero sin valor en dólares: EBITDA negativo, fuera de
+       rango o sin industria. Se habla de la calificación, no de dinero. */
+    q('#c-tit').innerHTML = 'Tu calificación<br>puede llegar a ' + D.potencial + '.<br>' +
+      '<em>El valor lo vemos juntos.</em>';
+    q('#c-sub').innerHTML = 'Tu calificación es <b>' + D.total + '</b>. Con los datos que ' +
+      'capturaste este diagnóstico no estima tu valor en dólares, pero los ocho ' +
+      'componentes sí aplican: subir de ' + D.total + ' a ' + D.potencial + ' es lo que ' +
+      'mueve el múltiplo que un comprador está dispuesto a pagar. En la sesión ' +
+      'revisamos el valor con tus números.';
+    q('#c-cifras').innerHTML =
+      '<div class="pa-cfila"><div class="k">Tu calificación hoy</div>' +
+        '<div class="n">' + D.total + '<small>/100</small></div></div>' +
+      '<div class="pa-cfila pa-calta"><div class="k">La meta</div>' +
+        '<div class="n">' + D.potencial + '<small>/100</small></div></div>' +
+      '<div class="pa-cfila pa-cprecio"><div class="k">Lo que cuesta sentarte a verlo</div>' +
+        '<div class="n"><i>$</i>200<small>USD</small></div></div>';
+  } else {
+    /* El cliente ya está en el nivel: no hay brecha que enseñarle. */
+    q('#c-tit').innerHTML = 'Ya estás donde<br>pocos llegan.<br>' +
+      '<em>Ahora toca probarlo.</em>';
+    q('#c-sub').innerHTML = 'Tu calificación es <b>' + D.total + '</b>, arriba del nivel ' +
+      'en el que la mayoría de las empresas se quedan. Lo que sigue no es subir ' +
+      'calificación, es preparar la empresa para que resista la revisión de un comprador ' +
+      'sin que el precio se mueva.';
+    q('#c-cifras').innerHTML =
+      '<div class="pa-cfila pa-calta"><div class="k">Tu valor estimado hoy</div>' +
+        '<div class="n"><i>$</i>' + (D.valor || 'N/D') + '<small>M</small></div></div>' +
+      '<div class="pa-cfila pa-cprecio"><div class="k">Lo que cuesta sentarte a verlo</div>' +
+        '<div class="n"><i>$</i>200<small>USD</small></div></div>';
+  }
+
+  var prio = comps.slice().sort(function (a, b) {
+    return (100 - b.p) * b.w - (100 - a.p) * a.w || a.p - b.p;
+  }).slice(0, 3);
+  /* abajo de la meta la referencia es la meta; arriba, los 100 puntos */
+  var ref = meta ? D.potencial : 100;
+  q('#c-prio').innerHTML = '<div class="k">' +
+    (meta ? 'Lo que te separa de ' + D.potencial : 'Donde queda más por apretar') +
+    '</div>' + prio.map(function (c) {
+      return '<div class="pa-cf ' + c.b.k + '">' +
+        '<div class="pa-cftop"><div class="nm"><i></i>' + esc(c.n) + '</div>' +
+        '<div class="vv"><b>' + c.p + '</b>de ' + ref + '</div></div>' +
+        '<div class="pa-cbar"><i style="width:' + Math.max(2, c.p) + '%"></i>' +
+        (meta ? '<u style="left:' + ref + '%"></u>' : '') + '</div></div>';
+    }).join('');
+
+  ['#s1','#s2','#s3','#s4','#s13','#s14'].forEach(function(s){ q(s).textContent = SELLO; });
 
   /* con ?print=1 el navegador abre solo el diálogo de guardar como PDF */
-  /* El PDF se arma aquí mismo, hoja por hoja, en 1280×720 horizontal.
-     No se usa window.print(): en Windows (Edge, "Microsoft Print to PDF",
-     impresoras reales, Firefox) el diálogo ignora @page y voltea el informe
-     a carta vertical. Si las librerías no cargan, queda print() de respaldo. */
-  function cargar(src){ return new Promise(function(ok,mal){
-    var s=document.createElement('script'); s.src=src; s.onload=ok; s.onerror=mal; document.head.appendChild(s); }); }
-  function avisar(t){
-    var a=document.getElementById('pdf-aviso');
-    if(!a){ a=document.createElement('div'); a.id='pdf-aviso';
-      a.style.cssText='position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;'+
-        'background:rgba(10,10,10,.82);color:#fff;font:500 18px/1.4 Roboto,Arial,sans-serif;text-align:center;padding:24px';
-      document.body.appendChild(a); }
-    a.textContent=t; a.style.display=t?'flex':'none';
-  }
-  function generarPDF(){
-    avisar('Generando tu informe en PDF…');
-    Promise.all([
-      cargar('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'),
-      cargar('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')
-    ]).then(function(){
-      var hojas=[].slice.call(document.querySelectorAll('.hoja'));
-      var pdf=new window.jspdf.jsPDF({orientation:'landscape',unit:'px',format:[1280,720],hotfixes:['px_scaling'],compress:true});
-      var i=0;
-      function sig(){
-        if(i>=hojas.length){
-          var nom='Value Growth Score'+(D.empresa?' - '+String(D.empresa).replace(/[\\/:*?"<>|]/g,''):'')+'.pdf';
-          pdf.save(nom); avisar(''); return;
-        }
-        avisar('Generando tu informe en PDF… '+(i+1)+' de '+hojas.length);
-        window.html2canvas(hojas[i],{scale:2,width:1280,height:720,backgroundColor:null,useCORS:true,logging:false,
-          windowWidth:1280,scrollX:0,scrollY:-window.scrollY}).then(function(c){
-          if(i>0) pdf.addPage([1280,720],'landscape');
-          pdf.addImage(c.toDataURL('image/jpeg',0.92),'JPEG',0,0,1280,720,undefined,'FAST');
-          i++; sig();
-        }).catch(respaldo);
-      }
-      sig();
-    }).catch(respaldo);
-  }
-  function respaldo(){ avisar(''); window.print(); }
   if (/[?&]print=1/.test(location.search)) {
-    var listo = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
-    window.addEventListener('load', function(){ listo.then(function(){ setTimeout(generarPDF, 300); }); });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function(){ setTimeout(function(){ window.print(); }, 250); });
+    } else {
+      window.addEventListener('load', function(){ setTimeout(function(){ window.print(); }, 500); });
+    }
   }
 })();
 </script>

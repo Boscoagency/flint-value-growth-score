@@ -1132,6 +1132,10 @@ function datosInforme(lead,c,v){
     vg.rangoAlto=usdMillones(v.hi);
     vg.multiplo=v.m0.toFixed(1)+'x';
     vg.multiploPot=(v.v8/v.eb).toFixed(1)+'x';
+    /* diferencia exacta para la hoja de cierre; sin esto el informe la saca
+       de los millones redondeados y queda aproximada */
+    vg.dif=Math.max(0,Math.round(v.v8-v.v0));
+    vg.difPct=v.v0>0?Math.max(0,Math.round((v.v8-v.v0)/v.v0*100)):0;
   }else{
     vg.valorAplica=false;
     vg.ebitda=usdPlano(prom('ebitda'));
